@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         NavHostFragment mainNavHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.main_host_fragment);
 
+        assert mainNavHostFragment != null;
         NavController mainNavController = mainNavHostFragment.getNavController();
 
         if(savedInstanceState == null) {
@@ -43,5 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
             mainNavController.navigate(BlankFragment1Directions.actionBlankFragment1ToBlankFragment2());
         });
+        
     }
 }
