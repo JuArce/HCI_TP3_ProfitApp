@@ -1,26 +1,47 @@
 package ar.edu.itba.hci.profitapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.VideoView;
+
+import ar.edu.itba.hci.profitapp.databinding.ActivityMainBinding;
+
 
 public class MainActivity extends AppCompatActivity {
+
+    private ActivityMainBinding mainBinding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-//        VideoView videoview = (VideoView) findViewById(R.id.videoView);
-//        Uri uri = Uri.parse("https://assets.mixkit.co/videos/preview/mixkit-man-training-by-the-sea-14065-large.mp4");
-//        videoview.setVideoURI(uri);
-//        videoview.start();
-        
+
+        mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+
+        setContentView(mainBinding.getRoot());
+
+        NavHostFragment mainNavHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.main_host_fragment);
+
+        NavController mainNavController = mainNavHostFragment.getNavController();
+
+        if(savedInstanceState == null) {
+            mainNavController.navigate(R.id.action_blankFragment1_to_blankFragment2);
+        }
+
+        mainBinding.toFragment1.setOnClickListener(v -> {
+            mainBinding.toFragment1.setEnabled(false);
+            mainBinding.toFragment2.setEnabled(true);
+
+            mainNavController.navigate(BlankFragment2Directions.actionBlankFragment2ToBlankFragment1());
+        });
+
+        mainBinding.toFragment2.setOnClickListener(v -> {
+            mainBinding.toFragment2.setEnabled(false);
+            mainBinding.toFragment1.setEnabled(true);
+
+            mainNavController.navigate(BlankFragment1Directions.actionBlankFragment1ToBlankFragment2());
+        });
     }
-
-
 }
