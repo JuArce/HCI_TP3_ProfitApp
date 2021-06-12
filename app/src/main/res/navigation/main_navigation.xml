@@ -6,7 +6,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="ar.edu.itba.hci.profitapp.HomeFragment"
+        android:name="ar.edu.itba.hci.profitapp.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/routinesFragment"
-        android:name="ar.edu.itba.hci.profitapp.RoutinesFragment"
+        android:name="ar.edu.itba.hci.profitapp.ui.RoutinesFragment"
         android:label="fragment_routines"
         tools:layout="@layout/fragment_routines" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="ar.edu.itba.hci.profitapp.FavoritesFragment"
+        android:name="ar.edu.itba.hci.profitapp.ui.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action

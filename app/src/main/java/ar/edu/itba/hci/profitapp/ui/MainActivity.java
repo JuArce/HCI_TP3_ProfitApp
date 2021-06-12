@@ -1,4 +1,4 @@
-package ar.edu.itba.hci.profitapp;
+package ar.edu.itba.hci.profitapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
+import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.databinding.ActivityMainBinding;
 
 
@@ -35,23 +36,6 @@ public class MainActivity extends AppCompatActivity {
         assert mainNavHostFragment != null;
         NavController mainNavController = mainNavHostFragment.getNavController();
 
-//        if(savedInstanceState == null) {
-//            mainNavController.navigate(R.id.action_favoritesFragment_to_homeFragment);
-//        }
-
         NavigationUI.setupWithNavController(mainBinding.mainBottomNav, mainNavController);
-
-//        mainBinding.mainBottomNav.setOnNavigationItemSelectedListener(item -> {
-//            if(item.getItemId() == R.id.homeIconFragment) {
-//                mainNavController.navigate();
-//
-//            } else if(item.getItemId() == R.id.favoritesIconFragment) {
-//                mainNavController.navigate(BlankFragment2Directions.actionBlankFragment2ToBlankFragment1());
-//
-//            } else if(item.getItemId() == R.id.routinesIconFragment) {
-//
-//            }
-//            return true;
-//        });
     }
 }

@@ -1,4 +1,4 @@
-package ar.edu.itba.hci.profitapp;
+package ar.edu.itba.hci.profitapp.ui;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import ar.edu.itba.hci.profitapp.R;
 
 public class RoutinesFragment extends Fragment {
 

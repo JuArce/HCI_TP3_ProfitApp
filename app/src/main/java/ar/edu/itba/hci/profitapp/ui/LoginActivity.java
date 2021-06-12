@@ -1,4 +1,4 @@
-package ar.edu.itba.hci.profitapp;
+package ar.edu.itba.hci.profitapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
