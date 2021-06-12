@@ -3,23 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/blankFragment1">
+    app:startDestination="@id/homeFragment">
     <fragment
-        android:id="@+id/blankFragment1"
-        android:name="ar.edu.itba.hci.profitapp.BlankFragment1"
-        android:label="fragment_blank1"
-        tools:layout="@layout/fragment_blank1" >
+        android:id="@+id/homeFragment"
+        android:name="ar.edu.itba.hci.profitapp.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_blankFragment1_to_blankFragment2"
-            app:destination="@id/blankFragment2" />
+            android:id="@+id/action_homeFragment_to_routinesFragment"
+            app:destination="@id/routinesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
     <fragment
-        android:id="@+id/blankFragment2"
-        android:name="ar.edu.itba.hci.profitapp.BlankFragment2"
-        android:label="fragment_blank2"
-        tools:layout="@layout/fragment_blank2" >
+        android:id="@+id/routinesFragment"
+        android:name="ar.edu.itba.hci.profitapp.RoutinesFragment"
+        android:label="fragment_routines"
+        tools:layout="@layout/fragment_routines" >
         <action
-            android:id="@+id/action_blankFragment2_to_blankFragment1"
-            app:destination="@id/blankFragment1" />
+            android:id="@+id/action_routinesFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_routinesFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="ar.edu.itba.hci.profitapp.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_routinesFragment"
+            app:destination="@id/routinesFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

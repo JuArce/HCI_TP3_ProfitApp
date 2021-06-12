@@ -3,8 +3,16 @@ package ar.edu.itba.hci.profitapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
 
 import ar.edu.itba.hci.profitapp.databinding.ActivityMainBinding;
 
@@ -27,23 +35,23 @@ public class MainActivity extends AppCompatActivity {
         assert mainNavHostFragment != null;
         NavController mainNavController = mainNavHostFragment.getNavController();
 
-        if(savedInstanceState == null) {
-            mainNavController.navigate(R.id.action_blankFragment1_to_blankFragment2);
-        }
+//        if(savedInstanceState == null) {
+//            mainNavController.navigate(R.id.action_favoritesFragment_to_homeFragment);
+//        }
 
-        mainBinding.toFragment1.setOnClickListener(v -> {
-            mainBinding.toFragment1.setEnabled(false);
-            mainBinding.toFragment2.setEnabled(true);
+        NavigationUI.setupWithNavController(mainBinding.mainBottomNav, mainNavController);
 
-            mainNavController.navigate(BlankFragment2Directions.actionBlankFragment2ToBlankFragment1());
-        });
-
-        mainBinding.toFragment2.setOnClickListener(v -> {
-            mainBinding.toFragment2.setEnabled(false);
-            mainBinding.toFragment1.setEnabled(true);
-
-            mainNavController.navigate(BlankFragment1Directions.actionBlankFragment1ToBlankFragment2());
-        });
-        
+//        mainBinding.mainBottomNav.setOnNavigationItemSelectedListener(item -> {
+//            if(item.getItemId() == R.id.homeIconFragment) {
+//                mainNavController.navigate();
+//
+//            } else if(item.getItemId() == R.id.favoritesIconFragment) {
+//                mainNavController.navigate(BlankFragment2Directions.actionBlankFragment2ToBlankFragment1());
+//
+//            } else if(item.getItemId() == R.id.routinesIconFragment) {
+//
+//            }
+//            return true;
+//        });
     }
 }

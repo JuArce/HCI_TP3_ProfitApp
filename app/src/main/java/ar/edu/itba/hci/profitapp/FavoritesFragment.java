@@ -8,17 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class BlankFragment1 extends Fragment {
+public class FavoritesFragment extends Fragment {
 
-    public BlankFragment1() {
-        super(R.layout.fragment_blank1);
+    public FavoritesFragment() {
+        super(R.layout.fragment_favorites);
     }
-
 
 //    @Override
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 //                             Bundle savedInstanceState) {
 //        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_blank1, container, false);
+//        return inflater.inflate(R.layout.fragment_favorites, container, false);
 //    }
 }

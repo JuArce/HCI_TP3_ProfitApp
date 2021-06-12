@@ -8,16 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class BlankFragment2 extends Fragment {
+public class HomeFragment extends Fragment {
 
-    public BlankFragment2() {
-        super(R.layout.fragment_blank2);
+    public HomeFragment() {
+        super(R.layout.fragment_home);
     }
 
 //    @Override
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 //                             Bundle savedInstanceState) {
 //        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_blank2, container, false);
+//        return inflater.inflate(R.layout.fragment_home, container, false);
 //    }
 }
