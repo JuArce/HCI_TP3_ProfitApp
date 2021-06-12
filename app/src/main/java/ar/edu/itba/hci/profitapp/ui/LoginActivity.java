@@ -3,14 +3,10 @@ package ar.edu.itba.hci.profitapp.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.net.wifi.hotspot2.pps.Credential;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.VideoView;
 
 import ar.edu.itba.hci.profitapp.App;
-import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.databinding.ActivityLoginBinding;
 import ar.edu.itba.hci.profitapp.repository.Resource;
 import ar.edu.itba.hci.profitapp.repository.Status;
@@ -43,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         activityLoginBinding.loginButton.setOnClickListener(v -> {
+            //TODO validar user y password antes de llamar a la api. Mostrar mensajes de error en caso que esté mal el input
             Credentials credentials = new Credentials(activityLoginBinding.usernameContainer.getEditText().getText().toString(), activityLoginBinding.passwordContainer.getEditText().getText().toString());
             app.getUserRepository().login(credentials).observe(this, r -> {
                 if (r.getStatus() == Status.SUCCESS) {
@@ -51,10 +48,6 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                 } else {
-//                    activityLoginBinding.usernameContainer.setError("Paso algo");
-
-
-//                    activityLoginBinding.usernameInput.setError("Error :(");
                     defaultResourceHandler(r);
                 }
             });

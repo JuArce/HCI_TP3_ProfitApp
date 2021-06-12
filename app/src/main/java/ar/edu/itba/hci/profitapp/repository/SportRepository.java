@@ -19,8 +19,7 @@ public class SportRepository {
     }
 
     public LiveData<Resource<PagedList<Sport>>> getSports() {
-        return new NetworkBoundResource<PagedList<Sport>, PagedList<Sport>>()
-        {
+        return new NetworkBoundResource<PagedList<Sport>, PagedList<Sport>>() {
             @NonNull
             @Override
             protected LiveData<ApiResponse<PagedList<Sport>>> createCall() {
@@ -30,8 +29,7 @@ public class SportRepository {
     }
 
     public LiveData<Resource<Sport>> getSport(int sportId) {
-        return new NetworkBoundResource<Sport, Sport>()
-        {
+        return new NetworkBoundResource<Sport, Sport>() {
             @NonNull
             @Override
             protected LiveData<ApiResponse<Sport>> createCall() {
@@ -41,8 +39,7 @@ public class SportRepository {
     }
 
     public LiveData<Resource<Sport>> addSport(Sport sport) {
-        return new NetworkBoundResource<Sport, Sport>()
-        {
+        return new NetworkBoundResource<Sport, Sport>() {
             @NonNull
             @Override
             protected LiveData<ApiResponse<Sport>> createCall() {
@@ -52,8 +49,7 @@ public class SportRepository {
     }
 
     public LiveData<Resource<Sport>> modifySport(Sport sport) {
-        return new NetworkBoundResource<Sport, Sport>()
-        {
+        return new NetworkBoundResource<Sport, Sport>() {
             @NonNull
             @Override
             protected LiveData<ApiResponse<Sport>> createCall() {
@@ -63,8 +59,7 @@ public class SportRepository {
     }
 
     public LiveData<Resource<Void>> deleteSport(int sportId) {
-        return new NetworkBoundResource<Void, Void>()
-        {
+        return new NetworkBoundResource<Void, Void>() {
             @NonNull
             @Override
             protected LiveData<ApiResponse<Void>> createCall() {
