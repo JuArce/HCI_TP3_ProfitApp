@@ -5,7 +5,6 @@ import android.app.Application;
 import ar.edu.itba.hci.profitapp.repository.SportRepository;
 import ar.edu.itba.hci.profitapp.repository.UserRepository;
 
-
 public class App extends Application {
 
     private AppPreferences preferences;
