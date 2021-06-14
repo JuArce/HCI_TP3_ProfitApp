@@ -16,7 +16,6 @@ import java.util.List;
 import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.api.model.Routine;
 import ar.edu.itba.hci.profitapp.databinding.ItemRoutineBinding;
-import ar.edu.itba.hci.profitapp.databinding.RoutineCardBinding;
 
 public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAdapter.ViewHolder> {
 
