@@ -5,9 +5,6 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ar.edu.itba.hci.profitapp.api.model.PagedList;
 import ar.edu.itba.hci.profitapp.api.model.Routine;
 import ar.edu.itba.hci.profitapp.repository.Resource;
@@ -20,11 +17,15 @@ public class RoutineViewModel extends RepositoryViewModel<RoutineRepository> {
     private final static int PAGE_SIZE = 10;
 
     private int routinePage = 0;
+    private String orderBy = "date";
+    private String direction = "asc";
     private boolean isLastRoutinePage = false;
+
     private final PagedList<Routine> allRoutines = new PagedList<>();
     private final MediatorLiveData<Resource<PagedList<Routine>>> routines = new MediatorLiveData<>();
     private final MutableLiveData<Integer> routineId = new MutableLiveData<>();
     private final LiveData<Resource<Routine>> routine;
+
     private final MediatorLiveData<Resource<Routine>> addRoutine = new MediatorLiveData<>();
 
     public RoutineViewModel(RoutineRepository repository) {
@@ -41,7 +42,7 @@ public class RoutineViewModel extends RepositoryViewModel<RoutineRepository> {
 
     public LiveData<Resource<PagedList<Routine>>> getRoutines() {
 //        getMoreRoutines();
-        routines.addSource(repository.getRoutines(), resource -> {
+        routines.addSource(repository.getRoutines(routinePage, PAGE_SIZE, orderBy, direction), resource -> {
             if(resource.getStatus() == Status.SUCCESS) {
                 if ((resource.getData().getSize() == 0) || (resource.getData().getSize() < PAGE_SIZE)) {
                     isLastRoutinePage = true;
