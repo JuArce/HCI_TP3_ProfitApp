@@ -11,27 +11,42 @@ import java.util.Date;
 public class UserEntity {
     @NonNull
     @ColumnInfo(name = "id")
-    private Integer id;
+    public Integer id;
     @ColumnInfo(name = "username")
-    private String username;
+    public String username;
     @ColumnInfo(name = "firstName")
-    private String firstName;
+    public String firstName;
     @ColumnInfo(name = "lastName")
-    private String lastName;
+    public String lastName;
     @ColumnInfo(name = "gender")
-    private String gender;
+    public String gender;
     @ColumnInfo(name = "birthdate")
-    private Date birthdate;
+    public long birthdate;
     @ColumnInfo(name = "email")
-    private String email;
+    public String email;
     @ColumnInfo(name = "phone")
-    private String phone;
+    public String phone;
     @ColumnInfo(name = "avatarUrl")
-    private String avatarUrl;
+    public String avatarUrl;
     @ColumnInfo(name = "date")
-    private Date date;
+    public long date;
     @ColumnInfo(name = "lastActivity")
-    private Date lastActivity;
+    public long lastActivity;
     //@ColumnInfo(name = "verified") //me parece que este no va
     //private Boolean verified;
+
+
+    public UserEntity(@NonNull Integer id, String username, String firstName, String lastName, String gender, long birthdate, String email, String phone, String avatarUrl, long date, long lastActivity) {
+        this.id = id;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthdate = birthdate;
+        this.email = email;
+        this.phone = phone;
+        this.avatarUrl = avatarUrl;
+        this.date = date;
+        this.lastActivity = lastActivity;
+    }
 }

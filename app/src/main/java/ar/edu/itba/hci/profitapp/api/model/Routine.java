@@ -3,6 +3,9 @@ package ar.edu.itba.hci.profitapp.api.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Routine {
 
     @SerializedName("id")
@@ -77,8 +80,15 @@ public class Routine {
         this.detail = detail;
     }
 
-    public long getDate() {
-        return date;
+//    public long getDate() {
+//        return date;
+//    }
+
+    public String getDate() {
+        Date fullDate = new Date(date);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        String strDate= formatter.format(fullDate);
+        return strDate;
     }
 
     public void setDate(long date) {

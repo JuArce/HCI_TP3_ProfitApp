@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
@@ -14,6 +15,8 @@ import java.util.List;
 
 import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.api.model.Routine;
+import ar.edu.itba.hci.profitapp.databinding.ItemRoutineBinding;
+import ar.edu.itba.hci.profitapp.databinding.RoutineCardBinding;
 
 public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAdapter.ViewHolder> {
 
@@ -31,13 +34,14 @@ public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAd
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_routine, parent, false);
-        return new ViewHolder(view);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        ItemRoutineBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_routine, parent, false);
+        return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-        holder.getRoutineName().setText(routineList.get(position).getName());
+        holder.getItemRoutineBinding().setRoutine(routineList.get(position));
     }
 
     @Override
@@ -47,15 +51,15 @@ public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView routineName;
+        private final ItemRoutineBinding itemRoutineBinding;
 
-        public ViewHolder(@NonNull @NotNull View itemView) {
-            super(itemView);
-            this.routineName = itemView.findViewById(R.id.routine_name);
+        public ViewHolder(@NonNull @NotNull ItemRoutineBinding itemView) {
+            super(itemView.getRoot());
+            this.itemRoutineBinding = itemView;
         }
 
-        public TextView getRoutineName() {
-            return routineName;
+        public ItemRoutineBinding getItemRoutineBinding() {
+            return itemRoutineBinding;
         }
     }
 }
