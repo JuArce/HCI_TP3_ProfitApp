@@ -11,7 +11,12 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        app:cardElevation="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,7 +30,7 @@
                 android:text="@{routine.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.048"
+                app:layout_constraintHorizontal_bias="0.024"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.122" />
@@ -34,10 +39,11 @@
                 android:id="@+id/routine_creator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="@{routine.user.username}"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.024"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/routine_name"
                 app:layout_constraintVertical_bias="0.034" />
@@ -49,6 +55,7 @@
                 android:text="@{routine.date}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.148"
                 app:layout_constraintStart_toEndOf="@+id/routine_creator"
                 app:layout_constraintTop_toBottomOf="@+id/routine_name"
                 app:layout_constraintVertical_bias="0.114" />
@@ -105,7 +112,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar"
                 app:layout_constraintVertical_bias="0.578"
                 app:srcCompat="@drawable/ic_shield_outline"
-                app:tint="@color/light_grey"/>
+                app:tint="@color/light_grey" />
 
             <TextView
                 android:id="@+id/difficulty"
@@ -136,16 +143,15 @@
                 android:id="@+id/favoriteButton"
                 android:layout_width="20dp"
                 android:layout_height="18dp"
+                android:background="@drawable/fav_toggle_selector"
+                android:textOff=""
+                android:textOn=""
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/shareButton"
                 app:layout_constraintHorizontal_bias="0.935"
                 app:layout_constraintStart_toStartOf="@+id/difficulty"
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-                app:layout_constraintVertical_bias="0.605"
-                android:textOff=""
-                android:textOn=""
-                android:background="@drawable/ic_active_favorite_24"/>
-
+                app:layout_constraintVertical_bias="0.605" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
