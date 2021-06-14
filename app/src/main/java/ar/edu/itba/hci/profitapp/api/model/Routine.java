@@ -85,7 +85,7 @@ public class Routine {
         this.date = date;
     }
 
-    public double getAverageRating() {
+    public Double getAverageRating() {
         return averageRating;
     }
 
