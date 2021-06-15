@@ -63,6 +63,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$ok_http_version"
     implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.cardview:cardview:1.0.0"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

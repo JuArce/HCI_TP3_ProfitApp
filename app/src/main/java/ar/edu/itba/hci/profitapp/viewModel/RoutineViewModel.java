@@ -41,31 +41,27 @@ public class RoutineViewModel extends RepositoryViewModel<RoutineRepository> {
     }
 
     public LiveData<Resource<PagedList<Routine>>> getRoutines() {
-//        getMoreRoutines();
-        routines.addSource(repository.getRoutines(routinePage, PAGE_SIZE, orderBy, direction), resource -> {
-            if(resource.getStatus() == Status.SUCCESS) {
-                if ((resource.getData().getSize() == 0) || (resource.getData().getSize() < PAGE_SIZE)) {
-                    isLastRoutinePage = true;
+        if(!isLastRoutinePage) {
+            routines.addSource(repository.getRoutines(routinePage, PAGE_SIZE, orderBy, direction), resource -> {
+                if (resource.getStatus() == Status.SUCCESS) {
+//                if ((resource.getData().getSize() == 0) || (resource.getData().getSize() < PAGE_SIZE)) {
+//                    isLastRoutinePage = true;
+//                }
+                    assert resource.getData() != null;
+                    isLastRoutinePage = resource.getData().getIsLastPage();
+
+                    allRoutines.setContent(resource.getData().getContent());
+                    routines.setValue(Resource.success(allRoutines));
+                    if (!isLastRoutinePage) {
+                        routinePage++;
+                    }
+                } else if (resource.getStatus() == Status.LOADING) {
+                    routines.setValue(resource);
                 }
-
-                routinePage++;
-
-                allRoutines.setContent(resource.getData().getContent());
-                routines.setValue(Resource.success(allRoutines));
-            } else if(resource.getStatus() == Status.LOADING) {
-                routines.setValue(resource);
-            }
-        });
+            });
+        }
         return routines;
     }
-
-//    public void getMoreRoutines() {
-//        if(isLastRoutinePage) {
-//            return;
-//        }
-//
-//        routines.addSource(repository.getRoutines());
-//    }
 
     public LiveData<Resource<Routine>> getRoutine() {
         return routine;

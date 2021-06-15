@@ -60,6 +60,9 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
+//        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//        });
+
         app = ((App) getActivity().getApplication());
 
         ViewModelProvider.Factory viewModelFactory = new RepositoryViewModelFactory<>(RoutineRepository.class, app.getRoutineRepository());

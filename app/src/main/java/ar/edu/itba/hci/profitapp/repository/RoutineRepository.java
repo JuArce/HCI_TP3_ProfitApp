@@ -5,8 +5,11 @@ import androidx.lifecycle.LiveData;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.stream.Collectors;
+
 import ar.edu.itba.hci.profitapp.App;
 import ar.edu.itba.hci.profitapp.api.ApiClient;
+import ar.edu.itba.hci.profitapp.api.ApiFavoriteService;
 import ar.edu.itba.hci.profitapp.api.ApiResponse;
 import ar.edu.itba.hci.profitapp.api.ApiRoutineService;
 import ar.edu.itba.hci.profitapp.api.model.Cycle;
@@ -16,9 +19,11 @@ import retrofit2.http.Query;
 
 public class RoutineRepository {
     private final ApiRoutineService apiService;
+    private final ApiFavoriteService apiFavoriteService;
 
     public RoutineRepository(App application) {
         this.apiService = ApiClient.create(application, ApiRoutineService.class);
+        this.apiFavoriteService = ApiClient.create(application, ApiFavoriteService.class);
     }
 
     public LiveData<Resource<PagedList<Routine>>> getRoutines(int page, int size, String orderBy, String direction) {
@@ -27,7 +32,16 @@ public class RoutineRepository {
             @NotNull
             @Override
             protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
-                return apiService.getRoutines(page, size, orderBy, direction);
+                LiveData<ApiResponse<PagedList<Routine>>> aux = apiService.getRoutines(page, size, orderBy, direction);
+                LiveData<ApiResponse<PagedList<Routine>>> favorites = apiFavoriteService.getFavorites(0, 10);
+                
+//                aux.getValue().getData().getContent().forEach(routine -> {
+//                    if(favorites.getValue().getData().getContent().stream().map(Routine::getId).collect(Collectors.toList()).contains(routine.getId())) {
+//                        routine.setFavorite(true);
+//                    }
+//                });
+                
+                return aux;
             }
         }.asLiveData();
     }

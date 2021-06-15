@@ -39,6 +39,8 @@ public class Routine {
     @Expose
     private User user;
 
+    private boolean isFavorite;
+
     public Routine() {
     }
 
@@ -54,6 +56,7 @@ public class Routine {
         this.metadata = metadata;
         this.category = category;
         this.user = user;
+        this.isFavorite = false;
     }
 
     public int getId() {
@@ -141,6 +144,14 @@ public class Routine {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 
 }

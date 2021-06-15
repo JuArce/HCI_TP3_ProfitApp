@@ -1,9 +1,7 @@
 package ar.edu.itba.hci.profitapp.ui.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -17,11 +15,10 @@ import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.api.model.Routine;
 import ar.edu.itba.hci.profitapp.databinding.ItemRoutineBinding;
 
-public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAdapter.ViewHolder> {
-
+public class FavoritesCustomAdapter extends RecyclerView.Adapter<FavoritesCustomAdapter.ViewHolder> {
     private List<Routine> routineList;
 
-    public RoutinesCustomAdapter(List<Routine> routineList) {
+    public FavoritesCustomAdapter(List<Routine> routineList) {
         this.routineList = routineList;
     }
 
@@ -32,17 +29,17 @@ public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAd
     @NonNull
     @NotNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public FavoritesCustomAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         ItemRoutineBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_routine, parent, false);
-        return new ViewHolder(binding);
+        return new FavoritesCustomAdapter.ViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull FavoritesCustomAdapter.ViewHolder holder, int position) {
         holder.getItemRoutineBinding().setRoutine(routineList.get(position));
     }
-    
+
     @Override
     public int getItemCount() {
         return routineList.size();
@@ -61,4 +58,5 @@ public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAd
             return itemRoutineBinding;
         }
     }
+
 }
