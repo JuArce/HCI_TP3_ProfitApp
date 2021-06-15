@@ -159,7 +159,7 @@
                 android:layout_height="18dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/fav_toggle_selector"
-                android:checked="@{routine.favorite}"
+                android:checked="@={routine.favorite}"
                 android:textOff=""
                 android:textOn=""
                 app:layout_constraintBottom_toBottomOf="parent"

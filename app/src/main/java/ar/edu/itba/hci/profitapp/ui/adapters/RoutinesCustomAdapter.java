@@ -23,9 +23,11 @@ public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAd
 
     private List<Routine> routineList;
     public final static String EXTRA_MESSAGE = "ar.edu.itba.hci.profitapp.message";
+    public final View.OnClickListener favoriteClickListener;
 
-    public RoutinesCustomAdapter(List<Routine> routineList) {
+    public RoutinesCustomAdapter(List<Routine> routineList, View.OnClickListener favoriteClickListener) {
         this.routineList = routineList;
+        this.favoriteClickListener = favoriteClickListener;
     }
 
     public void addRoutines(List<Routine> toAdd) {
@@ -38,7 +40,7 @@ public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAd
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         ItemRoutineBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_routine, parent, false);
-        return new ViewHolder(binding);
+        return new ViewHolder(binding, favoriteClickListener);
     }
 
     @Override
@@ -55,14 +57,23 @@ public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAd
 
         private final ItemRoutineBinding itemRoutineBinding;
 
-        public ViewHolder(@NonNull @NotNull ItemRoutineBinding itemView) {
+        public ViewHolder(@NonNull @NotNull ItemRoutineBinding itemView, View.OnClickListener favoriteClickListener) {
             super(itemView.getRoot());
             View view = itemView.getRoot();
+
+
+            itemView.favoriteButton.setOnClickListener(v -> {
+                v.setTag(routineList.get(getAdapterPosition()).getId());
+                favoriteClickListener.onClick(v);
+            });
+
             view.setOnClickListener(v -> {
+//                favoriteClickListener.onClick(v);
                 Intent intent = new Intent(v.getContext(), RoutineActivity.class);
                 intent.putExtra(EXTRA_MESSAGE, routineList.get(getAdapterPosition()).getId());
                 v.getContext().startActivity(intent);
             });
+
             this.itemRoutineBinding = itemView;
 
         }

@@ -55,7 +55,14 @@ public class RoutinesFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        routinesAdapter = new RoutinesCustomAdapter(new ArrayList<>());
+        View.OnClickListener favoriteClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                v.getTag()
+            }
+        };
+
+        routinesAdapter = new RoutinesCustomAdapter(new ArrayList<>(), favoriteClickListener);
 
         recyclerView.setAdapter(routinesAdapter);
 

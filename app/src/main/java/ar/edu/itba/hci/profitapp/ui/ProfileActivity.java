@@ -1,8 +1,10 @@
 package ar.edu.itba.hci.profitapp.ui;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -26,6 +28,13 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         profileBinding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(profileBinding.getRoot());
+
+        setSupportActionBar(profileBinding.toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            Log.d("TAG", "action bar");
+        }
 
         app = ((App) getApplication());
 

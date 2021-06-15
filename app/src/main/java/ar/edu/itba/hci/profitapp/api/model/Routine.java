@@ -44,6 +44,7 @@ public class Routine {
     private boolean isFavorite;
 
     public Routine() {
+        this.isFavorite = true;
     }
 
     public Routine(int id, String name, String detail, long date, double averageRating, boolean isPublic, String difficulty, Object metadata, Category category, User user) {
@@ -58,7 +59,6 @@ public class Routine {
         this.metadata = metadata;
         this.category = category;
         this.user = user;
-        this.isFavorite = true;
     }
 
     public int getId() {
@@ -148,7 +148,7 @@ public class Routine {
         this.user = user;
     }
 
-    public boolean isFavorite() {
+    public boolean getFavorite() {
         return isFavorite;
     }
 

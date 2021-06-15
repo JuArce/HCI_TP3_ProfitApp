@@ -32,8 +32,9 @@ public class RoutineRepository {
             @NotNull
             @Override
             protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
+                //TODO refactor
                 LiveData<ApiResponse<PagedList<Routine>>> aux = apiService.getRoutines(page, size, orderBy, direction);
-                LiveData<ApiResponse<PagedList<Routine>>> favorites = apiFavoriteService.getFavorites(0, 10);
+//                LiveData<ApiResponse<PagedList<Routine>>> favorites = apiFavoriteService.getFavorites(0, 10);
                 
 //                aux.getValue().getData().getContent().forEach(routine -> {
 //                    if(favorites.getValue().getData().getContent().stream().map(Routine::getId).collect(Collectors.toList()).contains(routine.getId())) {

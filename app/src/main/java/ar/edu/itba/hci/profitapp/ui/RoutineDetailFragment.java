@@ -55,19 +55,14 @@ public class RoutineDetailFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        routinesAdapter = new RoutinesCustomAdapter(new ArrayList<>());
+        View.OnClickListener favoriteClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                v.getTag()
+            }
+        };
 
-//        recyclerView.setAdapter(routinesAdapter);
-//
-//        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-//        } else {
-//            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        }
-//        recyclerView.setHasFixedSize(true);
-
-//        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//        });
+        routinesAdapter = new RoutinesCustomAdapter(new ArrayList<>(), favoriteClickListener);
 
         app = ((App) getActivity().getApplication());
         RoutineActivity activity = (RoutineActivity) getActivity();

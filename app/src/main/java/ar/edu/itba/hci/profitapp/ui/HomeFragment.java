@@ -11,8 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -45,6 +48,10 @@ public class HomeFragment extends Fragment {
 
         recyclerView = fragmentHomeBinding.routinesRecyclerView;
 
+//        BottomNavigationView b = getActivity().findViewById(R.id.main_bottom_nav);
+//        Menu m = b.getMenu();
+//        m.findItem(R.id.homeFragment).setIcon(R.drawable.ic_baseline_fitness_center_24);
+
         return fragmentHomeBinding.getRoot();
 
     }
@@ -53,7 +60,14 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        routinesAdapter = new RoutinesCustomAdapter(new ArrayList<>());
+        View.OnClickListener favoriteClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                v.getTag()
+            }
+        };
+
+        routinesAdapter = new RoutinesCustomAdapter(new ArrayList<>(), favoriteClickListener);
 
         recyclerView.setAdapter(routinesAdapter);
 
