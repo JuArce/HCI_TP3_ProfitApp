@@ -1,19 +1,17 @@
 package ar.edu.itba.hci.profitapp.ui;
+
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
+
 import ar.edu.itba.hci.profitapp.App;
 import ar.edu.itba.hci.profitapp.databinding.ActivityProfileBinding;
-import ar.edu.itba.hci.profitapp.repository.RoutineRepository;
 import ar.edu.itba.hci.profitapp.repository.Status;
 import ar.edu.itba.hci.profitapp.repository.UserRepository;
-import ar.edu.itba.hci.profitapp.viewModel.RoutineViewModel;
 import ar.edu.itba.hci.profitapp.viewModel.UserViewModel;
 import ar.edu.itba.hci.profitapp.viewModel.repositoryVM.RepositoryViewModelFactory;
 
@@ -33,7 +31,6 @@ public class ProfileActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            Log.d("TAG", "action bar");
         }
 
         app = ((App) getApplication());
@@ -45,6 +42,9 @@ public class ProfileActivity extends AppCompatActivity {
             if (r.getStatus() == Status.SUCCESS) {
                 if(r.getData() != null && r.getData() != null) {
                     profileBinding.setUser(r.getData());
+                    if(r.getData().getAvatarUrl() != "") {
+                        Glide.with(profileBinding.getRoot()).load(r.getData().getAvatarUrl()).into(profileBinding.profilePicture);
+                    }
                 }
             } else {
 //                defaultResourceHandler(r);
