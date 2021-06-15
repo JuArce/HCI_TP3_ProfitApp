@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/routine_navigation"
+    app:startDestination="@id/routineDetailFragment">
+
+    <fragment
+        android:id="@+id/routineDetailFragment"
+        android:name="ar.edu.itba.hci.profitapp.ui.RoutineDetailFragment"
+        android:label="fragment_routine_detail"
+        tools:layout="@layout/fragment_routine_detail" />
+</navigation>

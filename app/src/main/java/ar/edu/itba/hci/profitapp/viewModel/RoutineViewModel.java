@@ -24,7 +24,7 @@ public class RoutineViewModel extends RepositoryViewModel<RoutineRepository> {
     private final PagedList<Routine> allRoutines = new PagedList<>();
     private final MediatorLiveData<Resource<PagedList<Routine>>> routines = new MediatorLiveData<>();
     private final MutableLiveData<Integer> routineId = new MutableLiveData<>();
-    private final LiveData<Resource<Routine>> routine;
+    private LiveData<Resource<Routine>> routine;
 
     private final MediatorLiveData<Resource<Routine>> addRoutine = new MediatorLiveData<>();
 
@@ -63,7 +63,8 @@ public class RoutineViewModel extends RepositoryViewModel<RoutineRepository> {
         return routines;
     }
 
-    public LiveData<Resource<Routine>> getRoutine() {
+    public LiveData<Resource<Routine>> getRoutine(int routineId) {
+        routine = repository.getRoutine(routineId);
         return routine;
     }
 
@@ -73,5 +74,4 @@ public class RoutineViewModel extends RepositoryViewModel<RoutineRepository> {
         }
         this.routineId.setValue(routineId);
     }
-
 }

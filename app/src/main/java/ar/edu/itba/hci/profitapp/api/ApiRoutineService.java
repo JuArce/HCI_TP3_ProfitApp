@@ -13,7 +13,7 @@ public interface ApiRoutineService {
     @GET("routines")
     LiveData<ApiResponse<PagedList<Routine>>> getRoutines(@Query("page") int page, @Query("size") int size, @Query("orderBy") String orderBy, @Query("direction") String direction);
 
-    @GET("routine/{routineId}")
+    @GET("routines/{routineId}")
     LiveData<ApiResponse<Routine>> getRoutine(@Path("routineId") int routineId);
 
     @GET("routines/{routineId}/cycles")

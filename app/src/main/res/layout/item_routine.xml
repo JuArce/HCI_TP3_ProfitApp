@@ -146,12 +146,12 @@
                 android:layout_marginEnd="16dp"
                 android:background="@null"
                 android:scaleType="fitCenter"
-                android:tint="@color/light_grey"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.121"
-                app:srcCompat="@drawable/ic_baseline_share_24" />
+                app:srcCompat="@drawable/ic_baseline_share_24"
+                app:tint="@color/light_grey" />
 
             <ToggleButton
                 android:id="@+id/favoriteButton"
