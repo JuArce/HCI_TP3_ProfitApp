@@ -78,4 +78,37 @@ public class RoutineRepository {
             }
         }.asLiveData();
     }
+
+    public LiveData<Resource<PagedList<Routine>>> getFavorites(int page, int size) {
+        return new NetworkBoundResource<PagedList<Routine>, PagedList<Routine>>() {
+            @NonNull
+            @NotNull
+            @Override
+            protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
+                LiveData<ApiResponse<PagedList<Routine>>> aux = apiFavoriteService.getFavorites(page, size);
+//                aux.getValue().getData().getContent().forEach(routine -> routine.setFavorite(true));
+                return aux;
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<Routine>> addFavorite(int routineId) {
+        return new NetworkBoundResource<Routine, Routine>() {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<Routine>> createCall() {
+                return apiFavoriteService.addFavorite(routineId);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<Void>> deleteFavorite(int routineId) {
+        return new NetworkBoundResource<Void, Void>() {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<Void>> createCall() {
+                return apiFavoriteService.deleteFavorite(routineId);
+            }
+        }.asLiveData();
+    }
 }

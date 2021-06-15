@@ -19,13 +19,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:foreground="@drawable/outlined_card">
 
             <TextView
                 android:id="@+id/routine_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="128dp"
                 android:text="@{routine.name}"
                 android:textColor="@color/dark_grey"
                 android:textSize="20sp"
@@ -41,52 +43,66 @@
                 android:id="@+id/routine_creator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="@{routine.user.username}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.024"
+                app:layout_constraintBottom_toTopOf="@+id/ratingBar"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/routine_name"
-                app:layout_constraintVertical_bias="0.034" />
+                app:layout_constraintTop_toBottomOf="@+id/routine_name" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="·"
+                app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+                app:layout_constraintStart_toEndOf="@+id/routine_creator"
+                app:layout_constraintTop_toBottomOf="@+id/routine_name" />
 
             <TextView
                 android:id="@+id/routine_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="@{routine.date}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.148"
-                app:layout_constraintStart_toEndOf="@+id/routine_creator"
+                app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+                app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/routine_name"
-                app:layout_constraintVertical_bias="0.114" />
+                app:layout_constraintVertical_bias="0.42000002" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="48dp"
                 android:isIndicator="true"
                 android:numStars="5"
+                android:progressBackgroundTint="@color/teal"
+                android:progressTint="@color/teal"
                 android:rating="@{routine.averageRating.intValue()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.03"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/routine_creator"
-                app:layout_constraintVertical_bias="0.173" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/category_icon"
                 android:layout_width="20dp"
                 android:layout_height="18dp"
+                android:layout_marginStart="8dp"
+                android:background="#00B60000"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.025"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-                app:layout_constraintVertical_bias="0.578"
+                app:layout_constraintVertical_bias="0.565"
                 app:srcCompat="@drawable/ic_baseline_format_list_bulleted_24" />
 
             <TextView
@@ -96,8 +112,6 @@
                 android:layout_marginStart="8dp"
                 android:text="@{routine.category.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/category_icon"
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar"
                 app:layout_constraintVertical_bias="0.567" />
@@ -108,8 +122,6 @@
                 android:layout_height="18dp"
                 android:layout_marginStart="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/category"
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar"
                 app:layout_constraintVertical_bias="0.578"
@@ -123,8 +135,6 @@
                 android:layout_marginStart="8dp"
                 android:text="@{routine.difficulty}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/difficulty_icon"
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar"
                 app:layout_constraintVertical_bias="0.6" />
@@ -135,6 +145,8 @@
                 android:layout_height="18dp"
                 android:layout_marginEnd="16dp"
                 android:background="@null"
+                android:scaleType="fitCenter"
+                android:tint="@color/light_grey"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -147,9 +159,9 @@
                 android:layout_height="18dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/fav_toggle_selector"
+                android:checked="@{routine.favorite}"
                 android:textOff=""
                 android:textOn=""
-                android:checked="@{routine.favorite}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/shareButton"
                 app:layout_constraintHorizontal_bias="1.0"

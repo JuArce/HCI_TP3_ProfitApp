@@ -1,5 +1,7 @@
 package ar.edu.itba.hci.profitapp.api.model;
 
+import androidx.room.util.StringUtil;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -56,7 +58,7 @@ public class Routine {
         this.metadata = metadata;
         this.category = category;
         this.user = user;
-        this.isFavorite = false;
+        this.isFavorite = true;
     }
 
     public int getId() {
@@ -115,7 +117,7 @@ public class Routine {
     }
 
     public String getDifficulty() {
-        return difficulty;
+        return difficulty.substring(0,1).toUpperCase() + difficulty.substring(1).toLowerCase();
     }
 
     public void setDifficulty(String difficulty) {

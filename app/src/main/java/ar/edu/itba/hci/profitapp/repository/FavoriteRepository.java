@@ -13,6 +13,7 @@ import ar.edu.itba.hci.profitapp.api.model.PagedList;
 import ar.edu.itba.hci.profitapp.api.model.Routine;
 import ar.edu.itba.hci.profitapp.api.model.Sport;
 
+@Deprecated
 public class FavoriteRepository {
     private final ApiFavoriteService apiService;
 

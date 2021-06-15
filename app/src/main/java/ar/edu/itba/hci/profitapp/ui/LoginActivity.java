@@ -25,6 +25,11 @@ public class LoginActivity extends AppCompatActivity {
 
         app = ((App) getApplication());
 
+        if(app.getPreferences().getAuthToken() != null) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
         activityLoginBinding = ActivityLoginBinding.inflate(getLayoutInflater());
 
         setContentView(activityLoginBinding.getRoot());

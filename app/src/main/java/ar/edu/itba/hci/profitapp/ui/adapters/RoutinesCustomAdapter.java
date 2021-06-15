@@ -42,7 +42,7 @@ public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAd
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
         holder.getItemRoutineBinding().setRoutine(routineList.get(position));
     }
-    
+
     @Override
     public int getItemCount() {
         return routineList.size();
