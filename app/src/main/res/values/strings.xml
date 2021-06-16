@@ -8,8 +8,12 @@
     <string name="routines">Routines</string>
     <string name="favorites">Favorites</string>
     <string name="home">Home</string>
-    <string name="button">Button</string>
     <string name="profileImage">Profile Image</string>
     <string name="profile">Profile</string>
+    <string name="log_out">Log Out</string>
+    <string name="log_out_msg">"Are you sure you want to log out?"</string>
+    <string name="confirm">Yes</string>
+    <string name="deny">No</string>
+
 
 </resources>

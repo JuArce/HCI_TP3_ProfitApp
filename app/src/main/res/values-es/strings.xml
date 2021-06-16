@@ -7,8 +7,11 @@
     <string name="routines">Routines</string>
     <string name="favorites">Favorites</string>
     <string name="home">Home</string>
-    <string name="button">Boton</string>
     <string name="profileImage">Imagen de Perfil</string>
     <string name="profile">Perfil</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="log_out">Cerrar sesión</string>
+    <string name="log_out_msg">"Esta seguro que desea cerrar sesión?"</string>
+    <string name="confirm">Si</string>
+    <string name="deny">No</string>
 </resources>
