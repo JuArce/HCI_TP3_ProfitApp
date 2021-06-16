@@ -80,6 +80,7 @@ public class FavoritesFragment extends Fragment {
         favoritesViewModel.getFavorites().observe(getViewLifecycleOwner(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 if(r.getData() != null && r.getData().getContent() != null) {
+                    r.getData().getContent().forEach(routine -> routine.setFavorite(true));
                     favoritesAdapter.addRoutines(r.getData().getContent());
                     favoritesAdapter.notifyDataSetChanged();
                 }

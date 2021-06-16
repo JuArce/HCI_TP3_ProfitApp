@@ -26,13 +26,16 @@ public class RoutineViewModel extends RepositoryViewModel<RoutineRepository> {
     private final MutableLiveData<Integer> routineId = new MutableLiveData<>();
     private LiveData<Resource<Routine>> routine;
 
+    private final PagedList<Routine> allFavorites = new PagedList<>();
+    private final MediatorLiveData<Resource<PagedList<Routine>>> favorites = new MediatorLiveData<>();
+
     private final MediatorLiveData<Resource<Routine>> addRoutine = new MediatorLiveData<>();
 
     public RoutineViewModel(RoutineRepository repository) {
         super(repository);
 
         routine = Transformations.switchMap(routineId, routineId -> {
-            if(routineId == null) {
+            if (routineId == null) {
                 return AbsentLiveData.create();
             } else {
                 return repository.getRoutine(routineId);
@@ -41,7 +44,7 @@ public class RoutineViewModel extends RepositoryViewModel<RoutineRepository> {
     }
 
     public LiveData<Resource<PagedList<Routine>>> getRoutines() {
-        if(!isLastRoutinePage) {
+        if (!isLastRoutinePage) {
             routines.addSource(repository.getRoutines(routinePage, PAGE_SIZE, orderBy, direction), resource -> {
                 if (resource.getStatus() == Status.SUCCESS) {
 //                if ((resource.getData().getSize() == 0) || (resource.getData().getSize() < PAGE_SIZE)) {
@@ -51,6 +54,7 @@ public class RoutineViewModel extends RepositoryViewModel<RoutineRepository> {
                     isLastRoutinePage = resource.getData().getIsLastPage();
 
                     allRoutines.setContent(resource.getData().getContent());
+
                     routines.setValue(Resource.success(allRoutines));
                     if (!isLastRoutinePage) {
                         routinePage++;
@@ -69,7 +73,7 @@ public class RoutineViewModel extends RepositoryViewModel<RoutineRepository> {
     }
 
     public void setRoutineId(int routineId) {
-        if((this.routineId.getValue() != null) && (routineId == this.routineId.getValue())) {
+        if ((this.routineId.getValue() != null) && (routineId == this.routineId.getValue())) {
             return;
         }
         this.routineId.setValue(routineId);

@@ -44,7 +44,7 @@ public class Routine {
     private boolean isFavorite;
 
     public Routine() {
-        this.isFavorite = true;
+        this.isFavorite = false;
     }
 
     public Routine(int id, String name, String detail, long date, double averageRating, boolean isPublic, String difficulty, Object metadata, Category category, User user) {
