@@ -1,6 +1,7 @@
 package ar.edu.itba.hci.profitapp.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +25,12 @@ public class RoutineActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Intent intent = getIntent();
-        routineId = intent.getIntExtra(EXTRA_MESSAGE, -1);
+
+        routineId = intent.getIntExtra(EXTRA_MESSAGE, -1); //se inicia navegando
+        if (routineId == -1) {
+            Uri linkData = intent.getData();
+            routineId = Integer.parseInt(linkData.getLastPathSegment()); //se inicia por un link
+        }
 
         NavHostFragment mainNavHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.routine_host_fragment);
 

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -65,6 +64,18 @@ public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAd
             itemView.favoriteButton.setOnClickListener(v -> {
                 v.setTag(routineList.get(getAdapterPosition()).getId());
                 favoriteClickListener.onClick(v);
+            });
+
+            itemView.shareButton.setOnClickListener(v -> {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "http://www.profit.com/routineDetail/" + routineList.get(getAdapterPosition()).getId());
+
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+
+                v.getContext().startActivity(shareIntent);
             });
 
             view.setOnClickListener(v -> {
