@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="exercise"
+            name="cycleExercise"
             type="ar.edu.itba.hci.profitapp.api.model.CycleExercise" />
     </data>
 
@@ -11,26 +12,49 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="1dp"
+            android:layout_height="85dp"
+            android:layout_marginStart="16dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/divider2"
+            app:layout_constraintEnd_toEndOf="@+id/divider2"
+            app:layout_constraintStart_toStartOf="@+id/divider2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/circle_exercise" />
+
         <TextView
             android:id="@+id/exercise_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@{cycleExercise.exercise.name}"
+            app:layout_constraintStart_toEndOf="@+id/divider2"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/exercise_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:text="@{cycleExercise.duration.toString()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/seconds"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/divider2"
             app:layout_constraintTop_toBottomOf="@+id/exercise_name"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -64,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="TextView"
+            android:text="@{cycleExercise.repetitions.toString()}"
             app:layout_constraintEnd_toStartOf="@+id/times"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/separator"

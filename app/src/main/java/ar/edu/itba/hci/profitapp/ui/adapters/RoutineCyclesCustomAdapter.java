@@ -6,20 +6,21 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.api.model.Cycle;
-import ar.edu.itba.hci.profitapp.api.model.Routine;
 import ar.edu.itba.hci.profitapp.databinding.ItemCycleBinding;
-import ar.edu.itba.hci.profitapp.databinding.ItemRoutineBinding;
 
 public class RoutineCyclesCustomAdapter extends RecyclerView.Adapter<RoutineCyclesCustomAdapter.ViewHolder> {
     private List<Cycle> cycleList;
+    private List<ExercisesCustomAdapter> exercisesCustomAdapters = new ArrayList<>();
 
     public RoutineCyclesCustomAdapter(List<Cycle> cycleList) {
         this.cycleList = cycleList;
@@ -27,6 +28,14 @@ public class RoutineCyclesCustomAdapter extends RecyclerView.Adapter<RoutineCycl
 
     public void addCycles(List<Cycle> toAdd) {
         cycleList.addAll(toAdd);
+    }
+
+    public void addCycle(Cycle toAdd) {
+        cycleList.add(toAdd);
+    }
+
+    public List<ExercisesCustomAdapter> getExercisesCustomAdapters() {
+        return exercisesCustomAdapters;
     }
 
     @NonNull
@@ -40,14 +49,23 @@ public class RoutineCyclesCustomAdapter extends RecyclerView.Adapter<RoutineCycl
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull RoutineCyclesCustomAdapter.ViewHolder holder, int position) {
-        holder.getItemCycleBinding().setCycle(cycleList.get(position));
+        Cycle cycle = cycleList.get(position);
+        ItemCycleBinding itemCycleBinding = holder.getItemCycleBinding();
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(holder.itemCycleBinding.exercisesRecyclerView.getContext(), LinearLayoutManager.VERTICAL, false);
+        ExercisesCustomAdapter exercisesCustomAdapter = new ExercisesCustomAdapter(cycle.getCycleExercises());
+        exercisesCustomAdapters.add(exercisesCustomAdapter);
+//        layoutManager.setInitialPrefetchItemCount(cycle.getCycleExercises().size());
+        holder.itemCycleBinding.exercisesRecyclerView.setLayoutManager(layoutManager);
+        holder.itemCycleBinding.exercisesRecyclerView.setAdapter(exercisesCustomAdapter);
+
+        itemCycleBinding.setCycle(cycle);
     }
 
     @Override
     public int getItemCount() {
         return cycleList.size();
     }
-
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {

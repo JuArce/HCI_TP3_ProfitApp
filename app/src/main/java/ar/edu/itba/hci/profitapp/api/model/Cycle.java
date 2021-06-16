@@ -3,6 +3,9 @@ package ar.edu.itba.hci.profitapp.api.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cycle {
 
     @SerializedName("id")
@@ -26,6 +29,8 @@ public class Cycle {
     @SerializedName("metadata")
     @Expose
     private Object metadata;
+
+    private List<CycleExercise> cycleExercises = new ArrayList<>();
 
     public Cycle() {
     }
@@ -66,7 +71,7 @@ public class Cycle {
     }
 
     public String getType() {
-        return type;
+        return type.substring(0,1).toUpperCase() + type.substring(1).toLowerCase();
     }
 
     public void setType(String type) {
@@ -81,7 +86,7 @@ public class Cycle {
         this.order = order;
     }
 
-    public int getRepetitions() {
+    public Integer getRepetitions() {
         return repetitions;
     }
 
@@ -97,4 +102,11 @@ public class Cycle {
         this.metadata = metadata;
     }
 
+    public List<CycleExercise> getCycleExercises() {
+        return cycleExercises;
+    }
+
+    public void setCycleExercises(List<CycleExercise> cycleExercises) {
+        this.cycleExercises = cycleExercises;
+    }
 }

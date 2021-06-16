@@ -85,10 +85,6 @@ public class Routine {
         this.detail = detail;
     }
 
-//    public long getDate() {
-//        return date;
-//    }
-
     public String getDate() {
         Date fullDate = new Date(date);
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");

@@ -38,8 +38,8 @@ public class ExercisesCustomAdapter extends RecyclerView.Adapter<ExercisesCustom
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-        //holder.getItemRoutineBinding().setRoutine(routineList.get(position));
+    public void onBindViewHolder(@NonNull @NotNull ExercisesCustomAdapter.ViewHolder holder, int position) {
+        holder.getItemExerciseBinding().setCycleExercise(exerciseList.get(position));
     }
 
     @Override
@@ -48,21 +48,19 @@ public class ExercisesCustomAdapter extends RecyclerView.Adapter<ExercisesCustom
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        //private final ItemRoutineBinding itemRoutineBinding;
+        private final ItemExerciseBinding itemExerciseBinding;
 
         public ViewHolder(@NonNull @NotNull ItemExerciseBinding itemView) {
             super(itemView.getRoot());
             View view = itemView.getRoot();
 
-            //this.itemRoutineBinding = itemView;
+            this.itemExerciseBinding = itemView;
 
         }
 
-                /*
-                public ItemRoutineBinding getItemRoutineBinding() {
-                    return itemRoutineBinding;
-                }
-                */
+        public ItemExerciseBinding getItemExerciseBinding() {
+            return itemExerciseBinding;
+        }
     }
 
 }

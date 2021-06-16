@@ -37,7 +37,7 @@ public class CycleExercise {
         this.order = order;
     }
 
-    public int getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
@@ -45,7 +45,7 @@ public class CycleExercise {
         this.duration = duration;
     }
 
-    public int getRepetitions() {
+    public Integer getRepetitions() {
         return repetitions;
     }
 

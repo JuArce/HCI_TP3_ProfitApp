@@ -4,6 +4,7 @@ import android.app.Application;
 
 import ar.edu.itba.hci.profitapp.repository.AchievementsRepository;
 import ar.edu.itba.hci.profitapp.repository.CategoryRepository;
+import ar.edu.itba.hci.profitapp.repository.ExerciseRepository;
 import ar.edu.itba.hci.profitapp.repository.RoutineRepository;
 import ar.edu.itba.hci.profitapp.repository.SportRepository;
 import ar.edu.itba.hci.profitapp.repository.UserRepository;
@@ -16,6 +17,7 @@ public class App extends Application {
     private RoutineRepository routineRepository;
     private CategoryRepository categoryRepository;
     private AchievementsRepository achievementsRepository;
+    private ExerciseRepository exerciseRepository;
 
     @Override
     public void onCreate() {
@@ -32,6 +34,8 @@ public class App extends Application {
         categoryRepository = new CategoryRepository(this);
 
         achievementsRepository = new AchievementsRepository(this);
+
+        exerciseRepository = new ExerciseRepository(this);
     }
 
     public AppPreferences getPreferences() {
@@ -56,5 +60,9 @@ public class App extends Application {
 
     public AchievementsRepository getAchievementsRepository() {
         return achievementsRepository;
+    }
+
+    public ExerciseRepository getExerciseRepository() {
+        return exerciseRepository;
     }
 }
