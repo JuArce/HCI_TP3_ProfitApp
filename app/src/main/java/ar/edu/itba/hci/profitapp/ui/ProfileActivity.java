@@ -2,6 +2,7 @@ package ar.edu.itba.hci.profitapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -13,8 +14,10 @@ import com.bumptech.glide.Glide;
 import ar.edu.itba.hci.profitapp.App;
 import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.databinding.ActivityProfileBinding;
+import ar.edu.itba.hci.profitapp.repository.AchievementsRepository;
 import ar.edu.itba.hci.profitapp.repository.Status;
 import ar.edu.itba.hci.profitapp.repository.UserRepository;
+import ar.edu.itba.hci.profitapp.viewModel.AchievementsViewModel;
 import ar.edu.itba.hci.profitapp.viewModel.UserViewModel;
 import ar.edu.itba.hci.profitapp.viewModel.repositoryVM.RepositoryViewModelFactory;
 
@@ -22,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
     private App app;
     private ActivityProfileBinding profileBinding;
     private UserViewModel userViewModel;
-
+    private AchievementsViewModel achievementsViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
             if (r.getStatus() == Status.SUCCESS) {
                 if(r.getData() != null && r.getData() != null) {
                     profileBinding.setUser(r.getData());
-                    if(r.getData().getAvatarUrl() != "") {
+                    if(!r.getData().getAvatarUrl().equals("")) {
                         Glide.with(profileBinding.getRoot()).load(r.getData().getAvatarUrl()).into(profileBinding.profilePicture);
                     }
                 }
@@ -53,6 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
 //                defaultResourceHandler(r);
             }
         });
+//        LOG OUT
         profileBinding.logoutButton.setOnClickListener((v) -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true);
@@ -74,5 +78,15 @@ public class ProfileActivity extends AppCompatActivity {
             dialog.show();
 
         });
+        ViewModelProvider.Factory viewModelFactoryAch = new RepositoryViewModelFactory<>(AchievementsRepository.class, app.getAchievementsRepository());
+        achievementsViewModel = new ViewModelProvider(this, viewModelFactoryAch).get(AchievementsViewModel.class);
+        achievementsViewModel.getAchievements().observe(this, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                if (r.getData() != null && r.getData().getContent() != null) {
+                    Log.d("TAG", r.getData().getContent().toString());
+                }
+            }
+        });
+
     }
 }

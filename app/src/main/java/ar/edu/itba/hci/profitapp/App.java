@@ -2,6 +2,7 @@ package ar.edu.itba.hci.profitapp;
 
 import android.app.Application;
 
+import ar.edu.itba.hci.profitapp.repository.AchievementsRepository;
 import ar.edu.itba.hci.profitapp.repository.CategoryRepository;
 import ar.edu.itba.hci.profitapp.repository.RoutineRepository;
 import ar.edu.itba.hci.profitapp.repository.SportRepository;
@@ -14,6 +15,7 @@ public class App extends Application {
     private SportRepository sportRepository;
     private RoutineRepository routineRepository;
     private CategoryRepository categoryRepository;
+    private AchievementsRepository achievementsRepository;
 
     @Override
     public void onCreate() {
@@ -28,6 +30,8 @@ public class App extends Application {
         routineRepository = new RoutineRepository(this);
 
         categoryRepository = new CategoryRepository(this);
+
+        achievementsRepository = new AchievementsRepository(this);
     }
 
     public AppPreferences getPreferences() {
@@ -48,5 +52,9 @@ public class App extends Application {
 
     public CategoryRepository getCategoryRepository() {
         return categoryRepository;
+    }
+
+    public AchievementsRepository getAchievementsRepository() {
+        return achievementsRepository;
     }
 }
