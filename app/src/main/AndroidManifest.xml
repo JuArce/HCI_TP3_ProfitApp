@@ -20,6 +20,14 @@
 
         <activity android:name=".ui.RoutineActivity"
             android:parentActivityName=".ui.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http"
+                    android:host="www.profit.com"
+                    android:pathPrefix="/routineDetail"/>
+            </intent-filter>
 
         </activity>
 
