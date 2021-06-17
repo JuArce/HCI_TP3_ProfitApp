@@ -14,6 +14,7 @@
     <string name="log_out_msg">"Esta seguro que desea cerrar sesión?"</string>
     <string name="confirm">Si</string>
     <string name="deny">No</string>
+    <string name="rate_now">Votar</string>
     <string name="category">Categoría</string>
     <string name="date">Fecha</string>
     <string name="difficulty">Dificultad</string>

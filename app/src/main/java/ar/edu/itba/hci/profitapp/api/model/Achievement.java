@@ -59,4 +59,13 @@ public class Achievement {
     public void setDate(long date) {
         this.date = date;
     }
+
+    public long getDate() {
+        return date;
+    }
 }
+/*Log.d("TAG","ARCHIEVEMENT LIST LENGTH" +Integer.toString(achievementList.size()));
+        achievementList.forEach(v -> {
+            double aux = v.getWeight();
+            Log.d("TAG", "PESO: "+Double.toString(aux));
+        });*/

@@ -2,10 +2,10 @@ package ar.edu.itba.hci.profitapp.ui;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,16 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import ar.edu.itba.hci.profitapp.App;
 import ar.edu.itba.hci.profitapp.api.model.Cycle;
-import ar.edu.itba.hci.profitapp.api.model.CycleExercise;
-import ar.edu.itba.hci.profitapp.api.model.Exercise;
 import ar.edu.itba.hci.profitapp.databinding.FragmentRoutineDetailBinding;
-import ar.edu.itba.hci.profitapp.databinding.FragmentRoutinesBinding;
 import ar.edu.itba.hci.profitapp.repository.ExerciseRepository;
 import ar.edu.itba.hci.profitapp.repository.RoutineRepository;
 import ar.edu.itba.hci.profitapp.repository.Status;
@@ -37,8 +33,6 @@ import ar.edu.itba.hci.profitapp.viewModel.ExerciseViewModel;
 import ar.edu.itba.hci.profitapp.viewModel.RoutineCycleViewModel;
 import ar.edu.itba.hci.profitapp.viewModel.RoutineViewModel;
 import ar.edu.itba.hci.profitapp.viewModel.repositoryVM.RepositoryViewModelFactory;
-
-import static android.os.Build.VERSION_CODES.R;
 
 public class RoutineDetailFragment extends Fragment {
     private App app;
@@ -148,6 +142,16 @@ public class RoutineDetailFragment extends Fragment {
             } else {
 
             }
+        });
+        fragmentRoutineDetailBinding.ratingButton.setOnClickListener(v -> {
+            RatingBar ratingBar = (RatingBar) fragmentRoutineDetailBinding.ratingBar;
+            float rating = ratingBar.getRating(); //este es el rating local 
+            app.getRoutineRepository().getRoutine(routineId).observe(getViewLifecycleOwner(), r ->{
+                if (r.getStatus() == Status.SUCCESS) {
+                    if (r.getData() != null && r.getData() != null) {
+//                        r.getData().setAverageRating();
+                    }}
+            });
         });
 
 

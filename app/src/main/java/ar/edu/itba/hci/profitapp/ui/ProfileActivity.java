@@ -10,9 +10,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ar.edu.itba.hci.profitapp.App;
 import ar.edu.itba.hci.profitapp.R;
+import ar.edu.itba.hci.profitapp.api.model.Achievement;
 import ar.edu.itba.hci.profitapp.databinding.ActivityProfileBinding;
 import ar.edu.itba.hci.profitapp.repository.AchievementsRepository;
 import ar.edu.itba.hci.profitapp.repository.Status;
@@ -78,15 +87,29 @@ public class ProfileActivity extends AppCompatActivity {
             dialog.show();
 
         });
+        LineChart achievementsChart = (LineChart) findViewById(R.id.lineChart);
+        List<Achievement> achievementList = new ArrayList<>();
         ViewModelProvider.Factory viewModelFactoryAch = new RepositoryViewModelFactory<>(AchievementsRepository.class, app.getAchievementsRepository());
         achievementsViewModel = new ViewModelProvider(this, viewModelFactoryAch).get(AchievementsViewModel.class);
         achievementsViewModel.getAchievements().observe(this, r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 if (r.getData() != null && r.getData().getContent() != null) {
+                    achievementList.addAll(r.getData().getContent());
                     Log.d("TAG", r.getData().getContent().toString());
+                    ArrayList<Entry> valueSet = new ArrayList<>();
+                    achievementList.forEach(v -> {
+                        valueSet.add(new BarEntry(v.getDate(), (float) v.getWeight()));
+
+                    });
+                    LineDataSet dataSet = new LineDataSet(valueSet, "");
+                    LineData data = new LineData(dataSet);
+                    achievementsChart.setData(data);
+                    achievementsChart.animateXY(2000,2000);
+                    achievementsChart.invalidate();
                 }
             }
         });
+
 
     }
 }
