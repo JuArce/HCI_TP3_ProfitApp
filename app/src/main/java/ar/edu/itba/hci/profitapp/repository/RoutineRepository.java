@@ -121,4 +121,16 @@ public class RoutineRepository {
             }
         }.asLiveData();
     }
+
+    public LiveData<Resource<PagedList<Routine>>> getCurrentUserRoutines() {
+        return new NetworkBoundResource<PagedList<Routine>, PagedList<Routine>>() {
+            @NonNull
+            @NotNull
+            @Override
+            protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
+                //TODO refactor
+                return apiService.getCurrentUserRoutines();
+            }
+        }.asLiveData();
+    }
 }

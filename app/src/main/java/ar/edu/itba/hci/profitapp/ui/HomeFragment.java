@@ -82,6 +82,17 @@ public class HomeFragment extends Fragment {
         ViewModelProvider.Factory viewModelFactory = new RepositoryViewModelFactory<>(RoutineRepository.class, app.getRoutineRepository());
         routineViewModel = new ViewModelProvider(this, viewModelFactory).get(RoutineViewModel.class);
 
+        app.getRoutineRepository().getCurrentUserRoutines().observe(getViewLifecycleOwner(), r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                if(r.getData() != null && r.getData().getContent() != null) {
+                    routinesAdapter.addRoutines(r.getData().getContent());
+                    routinesAdapter.notifyDataSetChanged();
+                }
+            } else {
+//                //defaultResourceHandler(r);
+            }
+        });
+        /*
         routineViewModel.getRoutines().observe(getViewLifecycleOwner(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 if(r.getData() != null && r.getData().getContent() != null) {
@@ -92,6 +103,8 @@ public class HomeFragment extends Fragment {
 //                defaultResourceHandler(r);
             }
         });
+
+         */
 
     }
 }
