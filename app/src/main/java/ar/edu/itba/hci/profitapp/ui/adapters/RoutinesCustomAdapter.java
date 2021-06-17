@@ -79,7 +79,6 @@ public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAd
             });
 
             view.setOnClickListener(v -> {
-//                favoriteClickListener.onClick(v);
                 Intent intent = new Intent(v.getContext(), RoutineActivity.class);
                 intent.putExtra(EXTRA_MESSAGE, routineList.get(getAdapterPosition()).getId());
                 v.getContext().startActivity(intent);

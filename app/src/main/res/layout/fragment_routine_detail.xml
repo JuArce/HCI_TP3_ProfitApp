@@ -134,6 +134,20 @@
             app:layout_constraintTop_toBottomOf="@+id/routine_creator"
             app:layout_constraintVertical_bias="0.0" />
 
+        <Button
+            android:id="@+id/rating_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@android:color/transparent"
+            android:text="@string/rate_now"
+            android:textColor="@color/teal"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar"
+            app:layout_constraintTop_toBottomOf="@+id/routine_creator" />
+
         <ImageView
             android:id="@+id/category_icon"
             android:layout_width="wrap_content"
@@ -208,22 +222,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider"
             app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/rating_button"
-            android:layout_width="84dp"
-            android:layout_height="31dp"
-            android:layout_marginStart="8dp"
-            android:text="@string/rate_now"
-            android:textSize="8sp"
-            android:textColor="@color/teal"
-            android:background="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.004"
-            app:layout_constraintStart_toEndOf="@+id/ratingBar"
-            app:layout_constraintTop_toBottomOf="@+id/routine_creator"
-            app:layout_constraintVertical_bias="0.012" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

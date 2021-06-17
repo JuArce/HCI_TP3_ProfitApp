@@ -1,7 +1,9 @@
 package ar.edu.itba.hci.profitapp.ui;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +21,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import ar.edu.itba.hci.profitapp.App;
 import ar.edu.itba.hci.profitapp.api.model.Cycle;
+import ar.edu.itba.hci.profitapp.api.model.Routine;
 import ar.edu.itba.hci.profitapp.databinding.FragmentRoutineDetailBinding;
 import ar.edu.itba.hci.profitapp.repository.ExerciseRepository;
 import ar.edu.itba.hci.profitapp.repository.RoutineRepository;
@@ -72,13 +76,6 @@ public class RoutineDetailFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        View.OnClickListener favoriteClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                v.getTag()
-            }
-        };
-
         app = ((App) getActivity().getApplication());
         RoutineActivity activity = (RoutineActivity) getActivity();
         routineId = activity.getRoutineId();
@@ -104,10 +101,21 @@ public class RoutineDetailFragment extends Fragment {
         routineViewModel.getRoutine(routineId).observe(getViewLifecycleOwner(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 if (r.getData() != null && r.getData() != null) {
-                    fragmentRoutineDetailBinding.setRoutine(r.getData());
-                }
-            } else {
+                    app.getRoutineRepository().getFavorites(0, 10).observe(getViewLifecycleOwner(), favRes -> { //TODO definir viewModel vs rep
+                        if (favRes.getStatus() == Status.SUCCESS) {
+                            if (favRes.getData() != null && favRes.getData().getContent() != null) {
+                                if (favRes.getData().getContent().stream().map(Routine::getId).collect(Collectors.toList()).contains(r.getData().getId())) {
+                                    r.getData().setFavorite(true);
+                                }
+                            }
+                        } else {
+
+                        }
+                        fragmentRoutineDetailBinding.setRoutine(r.getData());
+                    });
+                } else {
 //                defaultResourceHandler(r);
+                }
             }
         });
 
@@ -143,17 +151,35 @@ public class RoutineDetailFragment extends Fragment {
 
             }
         });
+
+        //TODO no hace el llamado a la api
         fragmentRoutineDetailBinding.ratingButton.setOnClickListener(v -> {
             RatingBar ratingBar = (RatingBar) fragmentRoutineDetailBinding.ratingBar;
-            float rating = ratingBar.getRating(); //este es el rating local 
-            app.getRoutineRepository().getRoutine(routineId).observe(getViewLifecycleOwner(), r ->{
-                if (r.getStatus() == Status.SUCCESS) {
-                    if (r.getData() != null && r.getData() != null) {
-//                        r.getData().setAverageRating();
-                    }}
-            });
+            float rating = ratingBar.getRating(); //este es el rating local .
+            app.getRoutineRepository().postReview(routineId, (int) rating);
+            Log.d("TAG", Float.toString(rating));
         });
 
+        //TODO probar
+        fragmentRoutineDetailBinding.shareButton.setOnClickListener(v -> {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "http://www.profit.com/routineDetail/" + routineId);
+
+            sendIntent.setType("text/plain");
+
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+
+            v.getContext().startActivity(shareIntent);
+        });
+
+        fragmentRoutineDetailBinding.favoriteButton.setOnClickListener(v -> {
+            if (fragmentRoutineDetailBinding.favoriteButton.isChecked()) {
+                app.getRoutineRepository().addFavorite(routineId);
+            } else {
+                app.getRoutineRepository().deleteFavorite(routineId);
+            }
+        });
 
     }
 }
