@@ -9,5 +9,16 @@
         android:id="@+id/routineDetailFragment"
         android:name="ar.edu.itba.hci.profitapp.ui.RoutineDetailFragment"
         android:label="fragment_routine_detail"
-        tools:layout="@layout/fragment_routine_detail" />
+        tools:layout="@layout/fragment_routine_detail">
+        <action
+            android:id="@+id/action_detailFragment_to_executionFragment"
+        app:destination="@id/routineExecutionFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/routineExecutionFragment"
+        android:name="ar.edu.itba.hci.profitapp.ui.RoutineExecutionFragment"
+        android:label="fragment_routine_execution"
+        tools:layout="@layout/fragment_routine_execution_detailed"/>
+<!--    que onda aca este layout, como deberia cambiar?-->
 </navigation>

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import ar.edu.itba.hci.profitapp.App;
+import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.api.model.Cycle;
 import ar.edu.itba.hci.profitapp.api.model.Routine;
 import ar.edu.itba.hci.profitapp.databinding.FragmentRoutineDetailBinding;
@@ -184,5 +186,8 @@ public class RoutineDetailFragment extends Fragment {
             }
         });
 
+        fragmentRoutineDetailBinding.startRoutineExecutionButton.setOnClickListener(v -> {
+            NavHostFragment.findNavController(this).navigate(R.id.action_detailFragment_to_executionFragment);
+        });
     }
 }
