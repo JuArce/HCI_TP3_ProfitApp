@@ -20,6 +20,9 @@
     <string name="rate_now">Rate Now</string>
     <string name="start">Start</string>
     <string name="order_button_title">Order by</string>
+    <string name="fav_added">Routine added to favorites</string>
+    <string name="fav_removed">Routine removed from favorites</string>
+    <string name="rated">Routine rated successfully!</string>
 
 
 </resources>

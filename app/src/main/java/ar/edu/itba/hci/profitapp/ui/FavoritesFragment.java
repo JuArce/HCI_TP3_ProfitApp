@@ -15,12 +15,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
 import ar.edu.itba.hci.profitapp.App;
 import ar.edu.itba.hci.profitapp.R;
+import ar.edu.itba.hci.profitapp.api.model.Routine;
 import ar.edu.itba.hci.profitapp.databinding.FragmentFavoritesBinding;
 import ar.edu.itba.hci.profitapp.databinding.FragmentHomeBinding;
 import ar.edu.itba.hci.profitapp.databinding.FragmentRoutinesBinding;
@@ -57,6 +60,20 @@ public class FavoritesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        View.OnClickListener favoriteClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Routine routine = (Routine) v.getTag();
+                if(routine.getFavorite()) {
+                    app.getRoutineRepository().addFavorite(routine.getId()).observe(getViewLifecycleOwner(), r->{});
+                    Snackbar.make(v, getResources().getString(R.string.fav_added), Snackbar.LENGTH_LONG).show();
+                } else {
+                    app.getRoutineRepository().deleteFavorite(routine.getId()).observe(getViewLifecycleOwner(), r->{});
+                    Snackbar.make(v, getResources().getString(R.string.fav_removed), Snackbar.LENGTH_LONG).show();
+                }
+            }
+        };
 
         favoritesAdapter = new FavoritesCustomAdapter(new ArrayList<>());
 

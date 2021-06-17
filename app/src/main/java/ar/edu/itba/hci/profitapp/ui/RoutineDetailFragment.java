@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -160,7 +162,7 @@ public class RoutineDetailFragment extends Fragment {
             float rating = ratingBar.getRating(); //este es el rating local .
             app.getRoutineRepository().postReview(routineId, (int) rating).observe(getViewLifecycleOwner(), r -> {
             });
-            Log.d("TAG", Float.toString(rating));
+            Snackbar.make(v, getResources().getString(R.string.rated), Snackbar.LENGTH_LONG).show();
         });
 
         //TODO probar
@@ -180,9 +182,11 @@ public class RoutineDetailFragment extends Fragment {
             if (fragmentRoutineDetailBinding.favoriteButton.isChecked()) {
                 app.getRoutineRepository().addFavorite(routineId).observe(getViewLifecycleOwner(), r -> {
                 });
+                Snackbar.make(v, getResources().getString(R.string.fav_added), Snackbar.LENGTH_LONG).show();
             } else {
                 app.getRoutineRepository().deleteFavorite(routineId).observe(getViewLifecycleOwner(), r -> {
                 });
+                Snackbar.make(v, getResources().getString(R.string.fav_removed), Snackbar.LENGTH_LONG).show();
             }
         });
 
