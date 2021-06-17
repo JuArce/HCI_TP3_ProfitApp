@@ -12,10 +12,12 @@
         tools:layout="@layout/fragment_routine_detail">
         <action
             android:id="@+id/action_detailFragment_to_executionFragment"
-        app:destination="@id/routineExecutionFragment"/>
+            app:destination="@id/routineExecutionFragment"
+            app:popUpTo="@id/routineDetailFragment" />
         <action
             android:id="@+id/action_routineDetailFragment_to_routineExecutionDetailedFragment"
-            app:destination="@id/routineExecutionDetailedFragment" />
+            app:destination="@id/routineExecutionDetailedFragment"
+            app:popUpTo="@id/routineDetailFragment" />
     </fragment>
 
     <fragment

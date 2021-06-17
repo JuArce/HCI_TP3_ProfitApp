@@ -26,8 +26,14 @@ public class LoginActivity extends AppCompatActivity {
         app = ((App) getApplication());
 
         if(app.getPreferences().getAuthToken() != null) {
+//          getIntent != ?
+//          y ver si viene la data de una url
+//            Si esta loggeado voy al detalle
+//            Si no le pide loguearse y mandarlo al detalle de la rutina
+//            Llamar a finish() corta la ejecucion del ciclo de vida la actividad.
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
 
         activityLoginBinding = ActivityLoginBinding.inflate(getLayoutInflater());

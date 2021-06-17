@@ -77,7 +77,7 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this.getContext(), R.array.order_by_options, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
-        spinner.setSelection(0,false);
+        spinner.setSelection(0, false);
         spinner.setOnItemSelectedListener(this);
 
 
@@ -95,11 +95,13 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
             public void onClick(View v) {
                 Routine routine = (Routine) v.getTag();
                 Log.d("TAG", Integer.toString(routine.getId()));
-                if(routine.getFavorite()) {
-                    app.getRoutineRepository().addFavorite(routine.getId()).observe(getViewLifecycleOwner(), r->{});
-                     Snackbar.make(v, getResources().getString(R.string.fav_added), Snackbar.LENGTH_LONG).show();
+                if (routine.getFavorite()) {
+                    app.getRoutineRepository().addFavorite(routine.getId()).observe(getViewLifecycleOwner(), r -> {
+                    });
+                    Snackbar.make(v, getResources().getString(R.string.fav_added), Snackbar.LENGTH_LONG).show();
                 } else {
-                    app.getRoutineRepository().deleteFavorite(routine.getId()).observe(getViewLifecycleOwner(), r->{});
+                    app.getRoutineRepository().deleteFavorite(routine.getId()).observe(getViewLifecycleOwner(), r -> {
+                    });
                     Snackbar.make(v, getResources().getString(R.string.fav_removed), Snackbar.LENGTH_LONG).show();
                 }
             }
@@ -124,19 +126,35 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         String orderByStr = parent.getItemAtPosition(pos).toString();
-        if(Locale.getDefault().getLanguage().equals("en")) {
+        if (Locale.getDefault().getLanguage().equals("en")) {
             switch (orderByStr) {
-                case "Category": orderByStr = "categoryId"; break;
-                case "Date": orderByStr = "date"; break;
-                case "Difficulty": orderByStr = "difficulty"; break;
-                case "Rating": orderByStr = "averageRating"; break;
+                case "Category":
+                    orderByStr = "categoryId";
+                    break;
+                case "Date":
+                    orderByStr = "date";
+                    break;
+                case "Difficulty":
+                    orderByStr = "difficulty";
+                    break;
+                case "Rating":
+                    orderByStr = "averageRating";
+                    break;
             }
-        } else if(Locale.getDefault().getLanguage().equals("es")) {
+        } else if (Locale.getDefault().getLanguage().equals("es")) {
             switch (orderByStr) {
-                case "Categoría": orderByStr = "categoryId"; break;
-                case "Fecha": orderByStr = "date"; break;
-                case "Dificultad": orderByStr = "difficulty"; break;
-                case "Puntuación": orderByStr = "averageRating"; break;
+                case "Categoría":
+                    orderByStr = "categoryId";
+                    break;
+                case "Fecha":
+                    orderByStr = "date";
+                    break;
+                case "Dificultad":
+                    orderByStr = "difficulty";
+                    break;
+                case "Puntuación":
+                    orderByStr = "averageRating";
+                    break;
             }
         }
         orderBy = orderByStr;

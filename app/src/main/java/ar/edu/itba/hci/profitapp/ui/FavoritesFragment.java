@@ -75,7 +75,7 @@ public class FavoritesFragment extends Fragment {
             }
         };
 
-        favoritesAdapter = new FavoritesCustomAdapter(new ArrayList<>());
+        favoritesAdapter = new FavoritesCustomAdapter(new ArrayList<>(), favoriteClickListener);
 
         recyclerView.setAdapter(favoritesAdapter);
 

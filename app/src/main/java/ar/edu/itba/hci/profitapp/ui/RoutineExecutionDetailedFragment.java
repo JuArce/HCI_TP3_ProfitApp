@@ -108,8 +108,6 @@ public class RoutineExecutionDetailedFragment extends Fragment {
             }
         });
 
-        Context context = getContext();
-
         binding.nextButton.setOnClickListener(v -> {
             Log.d("TAG", "cambiar");
             Log.d("TAG", Integer.toString(routineCycles.get(cycleIndex).getCycleExercises().size()));
@@ -133,7 +131,7 @@ public class RoutineExecutionDetailedFragment extends Fragment {
                         binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex++));
                     } else {
                         //TODO popup para salir
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
                         builder.setMessage("Congratulations! You finished your routine"); //despues pasarlo a R.string.lo_que_sea
                         builder.setCancelable(false);
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

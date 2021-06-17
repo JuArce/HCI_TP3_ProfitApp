@@ -1,6 +1,8 @@
 package ar.edu.itba.hci.profitapp.ui.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -14,12 +16,16 @@ import java.util.List;
 import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.api.model.Routine;
 import ar.edu.itba.hci.profitapp.databinding.ItemRoutineBinding;
+import ar.edu.itba.hci.profitapp.ui.RoutineActivity;
 
 public class FavoritesCustomAdapter extends RecyclerView.Adapter<FavoritesCustomAdapter.ViewHolder> {
     private List<Routine> routineList;
+    public final static String EXTRA_MESSAGE = "ar.edu.itba.hci.profitapp.message";
+    public final View.OnClickListener favoriteClickListener;
 
-    public FavoritesCustomAdapter(List<Routine> routineList) {
+    public FavoritesCustomAdapter(List<Routine> routineList, View.OnClickListener favoriteClickListener) {
         this.routineList = routineList;
+        this.favoriteClickListener = favoriteClickListener;
     }
 
     public void addRoutines(List<Routine> toAdd) {
@@ -51,6 +57,31 @@ public class FavoritesCustomAdapter extends RecyclerView.Adapter<FavoritesCustom
 
         public ViewHolder(@NonNull @NotNull ItemRoutineBinding itemView) {
             super(itemView.getRoot());
+            View view = itemView.getRoot();
+
+            itemView.favoriteButton.setOnClickListener(v -> {
+                v.setTag(routineList.get(getAdapterPosition()));
+                favoriteClickListener.onClick(v);
+            });
+
+            itemView.shareButton.setOnClickListener(v -> {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "http://www.profit.com/routineDetail/" + routineList.get(getAdapterPosition()).getId());
+
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+
+                v.getContext().startActivity(shareIntent);
+            });
+
+            view.setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), RoutineActivity.class);
+                intent.putExtra(EXTRA_MESSAGE, routineList.get(getAdapterPosition()).getId());
+                v.getContext().startActivity(intent);
+            });
+
             this.itemRoutineBinding = itemView;
         }
 
