@@ -22,6 +22,6 @@ public interface ApiRoutineService {
     @GET("routines/{routineId}/cycles/{cycleId}")
     LiveData<ApiResponse<Cycle>> getRoutineCycle(@Path("routineId") int routineId, @Path("cycleId") int cycleId);
 
-    @GET("users/current/routines")
+    @GET("users/current/routines/")
     LiveData<ApiResponse<PagedList<Routine>>> getCurrentUserRoutines();
 }

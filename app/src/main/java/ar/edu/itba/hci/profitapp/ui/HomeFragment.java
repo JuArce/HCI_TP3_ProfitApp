@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -20,9 +21,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import ar.edu.itba.hci.profitapp.App;
 import ar.edu.itba.hci.profitapp.R;
+import ar.edu.itba.hci.profitapp.api.model.Routine;
 import ar.edu.itba.hci.profitapp.databinding.FragmentHomeBinding;
 import ar.edu.itba.hci.profitapp.repository.RoutineRepository;
 import ar.edu.itba.hci.profitapp.repository.Status;
@@ -63,7 +66,13 @@ public class HomeFragment extends Fragment {
         View.OnClickListener favoriteClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                v.getTag()
+                Routine routine = (Routine) v.getTag();
+                if(routine.getFavorite()) {
+                    app.getRoutineRepository().addFavorite(routine.getId()).observe(getViewLifecycleOwner(), r->{});
+
+                } else {
+                    app.getRoutineRepository().deleteFavorite(routine.getId()).observe(getViewLifecycleOwner(), r->{});
+                }
             }
         };
 
@@ -85,8 +94,21 @@ public class HomeFragment extends Fragment {
         app.getRoutineRepository().getCurrentUserRoutines().observe(getViewLifecycleOwner(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 if(r.getData() != null && r.getData().getContent() != null) {
-                    routinesAdapter.addRoutines(r.getData().getContent());
-                    routinesAdapter.notifyDataSetChanged();
+                    app.getRoutineRepository().getFavorites(0,10).observe(getViewLifecycleOwner(), favRes -> {
+                        if (favRes.getStatus() == Status.SUCCESS) {
+                            if (favRes.getData() != null && favRes.getData().getContent() != null) {
+                                r.getData().getContent().forEach(routine -> {
+                                    if (favRes.getData().getContent().stream().map(Routine::getId).collect(Collectors.toList()).contains(routine.getId())) {
+                                        routine.setFavorite(true);
+                                    }
+                                });
+                                routinesAdapter.addRoutines(r.getData().getContent());
+                                routinesAdapter.notifyDataSetChanged();
+                            }
+                        } else {
+
+                        }
+                    });
                 }
             } else {
 //                //defaultResourceHandler(r);

@@ -49,6 +49,10 @@ public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAd
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
         holder.getItemRoutineBinding().setRoutine(routineList.get(position));
+        Routine routine = routineList.get(position);
+        if(!routine.isIsPublic()) {
+            holder.getItemRoutineBinding().shareButton.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
