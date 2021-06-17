@@ -5,15 +5,7 @@ import android.widget.AdapterView;
 
 import androidx.fragment.app.Fragment;
 
-public class RoutineExecutionFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class RoutineExecutionFragment extends Fragment{
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }

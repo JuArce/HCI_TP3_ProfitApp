@@ -2,7 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:title="Item"
+        android:id="@+id/order_by"
+        android:icon="@drawable/ic_baseline_filter_list_24"
+        android:title="@string/order_button_title"
         app:showAsAction="always" />
     <item
         app:showAsAction="ifRoom"

@@ -3,4 +3,5 @@
     <string name="routines">Routines</string>
     <string name="favorites">Favorites</string>
     <string name="home">Home</string>
+    <string name="order_button_title">Order by</string>
 </resources>

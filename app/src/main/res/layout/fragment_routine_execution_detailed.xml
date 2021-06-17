@@ -6,11 +6,12 @@
 
     <data>
         <variable
-            name="routine"
-            type="ar.edu.itba.hci.profitapp.api.model.Routine" />
-        <variable
-            name="exercise"
-            type="ar.edu.itba.hci.profitapp.api.model.Exercise"/>
+            name="cycle"
+            type="ar.edu.itba.hci.profitapp.api.model.Cycle" />
+<!--        <variable-->
+<!--            name="exercise"-->
+<!--            type="ar.edu.itba.hci.profitapp.api.model.Exercise"/>-->
+
         <variable
             name="cycleExercise"
             type="ar.edu.itba.hci.profitapp.api.model.CycleExercise"/>
@@ -26,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="@{routine.name}"
+            android:text="@{cycle.name}"
             android:textColor="@color/dark_grey"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -35,24 +36,24 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ProgressBar
-            android:id="@+id/routineProgressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/cardView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/teal_light"/>
+<!--        <ProgressBar-->
+<!--            android:id="@+id/routineProgressBar"-->
+<!--            style="?android:attr/progressBarStyleHorizontal"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="32dp"-->
+<!--            android:layout_marginEnd="32dp"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/cardView2"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            android:indeterminate="true"-->
+<!--            android:indeterminateTint="@color/teal_light"/>-->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="96dp"
             android:layout_marginEnd="32dp"
@@ -76,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="@{exercise.name}"
+                    android:text="@{cycleExercise.exercise.name}"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="@{exercise.detail}"
+                    android:text="@{cycleExercise.exercise.detail}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="@{cycleExercise.repetitions}"
+                    android:text="@{cycleExercise.repetitions.toString()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="@{cycleExercise.duration}"
+                    android:text="@{cycleExercise.duration.toString()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/exercise_repetitions"
@@ -125,12 +126,15 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="32dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/exercise_duration"
+                    app:layout_constraintVertical_bias="1.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
@@ -148,18 +152,18 @@
             app:tint="@color/teal"
             card_view:srcCompat="@drawable/ic_baseline_pause_24" />
 
-        <ProgressBar
-            android:id="@+id/exercise_progress"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="66dp"
-            android:layout_height="62dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/teal_light"
-            />
+<!--        <ProgressBar-->
+<!--            android:id="@+id/exercise_progress"-->
+<!--            style="?android:attr/progressBarStyle"-->
+<!--            android:layout_width="66dp"-->
+<!--            android:layout_height="62dp"-->
+<!--            android:layout_marginTop="24dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/cardView2"-->
+<!--            android:indeterminate="true"-->
+<!--            android:indeterminateTint="@color/teal_light"-->
+<!--            />-->
 
         <ImageButton
             android:id="@+id/rewindButton"

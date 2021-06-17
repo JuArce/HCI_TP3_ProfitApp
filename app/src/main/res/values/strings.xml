@@ -19,6 +19,7 @@
     <string name="rating">Rating</string>
     <string name="rate_now">Rate Now</string>
     <string name="start">Start</string>
+    <string name="order_button_title">Order by</string>
 
 
 </resources>

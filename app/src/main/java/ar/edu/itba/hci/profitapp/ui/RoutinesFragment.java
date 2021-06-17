@@ -75,6 +75,7 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this.getContext(), R.array.order_by_options, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
+        spinner.setSelection(0,false);
         spinner.setOnItemSelectedListener(this);
 
 
@@ -137,7 +138,7 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
         }
         orderBy = orderByStr;
         routinesAdapter.clearRoutines();
-        routinesAdapter.notifyDataSetChanged();
+//        routinesAdapter.notifyDataSetChanged();
         getRoutines();
 
         Log.d("ORDER", orderBy);
@@ -148,6 +149,7 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
     }
 
     public void getRoutines() {
+        Log.d("GETROUTINE", "llamado");
         app.getRoutineRepository().getRoutines(routinePage, PAGE_SIZE, orderBy, direction).observe(getViewLifecycleOwner(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 if (r.getData() != null && r.getData().getContent() != null) {

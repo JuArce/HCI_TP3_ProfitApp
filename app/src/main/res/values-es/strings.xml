@@ -20,4 +20,5 @@
     <string name="difficulty">Dificultad</string>
     <string name="rating">Puntuación</string>
     <string name="start">Comenzar</string>
+    <string name="order_button_title">Order by</string>
 </resources>
