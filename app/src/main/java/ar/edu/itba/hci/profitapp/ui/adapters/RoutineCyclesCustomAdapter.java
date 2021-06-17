@@ -20,7 +20,6 @@ import ar.edu.itba.hci.profitapp.databinding.ItemCycleBinding;
 
 public class RoutineCyclesCustomAdapter extends RecyclerView.Adapter<RoutineCyclesCustomAdapter.ViewHolder> {
     private List<Cycle> cycleList;
-    private List<ExercisesCustomAdapter> exercisesCustomAdapters = new ArrayList<>();
 
     public RoutineCyclesCustomAdapter(List<Cycle> cycleList) {
         this.cycleList = cycleList;
@@ -32,10 +31,6 @@ public class RoutineCyclesCustomAdapter extends RecyclerView.Adapter<RoutineCycl
 
     public void addCycle(Cycle toAdd) {
         cycleList.add(toAdd);
-    }
-
-    public List<ExercisesCustomAdapter> getExercisesCustomAdapters() {
-        return exercisesCustomAdapters;
     }
 
     @NonNull
@@ -54,8 +49,7 @@ public class RoutineCyclesCustomAdapter extends RecyclerView.Adapter<RoutineCycl
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(holder.itemCycleBinding.exercisesRecyclerView.getContext(), LinearLayoutManager.VERTICAL, false);
         ExercisesCustomAdapter exercisesCustomAdapter = new ExercisesCustomAdapter(cycle.getCycleExercises());
-        exercisesCustomAdapters.add(exercisesCustomAdapter);
-//        layoutManager.setInitialPrefetchItemCount(cycle.getCycleExercises().size());
+
         holder.itemCycleBinding.exercisesRecyclerView.setLayoutManager(layoutManager);
         holder.itemCycleBinding.exercisesRecyclerView.setAdapter(exercisesCustomAdapter);
 

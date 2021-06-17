@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    TODO eng-spanish-->
+    <string-array name="order_by_options">
+        <item>@string/category</item>
+        <item>@string/date</item>
+        <item>@string/difficulty</item>
+        <item>@string/rating</item>
+    </string-array>
+</resources>

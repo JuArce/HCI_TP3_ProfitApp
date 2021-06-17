@@ -19,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import ar.edu.itba.hci.profitapp.App;
 import ar.edu.itba.hci.profitapp.api.model.Cycle;
@@ -89,7 +90,7 @@ public class RoutineDetailFragment extends Fragment {
         routineId = activity.getRoutineId();
 
 //        routinesAdapter = new RoutinesCustomAdapter(new ArrayList<>(), favoriteClickListener);
-        routineCyclesAdapter = new RoutineCyclesCustomAdapter(new ArrayList<>());
+//        routineCyclesAdapter = new RoutineCyclesCustomAdapter(new ArrayList<>());
 
         ViewModelProvider.Factory routineViewModelFactory = new RepositoryViewModelFactory<>(RoutineRepository.class, app.getRoutineRepository());
         routineViewModel = new ViewModelProvider(this, routineViewModelFactory).get(RoutineViewModel.class);
@@ -97,9 +98,9 @@ public class RoutineDetailFragment extends Fragment {
         ViewModelProvider.Factory routineCycleViewModelFactory = new RepositoryViewModelFactory<>(RoutineRepository.class, app.getRoutineRepository());
         routineCycleViewModel = new ViewModelProvider(this, routineCycleViewModelFactory).get(RoutineCycleViewModel.class);
 
-        routineCyclesRecyclerView.setAdapter(routineCyclesAdapter);
+//        routineCyclesRecyclerView.setAdapter(routineCyclesAdapter); //TODO
 
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             routineCyclesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         } else {
             routineCyclesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -108,7 +109,7 @@ public class RoutineDetailFragment extends Fragment {
 
         routineViewModel.getRoutine(routineId).observe(getViewLifecycleOwner(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
-                if(r.getData() != null && r.getData() != null) {
+                if (r.getData() != null && r.getData() != null) {
                     fragmentRoutineDetailBinding.setRoutine(r.getData());
                 }
             } else {
@@ -116,31 +117,33 @@ public class RoutineDetailFragment extends Fragment {
             }
         });
 
-        routineCycleViewModel.getRoutineCycles(routineId).observe(getViewLifecycleOwner(), r -> {
-            if(r.getStatus() == Status.SUCCESS) {
-                if(r.getData() != null && r.getData().getContent() != null) {
+        app.getRoutineRepository().getRoutineCycles(routineId).observe(getViewLifecycleOwner(), r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                if (r.getData() != null && r.getData().getContent() != null) {
+                    AtomicInteger counter = new AtomicInteger();
+
                     List<Cycle> cycles = r.getData().getContent();
+                    counter.addAndGet(cycles.size());
                     cycles.forEach(cycle -> {
                         ViewModelProvider.Factory exerciseViewModelFactory = new RepositoryViewModelFactory<>(ExerciseRepository.class, app.getExerciseRepository());
                         ExerciseViewModel exerciseViewModel = new ViewModelProvider(this, exerciseViewModelFactory).get(ExerciseViewModel.class);
 
-                        List<CycleExercise> exercises = new ArrayList<>();
-                        exerciseViewModel.getCycleExercises(cycle.getId()).observe(getViewLifecycleOwner(), res -> {
-                            if(res.getStatus() == Status.SUCCESS) {
-                                if(res.getData() != null && res.getData().getContent() != null) {
-                                    exercises.addAll(res.getData().getContent());
-                                    cycle.setCycleExercises(exercises);
-                                    routineCyclesAdapter.addCycle(cycle);
-                                    routineCyclesAdapter.notifyDataSetChanged();
-                                    routineCyclesAdapter.getExercisesCustomAdapters().forEach(RecyclerView.Adapter::notifyDataSetChanged);
+                        app.getExerciseRepository().getCycleExercises(cycle.getId()).observe(getViewLifecycleOwner(), res -> {
+                            if (res.getStatus() == Status.SUCCESS) {
+                                if (res.getData() != null && res.getData().getContent() != null) {
+                                    counter.decrementAndGet();
+                                    cycle.setCycleExercises(res.getData().getContent());
+
+                                    if (counter.get() == 0) {
+                                        routineCyclesAdapter = new RoutineCyclesCustomAdapter(cycles);
+                                        routineCyclesRecyclerView.setAdapter(routineCyclesAdapter);
+                                    }
                                 }
                             } else {
 
                             }
                         });
                     });
-//                    routineCyclesAdapter.addCycles(r.getData().getContent());
-//                    routineCyclesAdapter.notifyDataSetChanged();
                 }
             } else {
 
