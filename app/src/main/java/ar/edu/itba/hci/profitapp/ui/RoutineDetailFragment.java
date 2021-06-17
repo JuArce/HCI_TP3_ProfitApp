@@ -156,7 +156,8 @@ public class RoutineDetailFragment extends Fragment {
         fragmentRoutineDetailBinding.ratingButton.setOnClickListener(v -> {
             RatingBar ratingBar = (RatingBar) fragmentRoutineDetailBinding.ratingBar;
             float rating = ratingBar.getRating(); //este es el rating local .
-            app.getRoutineRepository().postReview(routineId, (int) rating);
+            app.getRoutineRepository().postReview(routineId, (int) rating).observe(getViewLifecycleOwner(), r -> {
+            });
             Log.d("TAG", Float.toString(rating));
         });
 
@@ -175,9 +176,11 @@ public class RoutineDetailFragment extends Fragment {
 
         fragmentRoutineDetailBinding.favoriteButton.setOnClickListener(v -> {
             if (fragmentRoutineDetailBinding.favoriteButton.isChecked()) {
-                app.getRoutineRepository().addFavorite(routineId);
+                app.getRoutineRepository().addFavorite(routineId).observe(getViewLifecycleOwner(), r -> {
+                });
             } else {
-                app.getRoutineRepository().deleteFavorite(routineId);
+                app.getRoutineRepository().deleteFavorite(routineId).observe(getViewLifecycleOwner(), r -> {
+                });
             }
         });
 

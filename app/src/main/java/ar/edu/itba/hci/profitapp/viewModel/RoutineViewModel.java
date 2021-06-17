@@ -21,8 +21,8 @@ public class RoutineViewModel extends RepositoryViewModel<RoutineRepository> {
     private String direction = "asc";
     private boolean isLastRoutinePage = false;
 
-    private final PagedList<Routine> allRoutines = new PagedList<>();
-    private final MediatorLiveData<Resource<PagedList<Routine>>> routines = new MediatorLiveData<>();
+    private PagedList<Routine> allRoutines = new PagedList<>();
+    private MediatorLiveData<Resource<PagedList<Routine>>> routines = new MediatorLiveData<>();
     private final MutableLiveData<Integer> routineId = new MutableLiveData<>();
     private LiveData<Resource<Routine>> routine;
 
@@ -77,5 +77,15 @@ public class RoutineViewModel extends RepositoryViewModel<RoutineRepository> {
             return;
         }
         this.routineId.setValue(routineId);
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+        routines = new MediatorLiveData<>();
+        allRoutines = new PagedList<>();
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 }

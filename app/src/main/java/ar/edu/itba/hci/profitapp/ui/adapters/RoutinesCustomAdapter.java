@@ -33,6 +33,10 @@ public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAd
         routineList.addAll(toAdd);
     }
 
+    public void clearRoutines() {
+        routineList.clear();
+    }
+
     @NonNull
     @NotNull
     @Override

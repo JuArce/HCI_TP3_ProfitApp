@@ -15,12 +15,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import ar.edu.itba.hci.profitapp.App;
@@ -35,13 +37,20 @@ import ar.edu.itba.hci.profitapp.viewModel.FavoritesViewModel;
 import ar.edu.itba.hci.profitapp.viewModel.RoutineViewModel;
 import ar.edu.itba.hci.profitapp.viewModel.repositoryVM.RepositoryViewModelFactory;
 
-public class RoutinesFragment extends Fragment {
+public class RoutinesFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private App app;
     private FragmentRoutinesBinding fragmentRoutinesBinding;
     private RoutinesCustomAdapter routinesAdapter;
     private RecyclerView recyclerView;
     private RoutineViewModel routineViewModel;
     private FavoritesViewModel favoritesViewModel;
+
+    private final static int PAGE_SIZE = 10;
+
+    private int routinePage = 0;
+    private String orderBy = "date";
+    private String direction = "asc";
+    private boolean isLastRoutinePage = false;
 
     public RoutinesFragment() {
 
@@ -66,6 +75,8 @@ public class RoutinesFragment extends Fragment {
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this.getContext(), R.array.order_by_options, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
+        spinner.setOnItemSelectedListener(this);
+
 
         app = ((App) getActivity().getApplication());
 
@@ -82,10 +93,10 @@ public class RoutinesFragment extends Fragment {
                 Routine routine = (Routine) v.getTag();
                 Log.d("TAG", Integer.toString(routine.getId()));
                 if(routine.getFavorite()) {
-                    favoritesViewModel.addFavorite(routine.getId());
+                    app.getRoutineRepository().addFavorite(routine.getId()).observe(getViewLifecycleOwner(), r->{});
 
                 } else {
-                    favoritesViewModel.deleteFavorite(routine.getId());
+                    app.getRoutineRepository().deleteFavorite(routine.getId()).observe(getViewLifecycleOwner(), r->{});
                 }
             }
         };
@@ -104,7 +115,40 @@ public class RoutinesFragment extends Fragment {
 //        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 //        });
 
-        routineViewModel.getRoutines().observe(getViewLifecycleOwner(), r -> {
+        getRoutines();
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        String orderByStr = parent.getItemAtPosition(pos).toString();
+        if(Locale.getDefault().getLanguage().equals("en")) {
+            switch (orderByStr) {
+                case "Category": orderByStr = "categoryId"; break;
+                case "Date": orderByStr = "date"; break;
+                case "Difficulty": orderByStr = "difficulty"; break;
+                case "Rating": orderByStr = "averageRating"; break;
+            }
+        } else if(Locale.getDefault().getLanguage().equals("es")) {
+            switch (orderByStr) {
+                case "Categoría": orderByStr = "categoryId"; break;
+                case "Fecha": orderByStr = "date"; break;
+                case "Dificultad": orderByStr = "difficulty"; break;
+                case "Puntuación": orderByStr = "averageRating"; break;
+            }
+        }
+        orderBy = orderByStr;
+        routinesAdapter.clearRoutines();
+        routinesAdapter.notifyDataSetChanged();
+        getRoutines();
+
+        Log.d("ORDER", orderBy);
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    }
+
+    public void getRoutines() {
+        app.getRoutineRepository().getRoutines(routinePage, PAGE_SIZE, orderBy, direction).observe(getViewLifecycleOwner(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 if (r.getData() != null && r.getData().getContent() != null) {
                     favoritesViewModel.getFavorites().observe(getViewLifecycleOwner(), favRes -> {
@@ -127,6 +171,5 @@ public class RoutinesFragment extends Fragment {
 //                defaultResourceHandler(r);
             }
         });
-
     }
 }
