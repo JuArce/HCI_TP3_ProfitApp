@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -21,8 +22,13 @@ public class RoutineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = ActivityRoutineBinding.inflate(getLayoutInflater());
-
         setContentView(binding.getRoot());
+
+        setSupportActionBar(binding.toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         Intent intent = getIntent();
 
