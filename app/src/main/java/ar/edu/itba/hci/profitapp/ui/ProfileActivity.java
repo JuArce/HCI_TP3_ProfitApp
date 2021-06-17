@@ -11,12 +11,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ar.edu.itba.hci.profitapp.App;
@@ -97,15 +100,27 @@ public class ProfileActivity extends AppCompatActivity {
                     achievementList.addAll(r.getData().getContent());
                     Log.d("TAG", r.getData().getContent().toString());
                     ArrayList<Entry> valueSet = new ArrayList<>();
+                    List<Double> weightList = new ArrayList<>();
+                    List<Long> dateList = new ArrayList<>();
                     achievementList.forEach(v -> {
+                        weightList.add(v.getWeight());
+                        dateList.add(v.getDate());
                         valueSet.add(new BarEntry(v.getDate(), (float) v.getWeight()));
-
                     });
                     LineDataSet dataSet = new LineDataSet(valueSet, "");
                     LineData data = new LineData(dataSet);
                     achievementsChart.setData(data);
-                    achievementsChart.animateXY(2000,2000);
+                    achievementsChart.animateXY(2000,2000); //o solo achievementsChart.animateX(2000);
                     achievementsChart.invalidate();
+                    achievementsChart.getDescription().setEnabled(false);
+                    YAxis yAxis = achievementsChart.getAxisLeft();
+                    achievementsChart.getAxisRight().setEnabled(false);
+                    yAxis.enableGridDashedLine(10f,10f,0f);
+                    yAxis.setAxisMaximum((float) (Collections.max(weightList) + 1));
+                    yAxis.setAxisMinimum((float) (Collections.min(weightList) - 1));
+                    XAxis xAxis = achievementsChart.getXAxis();
+                    xAxis.setAxisMinimum(Collections.min(dateList));
+                    xAxis.setAxisMaximum(Collections.max(dateList));
                 }
             }
         });
