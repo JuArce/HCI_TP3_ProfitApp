@@ -1,5 +1,7 @@
 package ar.edu.itba.hci.profitapp.viewModel;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -67,5 +69,16 @@ public class FavoritesViewModel extends RepositoryViewModel<RoutineRepository> {
             return;
         }
         this.routineId.setValue(routineId);
+    }
+
+    public void addFavorite(int routineId) {
+        repository.addFavorite(routineId);
+        Log.d("TAG", "add");
+    }
+
+    public void deleteFavorite(int routineId) {
+        repository.deleteFavorite(routineId);
+        Log.d("TAG", "remove");
+
     }
 }

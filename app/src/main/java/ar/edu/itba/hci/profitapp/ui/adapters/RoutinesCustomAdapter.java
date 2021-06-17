@@ -62,7 +62,7 @@ public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAd
 
 
             itemView.favoriteButton.setOnClickListener(v -> {
-                v.setTag(routineList.get(getAdapterPosition()).getId());
+                v.setTag(routineList.get(getAdapterPosition()));
                 favoriteClickListener.onClick(v);
             });
 

@@ -1,5 +1,7 @@
 package ar.edu.itba.hci.profitapp.repository;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
@@ -94,6 +96,8 @@ public class RoutineRepository {
     }
 
     public LiveData<Resource<Routine>> addFavorite(int routineId) {
+        Log.d("TAG", "add1");
+
         return new NetworkBoundResource<Routine, Routine>() {
             @NonNull
             @Override
@@ -104,6 +108,7 @@ public class RoutineRepository {
     }
 
     public LiveData<Resource<Void>> deleteFavorite(int routineId) {
+        Log.d("TAG", "remove1");
         return new NetworkBoundResource<Void, Void>() {
             @NonNull
             @Override

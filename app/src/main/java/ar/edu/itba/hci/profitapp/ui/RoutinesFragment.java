@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,10 +60,25 @@ public class RoutinesFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        app = ((App) getActivity().getApplication());
+
+        ViewModelProvider.Factory viewModelFactory = new RepositoryViewModelFactory<>(RoutineRepository.class, app.getRoutineRepository());
+        routineViewModel = new ViewModelProvider(this, viewModelFactory).get(RoutineViewModel.class);
+
+        ViewModelProvider.Factory favoriteViewModelFactory = new RepositoryViewModelFactory<>(RoutineRepository.class, app.getRoutineRepository());
+        favoritesViewModel = new ViewModelProvider(this, favoriteViewModelFactory).get(FavoritesViewModel.class);
+
         View.OnClickListener favoriteClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                v.getTag()
+                Routine routine = (Routine) v.getTag();
+                Log.d("TAG", Integer.toString(routine.getId()));
+                if(routine.getFavorite()) {
+                    favoritesViewModel.addFavorite(routine.getId());
+
+                } else {
+                    favoritesViewModel.deleteFavorite(routine.getId());
+                }
             }
         };
 
@@ -79,14 +95,6 @@ public class RoutinesFragment extends Fragment {
 
 //        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 //        });
-
-        app = ((App) getActivity().getApplication());
-
-        ViewModelProvider.Factory viewModelFactory = new RepositoryViewModelFactory<>(RoutineRepository.class, app.getRoutineRepository());
-        routineViewModel = new ViewModelProvider(this, viewModelFactory).get(RoutineViewModel.class);
-
-        ViewModelProvider.Factory favoriteViewModelFactory = new RepositoryViewModelFactory<>(RoutineRepository.class, app.getRoutineRepository());
-        favoritesViewModel = new ViewModelProvider(this, favoriteViewModelFactory).get(FavoritesViewModel.class);
 
         routineViewModel.getRoutines().observe(getViewLifecycleOwner(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
