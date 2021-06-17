@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent linkIntent = getIntent();
 
-        if(linkIntent != null){
+        if(linkIntent != null && linkIntent.getData() != null){
             didLoginFromLink = true;
             Uri linkData = linkIntent.getData();
             routineId = Integer.parseInt(linkData.getLastPathSegment()); //se inicia por un link
