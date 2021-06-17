@@ -32,11 +32,7 @@ public class RoutineActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        routineId = intent.getIntExtra(EXTRA_MESSAGE, -1); //se inicia navegando
-        if (routineId == -1) {
-            Uri linkData = intent.getData();
-            routineId = Integer.parseInt(linkData.getLastPathSegment()); //se inicia por un link
-        }
+        routineId = intent.getIntExtra(EXTRA_MESSAGE, -1);
 
         NavHostFragment mainNavHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.routine_host_fragment);
 

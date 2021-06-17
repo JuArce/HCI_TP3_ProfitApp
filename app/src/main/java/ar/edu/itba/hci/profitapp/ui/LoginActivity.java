@@ -3,6 +3,7 @@ package ar.edu.itba.hci.profitapp.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -15,9 +16,13 @@ import ar.edu.itba.hci.profitapp.api.model.Error;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public final static String EXTRA_MESSAGE = "ar.edu.itba.hci.profitapp.message";
+
     public static final String TAG = "UI";
     private App app;
     private ActivityLoginBinding activityLoginBinding;
+    private boolean didLoginFromLink = false;
+    private int routineId = - 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +30,22 @@ public class LoginActivity extends AppCompatActivity {
 
         app = ((App) getApplication());
 
+        Intent linkIntent = getIntent();
+
+        if(linkIntent != null){
+            didLoginFromLink = true;
+            Uri linkData = linkIntent.getData();
+            routineId = Integer.parseInt(linkData.getLastPathSegment()); //se inicia por un link
+        }
+
         if(app.getPreferences().getAuthToken() != null) {
-//          getIntent != ?
-//          y ver si viene la data de una url
-//            Si esta loggeado voy al detalle
-//            Si no le pide loguearse y mandarlo al detalle de la rutina
-//            Llamar a finish() corta la ejecucion del ciclo de vida la actividad.
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            if(didLoginFromLink){
+                startDetailActivity();
+            }
+            else {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
             finish();
         }
 
@@ -56,13 +69,24 @@ public class LoginActivity extends AppCompatActivity {
                 if (r.getStatus() == Status.SUCCESS) {
                     app.getPreferences().setAuthToken(r.getData().getToken());
 
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
+                    if(didLoginFromLink){
+                        startDetailActivity();
+                    } else {
+                        Intent intent = new Intent(this, MainActivity.class);
+                        startActivity(intent);
+                    }
+
                 } else {
                     defaultResourceHandler(r);
                 }
             });
         });
+    }
+
+    private void startDetailActivity(){
+        Intent detailIntent = new Intent(this, RoutineActivity.class);
+        detailIntent.putExtra(EXTRA_MESSAGE, routineId);
+        startActivity(detailIntent);
     }
 
     private void defaultResourceHandler(Resource<?> resource) {
