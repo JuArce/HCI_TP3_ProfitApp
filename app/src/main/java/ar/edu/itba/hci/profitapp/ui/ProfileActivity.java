@@ -88,8 +88,8 @@ public class ProfileActivity extends AppCompatActivity {
             builder.setNegativeButton(getResources().getString(R.string.deny), null);
             AlertDialog dialog = builder.create();
             dialog.show();
-
         });
+
         LineChart achievementsChart = (LineChart) findViewById(R.id.lineChart);
         List<Achievement> achievementList = new ArrayList<>();
         ViewModelProvider.Factory viewModelFactoryAch = new RepositoryViewModelFactory<>(AchievementsRepository.class, app.getAchievementsRepository());
@@ -98,6 +98,7 @@ public class ProfileActivity extends AppCompatActivity {
             if (r.getStatus() == Status.SUCCESS) {
                 if (r.getData() != null && r.getData().getContent() != null) {
                     achievementList.addAll(r.getData().getContent());
+                    achievementsChart.setNoDataText(getResources().getString(R.string.no_weight_avail));
                     Log.d("TAG", r.getData().getContent().toString());
                     ArrayList<Entry> valueSet = new ArrayList<>();
                     List<Double> weightList = new ArrayList<>();
@@ -113,6 +114,7 @@ public class ProfileActivity extends AppCompatActivity {
                     achievementsChart.animateXY(2000,2000); //o solo achievementsChart.animateX(2000);
                     achievementsChart.invalidate();
                     achievementsChart.getDescription().setEnabled(false);
+                    achievementsChart.getLegend().setEnabled(false);
                     YAxis yAxis = achievementsChart.getAxisLeft();
                     achievementsChart.getAxisRight().setEnabled(false);
                     yAxis.enableGridDashedLine(10f,10f,0f);
@@ -125,6 +127,22 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+//        profileBinding.addWeightButton.setOnClickListener((v)->{
+//            final EditText input = new EditText(this);
+//            input.setPadding(5, 0,5, 0);
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setView(input);
+//            builder.setCancelable(true);
+//            builder.setTitle(getResources().getString(R.string.add_weight_title));
+//            builder.setMessage(getResources().getString(R.string.add_weight_msg));
+//            builder.setPositiveButton(getResources().getString(R.string.done), (dialog, which) -> {
+//                input.getText();
+//                achievementsViewModel.addAchievement(Double.parseDouble(input.toString())).observe(this, r -> {});
+//            });
+//            builder.setNegativeButton(getResources().getString(R.string.cancel), null);
+//            AlertDialog dialog = builder.create();
+//            dialog.show();
+//        });
 
     }
 }

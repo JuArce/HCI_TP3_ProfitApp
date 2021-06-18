@@ -23,6 +23,13 @@
     <string name="fav_added">Routine added to favorites</string>
     <string name="fav_removed">Routine removed from favorites</string>
     <string name="rated">Routine rated successfully!</string>
+    <string name="weight_progress_title">My weight progress</string>
+    <string name="exit">Exit</string>
+    <string name="no_weight_avail">There doesn\'t seem to be any weight logged.</string>
+    <string name="add_weight_title">Log a new weight</string>
+    <string name="add_weight_msg">Please enter your current weight.</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>

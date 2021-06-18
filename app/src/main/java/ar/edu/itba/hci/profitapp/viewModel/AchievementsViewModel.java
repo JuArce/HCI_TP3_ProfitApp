@@ -56,11 +56,8 @@ public class AchievementsViewModel extends RepositoryViewModel<AchievementsRepos
         return achievement;
     }
 
-    public void addAchievement(double weight, long date){
-        repository.addAchievement(new Achievement(date, weight));
+    public LiveData<Resource<Achievement>> addAchievement(double weight){
+        return repository.addAchievement(new Achievement(weight));
     }
 
-    public void removeAchievement(int achievementId){
-        repository.deleteAchievement(achievementId);
-    }
 }

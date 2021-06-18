@@ -24,5 +24,12 @@
     <string name="fav_added">Rutina añadida a favoritos</string>
     <string name="fav_removed">Rutina removida de favoritos</string>
     <string name="rated">¡Rutina calificada correctamente!</string>
+    <string name="weight_progress_title">Progreso de mi peso</string>
+    <string name="exit">Salir</string>
+    <string name="no_weight_avail">No parece haber ningún peso loggeado.</string>
+    <string name="add_weight_title">Añadir un nuevo peso</string>
+    <string name="add_weight_msg">Por favor, ingrese su peso actual.</string>
+    <string name="done">Aceptar</string>
+    <string name="cancel">Cancelar</string>
 
 </resources>

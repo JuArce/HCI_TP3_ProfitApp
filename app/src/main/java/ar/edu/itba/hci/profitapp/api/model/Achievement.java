@@ -31,11 +31,6 @@ public class Achievement {
         this(0, new Date().getTime(), weight, 0, null );
     }
 
-    public Achievement(long date, double weight) {
-        this.date = date;
-        this.weight = weight;
-    }
-
     public Achievement(int id, long date, double weight, double height, Object metadata) {
         this.id = id;
         this.date = date;
@@ -64,8 +59,3 @@ public class Achievement {
         return date;
     }
 }
-/*Log.d("TAG","ARCHIEVEMENT LIST LENGTH" +Integer.toString(achievementList.size()));
-        achievementList.forEach(v -> {
-            double aux = v.getWeight();
-            Log.d("TAG", "PESO: "+Double.toString(aux));
-        });*/

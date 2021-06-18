@@ -22,6 +22,18 @@
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageButton
+            android:id="@+id/logout_button"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_exit_to_app_24"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
@@ -71,26 +83,36 @@
             android:id="@+id/lineChart"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/weightProgressTitle" />
 
-        <Button
-            android:id="@+id/logout_button"
+        <TextView
+            android:id="@+id/weightProgressTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rounded_button"
-            android:text="@string/log_out"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/weight_progress_title"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineChart"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/username" />
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/add_weight_button"-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="22dp"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:background="@drawable/circular_teal_button"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:src="@drawable/ic_baseline_add_24"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/weightProgressTitle"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/username"-->
+<!--            app:tint="@color/black" />-->
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
