@@ -19,40 +19,12 @@
         android:layout_height="match_parent">
 
 
-        <TextView
-            android:id="@+id/routine_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@{cycle.name}"
-            android:textColor="@color/dark_grey"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/routineProgressBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ProgressBar
-            android:id="@+id/routineProgressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/cardView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/teal_light"/>
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="96dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="128dp"
             app:cardPreventCornerOverlap="true"
@@ -61,6 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             card_view:cardCornerRadius="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -72,8 +45,8 @@
                     android:id="@+id/exercise_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="@{cycleExercise.exercise.name}"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -83,98 +56,67 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/exercise_detail"
+                    android:id="@+id/exercise_repetitions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@{cycleExercise.exercise.detail}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@{cycleExercise.repetitions}"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/exercise_name" />
 
                 <TextView
-                    android:id="@+id/exercise_repetitions"
+                    android:id="@+id/repetitions2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@{cycleExercise.repetitions}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/exercise_detail" />
+                    android:text="@string/seconds"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/exercise_repetitions"
+                    app:layout_constraintTop_toBottomOf="@+id/exercise_name"
+                    app:layout_constraintVertical_bias="0.575" />
 
                 <TextView
                     android:id="@+id/exercise_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="16dp"
                     android:text="@{cycleExercise.duration}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/exercise_repetitions"
-                    app:layout_constraintTop_toBottomOf="@+id/exercise_detail" />
+                    app:layout_constraintStart_toEndOf="@+id/repetitions2"
+                    app:layout_constraintTop_toBottomOf="@+id/exercise_name"
+                    app:layout_constraintVertical_bias="0.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
         <ImageButton
-            android:id="@+id/pauseButton"
-            android:layout_width="46dp"
-            android:layout_height="47dp"
-            android:layout_marginTop="32dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2"
-            app:tint="@color/teal"
-            card_view:srcCompat="@drawable/ic_baseline_pause_24" />
-
-        <ProgressBar
-            android:id="@+id/exercise_progress"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="66dp"
-            android:layout_height="62dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/teal_light"
-            />
-
-        <ImageButton
             android:id="@+id/stopButton"
             android:layout_width="46dp"
             android:layout_height="47dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="4dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2"
             app:tint="@color/teal"
-            card_view:srcCompat="@drawable/ic_baseline_stop_24" />
+            card_view:srcCompat="@drawable/ic_baseline_stop_24"
+            tools:layout_editor_absoluteY="480dp" />
 
         <ImageButton
             android:id="@+id/nextButton"
             android:layout_width="46dp"
             android:layout_height="47dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="4dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2"
             app:tint="@color/teal"
-            card_view:srcCompat="@drawable/ic_baseline_skip_next_24" />
+            card_view:srcCompat="@drawable/ic_baseline_skip_next_24"
+            tools:layout_editor_absoluteY="480dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

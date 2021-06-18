@@ -35,5 +35,7 @@
     <string name="simplified_view">Vista Simplificada: Para una experiencia más práctica.</string>
     <string name="detailed_view">Vista Detallada: Para una experiencia más minuciosa.</string>
     <string name="routine_mode">Visualización de Rutina</string>
+    <string name="seconds">segundos</string>
+    <string name="repetitions">repeticiones</string>
 
 </resources>
