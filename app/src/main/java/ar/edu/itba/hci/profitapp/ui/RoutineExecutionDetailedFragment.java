@@ -24,6 +24,7 @@ import ar.edu.itba.hci.profitapp.App;
 import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.api.model.Cycle;
 import ar.edu.itba.hci.profitapp.api.model.CycleExercise;
+import ar.edu.itba.hci.profitapp.api.model.Exercise;
 import ar.edu.itba.hci.profitapp.databinding.FragmentRoutineExecutionDetailedBinding;
 import ar.edu.itba.hci.profitapp.repository.Status;
 
@@ -37,6 +38,7 @@ public class RoutineExecutionDetailedFragment extends Fragment {
     private int cycleIndex = 0;
     private int exerciseIndex = 0;
     private int currentCycleRepetition = 0;
+    private boolean changedOrientation = false;
 
     public RoutineExecutionDetailedFragment() {
 
@@ -58,10 +60,11 @@ public class RoutineExecutionDetailedFragment extends Fragment {
         RoutineActivity activity = (RoutineActivity) getActivity();
         routineId = activity.getRoutineId();
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             cycleIndex = savedInstanceState.getInt("cycleIndex");
             exerciseIndex = savedInstanceState.getInt("exerciseIndex");
             currentCycleRepetition = savedInstanceState.getInt("currentCycleRepetition");
+            changedOrientation = true;
         }
 
 //        routineViewModel.getRoutine(routineId).observe(getViewLifecycleOwner(), r -> {
@@ -100,7 +103,17 @@ public class RoutineExecutionDetailedFragment extends Fragment {
                                     cycle.setCycleExercises(res.getData().getContent());
 
                                     if (counter.get() == 0) {
-                                        loadAndStart();
+                                        if (!changedOrientation) {
+                                            loadAndStart();
+                                        } else {
+                                            changedOrientation = false;
+                                            try {
+                                                binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
+                                                binding.setCycle(routineCycles.get(cycleIndex));
+                                            } catch(Exception e) {
+                                                Log.d("ERROR", Integer.toString(exerciseIndex));
+                                            }
+                                        }
                                     }
                                 }
                             } else {
@@ -118,9 +131,9 @@ public class RoutineExecutionDetailedFragment extends Fragment {
             Log.d("TAG", "cambiar");
             Log.d("TAG", Integer.toString(routineCycles.get(cycleIndex).getCycleExercises().size()));
 
-            if (exerciseIndex < routineCycles.get(cycleIndex).getCycleExercises().size()) {
+            if (++exerciseIndex < routineCycles.get(cycleIndex).getCycleExercises().size()) {
                 Log.d("TAG", routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getExercise().getName());
-                binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex++));
+                binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
             } else {
                 Log.d("TAG", "se acabaron los ejercicios");
                 exerciseIndex = 0;
@@ -134,7 +147,7 @@ public class RoutineExecutionDetailedFragment extends Fragment {
 
                         binding.setCycle(routineCycles.get(++cycleIndex));
                         Log.d("TAG", routineCycles.get(cycleIndex).getName());
-                        binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex++));
+                        binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
                     } else {
                         //TODO popup para salir
                         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
@@ -168,7 +181,7 @@ public class RoutineExecutionDetailedFragment extends Fragment {
 
     public void loadAndStart() {
         currentCycleRepetition = routineCycles.get(cycleIndex).getRepetitions() - 1;
-        binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex++));
+        binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
         binding.setCycle(routineCycles.get(cycleIndex));
     }
 }
