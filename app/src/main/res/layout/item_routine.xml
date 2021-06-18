@@ -94,55 +94,52 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <ImageView
-                android:id="@+id/difficulty_icon"
-                android:layout_width="20dp"
-                android:layout_height="18dp"
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_shield_outline"
-                app:tint="@color/light_grey" />
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar">
 
-            <TextView
-                android:id="@+id/difficulty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="@{routine.difficulty}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/difficulty_icon"
-                app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-                app:layout_constraintVertical_bias="0.0" />
+                <ImageView
+                    android:id="@+id/difficulty_icon"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="3"
+                    app:srcCompat="@drawable/ic_shield_outline"
+                    app:tint="@color/light_grey" />
 
-            <ImageView
-                android:id="@+id/category_icon"
-                android:layout_width="20dp"
-                android:layout_height="18dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:background="#00B60000"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/difficulty"
-                app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_baseline_format_list_bulleted_24" />
+                <TextView
+                    android:id="@+id/difficulty"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{routine.difficulty}" />
 
-            <TextView
-                android:id="@+id/category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="@{routine.category.name}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/category_icon"
-                app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-                app:layout_constraintVertical_bias="0.0" />
+                <ImageView
+                    android:id="@+id/category_icon"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="3"
+                    android:background="#00B60000"
+                    app:srcCompat="@drawable/ic_baseline_format_list_bulleted_24" />
+
+                <TextView
+                    android:id="@+id/category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{routine.category.name}" />
+            </LinearLayout>
 
             <ImageButton
                 android:id="@+id/shareButton"
