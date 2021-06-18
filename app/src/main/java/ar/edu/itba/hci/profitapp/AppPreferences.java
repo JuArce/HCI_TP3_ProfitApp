@@ -11,9 +11,6 @@ public class AppPreferences {
 
     public AppPreferences(Context context) {
         sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(ROUTINE_DISPLAY, 0);
-        editor.apply();
     }
 
     public void setAuthToken(String token) {
