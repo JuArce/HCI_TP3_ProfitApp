@@ -58,6 +58,12 @@ public class RoutineExecutionDetailedFragment extends Fragment {
         RoutineActivity activity = (RoutineActivity) getActivity();
         routineId = activity.getRoutineId();
 
+        if(savedInstanceState != null){
+            cycleIndex = savedInstanceState.getInt("cycleIndex");
+            exerciseIndex = savedInstanceState.getInt("exerciseIndex");
+            currentCycleRepetition = savedInstanceState.getInt("currentCycleRepetition");
+        }
+
 //        routineViewModel.getRoutine(routineId).observe(getViewLifecycleOwner(), r -> {
 //            if (r.getStatus() == Status.SUCCESS) {
 //                if (r.getData() != null && r.getData() != null) {
@@ -150,6 +156,14 @@ public class RoutineExecutionDetailedFragment extends Fragment {
 
         });
 
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull @NotNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("cycleIndex", cycleIndex);
+        outState.putInt("exerciseIndex", exerciseIndex);
+        outState.putInt("currentCycleRepetition", currentCycleRepetition);
     }
 
     public void loadAndStart() {
