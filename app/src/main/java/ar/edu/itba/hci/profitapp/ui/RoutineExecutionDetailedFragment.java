@@ -3,6 +3,7 @@ package ar.edu.itba.hci.profitapp.ui;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,10 @@ public class RoutineExecutionDetailedFragment extends Fragment {
     private int exerciseIndex = 0;
     private int currentCycleRepetition = 0;
     private boolean changedOrientation = false;
+
+    private CountDownTimer countDownTimer;
+    private long timeMilliSeconds;
+    private boolean timerRunning;
 
     public RoutineExecutionDetailedFragment() {
 
@@ -134,6 +139,10 @@ public class RoutineExecutionDetailedFragment extends Fragment {
             if (++exerciseIndex < routineCycles.get(cycleIndex).getCycleExercises().size()) {
                 Log.d("TAG", routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getExercise().getName());
                 binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
+                if(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
+                    timeMilliSeconds = routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() * 1000;
+                    startTimer();
+                }
             } else {
                 Log.d("TAG", "se acabaron los ejercicios");
                 exerciseIndex = 0;
@@ -148,6 +157,10 @@ public class RoutineExecutionDetailedFragment extends Fragment {
                         binding.setCycle(routineCycles.get(++cycleIndex));
                         Log.d("TAG", routineCycles.get(cycleIndex).getName());
                         binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
+                        if(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
+                            timeMilliSeconds = routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() * 1000;
+                            startTimer();
+                        }
                     } else {
                         //TODO popup para salir
                         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
@@ -169,6 +182,10 @@ public class RoutineExecutionDetailedFragment extends Fragment {
 
         });
 
+        binding.pauseButton.setOnClickListener(v -> {
+            startStop();
+        });
+
     }
 
     @Override
@@ -183,6 +200,51 @@ public class RoutineExecutionDetailedFragment extends Fragment {
         currentCycleRepetition = routineCycles.get(cycleIndex).getRepetitions() - 1;
         binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
         binding.setCycle(routineCycles.get(cycleIndex));
+        if(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
+            timeMilliSeconds = routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() * 1000;
+            startTimer();
+        }
+    }
+
+    public void startStop() {
+        if(timerRunning) {
+            stopTimer();
+        } else {
+            startTimer();
+        }
+    }
+
+    public void startTimer() {
+        if(countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+        countDownTimer = new CountDownTimer(timeMilliSeconds, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeMilliSeconds = millisUntilFinished;
+                updateTimer();
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+        timerRunning = true;
+        binding.pauseButton.setImageResource(R.drawable.ic_baseline_pause_24);
+    }
+
+    public void stopTimer() {
+        countDownTimer.cancel();
+        binding.pauseButton.setImageResource(R.drawable.ic_baseline_play_arrow_24);
+        timerRunning = false;
+    }
+
+    public void updateTimer() {
+        int seconds = (int) timeMilliSeconds / 1000;
+        String time = Integer.toString(seconds);
+
+        binding.counter.setText(time);
     }
 }
 
