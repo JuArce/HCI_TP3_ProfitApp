@@ -1,12 +1,14 @@
 package ar.edu.itba.hci.profitapp.ui;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -82,7 +84,11 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setAdapter(routinesAdapter);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        } else {
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        }
         recyclerView.setHasFixedSize(true);
 
 //        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
