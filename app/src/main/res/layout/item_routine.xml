@@ -26,7 +26,8 @@
                 android:id="@+id/routine_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="128dp"
                 android:text="@{routine.name}"
                 android:textColor="@color/dark_grey"
@@ -34,16 +35,16 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.024"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.122" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/routine_creator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="@{routine.user.username}"
@@ -81,7 +82,7 @@
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginBottom="48dp"
                 android:isIndicator="true"
                 android:numStars="5"
@@ -94,37 +95,15 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
-                android:id="@+id/category_icon"
-                android:layout_width="20dp"
-                android:layout_height="18dp"
-                android:layout_marginStart="8dp"
-                android:background="#00B60000"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-                app:layout_constraintVertical_bias="0.565"
-                app:srcCompat="@drawable/ic_baseline_format_list_bulleted_24" />
-
-            <TextView
-                android:id="@+id/category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@{routine.category.name}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/category_icon"
-                app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-                app:layout_constraintVertical_bias="0.567" />
-
-            <ImageView
                 android:id="@+id/difficulty_icon"
                 android:layout_width="20dp"
                 android:layout_height="18dp"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/category"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-                app:layout_constraintVertical_bias="0.578"
+                app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/ic_shield_outline"
                 app:tint="@color/light_grey" />
 
@@ -133,41 +112,69 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@{routine.difficulty}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/difficulty_icon"
                 app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-                app:layout_constraintVertical_bias="0.6" />
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/category_icon"
+                android:layout_width="20dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:background="#00B60000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/difficulty"
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/ic_baseline_format_list_bulleted_24" />
+
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@{routine.category.name}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/category_icon"
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+                app:layout_constraintVertical_bias="0.0" />
 
             <ImageButton
                 android:id="@+id/shareButton"
-                android:layout_width="20dp"
-                android:layout_height="18dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@null"
                 android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/favoriteButton"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/routine_name"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.121"
+                app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/ic_baseline_share_24"
                 app:tint="@color/light_grey" />
 
             <ToggleButton
                 android:id="@+id/favoriteButton"
-                android:layout_width="20dp"
-                android:layout_height="18dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/fav_toggle_selector"
                 android:checked="@={routine.favorite}"
                 android:textOff=""
                 android:textOn=""
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/shareButton"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/routine_name"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.121" />
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

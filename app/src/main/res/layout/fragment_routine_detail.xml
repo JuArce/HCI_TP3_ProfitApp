@@ -18,7 +18,7 @@
             android:id="@+id/routine_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="128dp"
             android:text="@{routine.name}"
@@ -34,8 +34,8 @@
 
         <ImageButton
             android:id="@+id/shareButton"
-            android:layout_width="20dp"
-            android:layout_height="18dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@null"
@@ -49,8 +49,8 @@
 
         <ToggleButton
             android:id="@+id/favoriteButton"
-            android:layout_width="20dp"
-            android:layout_height="18dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/fav_toggle_selector"
@@ -68,7 +68,7 @@
             android:id="@+id/routine_creator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@{routine.user.username}"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,9 +104,9 @@
             android:id="@+id/routine_detail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:justificationMode="inter_word"
             android:text="@{routine.detail}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -119,7 +119,7 @@
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:isIndicator="false"
             android:numStars="5"
@@ -146,39 +146,12 @@
             app:layout_constraintTop_toBottomOf="@+id/routine_creator" />
 
         <ImageView
-            android:id="@+id/category_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="18dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:background="#00B60000"
-            app:layout_constraintEnd_toStartOf="@+id/category"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/routine_detail"
-            app:srcCompat="@drawable/ic_baseline_format_list_bulleted_24" />
-
-        <TextView
-            android:id="@+id/category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="@{routine.category.name}"
-            app:layout_constraintEnd_toStartOf="@+id/difficulty_icon"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/category_icon"
-            app:layout_constraintTop_toBottomOf="@+id/routine_detail" />
-
-        <ImageView
             android:id="@+id/difficulty_icon"
             android:layout_width="20dp"
             android:layout_height="18dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/difficulty"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/category"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/routine_detail"
             app:srcCompat="@drawable/ic_shield_outline"
             app:tint="@color/light_grey" />
@@ -193,13 +166,34 @@
             app:layout_constraintStart_toEndOf="@+id/difficulty_icon"
             app:layout_constraintTop_toBottomOf="@+id/routine_detail" />
 
+        <ImageView
+            android:id="@+id/category_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="17dp"
+            android:background="#00B60000"
+            app:layout_constraintStart_toEndOf="@+id/difficulty"
+            app:layout_constraintTop_toBottomOf="@+id/routine_detail"
+            app:srcCompat="@drawable/ic_baseline_format_list_bulleted_24" />
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@{routine.category.name}"
+            app:layout_constraintStart_toEndOf="@+id/category_icon"
+            app:layout_constraintTop_toBottomOf="@+id/routine_detail" />
+
         <View
             android:id="@+id/divider"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="24dp"
             android:alpha="0.2"
             android:background="@color/light_grey"
             app:layout_constraintEnd_toEndOf="parent"
@@ -223,7 +217,7 @@
             android:id="@+id/start_routine_execution_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/start"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/divider"
