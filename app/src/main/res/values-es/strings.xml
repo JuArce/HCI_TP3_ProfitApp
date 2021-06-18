@@ -11,7 +11,7 @@
     <string name="profile">Perfil</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="log_out">Cerrar sesión</string>
-    <string name="log_out_msg">"Esta seguro que desea cerrar sesión?"</string>
+    <string name="log_out_msg">¿Está seguro que desea cerrar sesión?</string>
     <string name="confirm">Si</string>
     <string name="deny">No</string>
     <string name="rate_now">Calificar</string>
@@ -40,5 +40,8 @@
     <string name="remaining_cycle_reps">Repeticiones Restantes: </string>
     <string name="next_exercises">Próximos Ejercicios: </string>
     <string name="remaining_exercises">Ejercicios Restantes: </string>
+    <string name="close_routine">Detener Ejecución</string>
+    <string name="close_routine_msg">¿Está seguro que desea detener la ejecución?</string>
+
 
 </resources>

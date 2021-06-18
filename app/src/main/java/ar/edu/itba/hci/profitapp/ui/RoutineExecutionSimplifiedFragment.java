@@ -1,6 +1,7 @@
 package ar.edu.itba.hci.profitapp.ui;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -125,6 +126,19 @@ public class RoutineExecutionSimplifiedFragment extends Fragment{
 
                 Log.d("TAG", "salir");
             }
+        });
+
+        binding.stopButton.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+            builder.setCancelable(true);
+            builder.setTitle(getResources().getString(R.string.close_routine));
+            builder.setMessage(getResources().getString(R.string.close_routine_msg));
+            builder.setPositiveButton(getResources().getString(R.string.confirm), (dialog, which) -> {
+                navController.navigate(R.id.action_routineExecutionSimplifiedFragment_to_routineDetailFragment);
+            });
+            builder.setNegativeButton(getResources().getString(R.string.deny), null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
         });
 
     }

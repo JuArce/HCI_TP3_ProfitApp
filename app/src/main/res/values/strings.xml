@@ -39,6 +39,8 @@
     <string name="remaining_cycle_reps">Remaining Repetitions: </string>
     <string name="next_exercises">Next Exercises: </string>
     <string name="remaining_exercises">Remaining Exercises: </string>
+    <string name="close_routine">Stop Execution</string>
+    <string name="close_routine_msg">Are you sure you want to stop the execution?</string>
 
 
 </resources>
