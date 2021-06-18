@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
@@ -110,10 +111,17 @@ public class ProfileActivity extends AppCompatActivity {
                     });
                     LineDataSet dataSet = new LineDataSet(valueSet, "");
                     LineData data = new LineData(dataSet);
+                    dataSet.setColor(ResourcesCompat.getColor(getResources(), R.color.teal, null)); //without theme));
+                    dataSet.setCircleColor(ResourcesCompat.getColor(getResources(), R.color.teal_700, null));
+                    dataSet.setLineWidth(3);
+                    dataSet.setCircleRadius(5);
+                    dataSet.setValueTextSize(13);
                     achievementsChart.setData(data);
                     achievementsChart.animateXY(2000,2000); //o solo achievementsChart.animateX(2000);
                     achievementsChart.invalidate();
                     achievementsChart.getDescription().setEnabled(false);
+                    achievementsChart.getLegend().setEnabled(false);
+                    achievementsChart.getXAxis().setDrawLabels(false);
                     achievementsChart.getLegend().setEnabled(false);
                     YAxis yAxis = achievementsChart.getAxisLeft();
                     achievementsChart.getAxisRight().setEnabled(false);
@@ -123,6 +131,7 @@ public class ProfileActivity extends AppCompatActivity {
                     XAxis xAxis = achievementsChart.getXAxis();
                     xAxis.setAxisMinimum(Collections.min(dateList));
                     xAxis.setAxisMaximum(Collections.max(dateList));
+                    yAxis.setTextSize(12);
                 }
             }
         });

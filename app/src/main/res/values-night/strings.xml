@@ -4,4 +4,8 @@
     <string name="favorites">Favorites</string>
     <string name="home">Home</string>
     <string name="order_button_title">Order by</string>
+    <string name="my_routines">My Routines</string>
+    <string name="simplified_view">Simplified View: View your routines in a simplified view for a more practical experience.</string>
+    <string name="detailed_view">Detailed View: For a more thorough and comprehensive experience.</string>
+    <string name="routine_mode">Routine Display</string>
 </resources>
