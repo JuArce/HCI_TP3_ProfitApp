@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(mainBinding.mainToolbar);
 
-
         NavHostFragment mainNavHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.main_host_fragment);
 
         assert mainNavHostFragment != null;

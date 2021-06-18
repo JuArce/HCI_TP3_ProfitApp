@@ -1,10 +1,12 @@
 package ar.edu.itba.hci.profitapp.ui;
 
+import android.app.ActionBar;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -13,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -56,6 +61,12 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
 
     public RoutinesFragment() {
 
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -194,5 +205,21 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
 //                defaultResourceHandler(r);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
+        if (item.getItemId() == R.id.order_by) {
+            Log.d("TAG", "En el switch");
+            Snackbar.make(item.getActionView(), getResources().getString(R.string.fav_added), Snackbar.LENGTH_LONG).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.toolbar_routines_fragment, menu);
     }
 }
