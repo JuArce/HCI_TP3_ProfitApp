@@ -71,24 +71,21 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
-            android:layout_width="546dp"
-            android:layout_height="282dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="128dp"
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/routine_name"
-            app:layout_constraintVertical_bias="0.0"
             card_view:cardCornerRadius="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:foreground="@drawable/outlined_card">
 
                 <TextView
@@ -118,43 +115,75 @@
                     app:layout_constraintTop_toBottomOf="@+id/exercise_name" />
 
                 <TextView
-                    android:id="@+id/exercise_repetitions"
+                    android:id="@+id/exercise_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="@{cycleExercise.repetitions.toString()}"
+                    android:text="@{cycleExercise.duration.toString()}"
+                    app:layout_constraintEnd_toStartOf="@+id/seconds"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/exercise_video"
                     app:layout_constraintTop_toBottomOf="@+id/exercise_detail" />
 
                 <TextView
-                    android:id="@+id/exercise_duration"
+                    android:id="@+id/seconds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/seconds"
+                    app:layout_constraintEnd_toStartOf="@+id/separator"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/exercise_time"
+                    app:layout_constraintTop_toBottomOf="@+id/exercise_detail" />
+
+                <TextView
+                    android:id="@+id/separator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
-                    android:text="@{cycleExercise.duration.toString()}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/exercise_repetitions"
+                    android:text="·"
+                    app:layout_constraintEnd_toStartOf="@+id/exercise_repetitions"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/seconds"
                     app:layout_constraintTop_toBottomOf="@+id/exercise_detail" />
+
+                <TextView
+                    android:id="@+id/exercise_repetitions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{cycleExercise.repetitions.toString()}"
+                    app:layout_constraintEnd_toStartOf="@+id/times"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/separator"
+                    app:layout_constraintTop_toBottomOf="@+id/exercise_detail" />
+
+                <TextView
+                    android:id="@+id/times"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/repetitions"
+                    app:layout_constraintStart_toEndOf="@+id/exercise_repetitions"
+                    app:layout_constraintTop_toBottomOf="@+id/exercise_detail" />
+
 
                 <VideoView
                     android:id="@+id/exercise_video"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
                     android:layout_marginBottom="32dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/counter"
@@ -164,7 +193,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/exercise_video"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/exercise_video"
-                    app:layout_constraintTop_toBottomOf="@+id/exercise_duration" />
+                    app:layout_constraintTop_toBottomOf="@+id/exercise_time" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -174,7 +203,7 @@
             android:id="@+id/pauseButton"
             android:layout_width="46dp"
             android:layout_height="47dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toStartOf="@+id/nextButton"
@@ -188,7 +217,7 @@
             android:id="@+id/stop_button"
             android:layout_width="46dp"
             android:layout_height="47dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toStartOf="@+id/pauseButton"
@@ -202,7 +231,7 @@
             android:id="@+id/nextButton"
             android:layout_width="46dp"
             android:layout_height="47dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
