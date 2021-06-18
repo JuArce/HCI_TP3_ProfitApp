@@ -5,7 +5,7 @@ import android.widget.AdapterView;
 
 import androidx.fragment.app.Fragment;
 
-public class RoutineExecutionFragment extends Fragment{
+public class RoutineExecutionSimplifiedFragment extends Fragment{
 
 
 }

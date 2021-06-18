@@ -11,30 +11,28 @@
         android:label="fragment_routine_detail"
         tools:layout="@layout/fragment_routine_detail">
         <action
-            android:id="@+id/action_detailFragment_to_executionFragment"
-            app:destination="@id/routineExecutionFragment"
-            app:popUpTo="@id/routineDetailFragment" />
-        <action
             android:id="@+id/action_routineDetailFragment_to_routineExecutionDetailedFragment"
             app:destination="@id/routineExecutionDetailedFragment"
             app:popUpTo="@id/routineDetailFragment" />
+        <action
+            android:id="@+id/action_routineDetailFragment_to_routineExecutionSimplifiedFragment"
+            app:destination="@id/routineExecutionSimplifiedFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/routineExecutionFragment"
-        android:name="ar.edu.itba.hci.profitapp.ui.RoutineExecutionFragment"
-        android:label="fragment_routine_execution"
-        tools:layout="@layout/fragment_routine_execution_detailed">
-        <action
-            android:id="@+id/action_routineExecutionFragment_to_routineDetailFragment"
-            app:destination="@id/routineDetailFragment" />
-    </fragment>
     <fragment
         android:id="@+id/routineExecutionDetailedFragment"
         android:name="ar.edu.itba.hci.profitapp.ui.RoutineExecutionDetailedFragment"
         android:label="RoutineExecutionDetailedFragment" >
         <action
             android:id="@+id/action_routineExecutionDetailedFragment_to_routineDetailFragment"
+            app:destination="@id/routineDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/routineExecutionSimplifiedFragment"
+        android:name="ar.edu.itba.hci.profitapp.ui.RoutineExecutionSimplifiedFragment"
+        android:label="RoutineExecutionSimplifiedFragment" >
+        <action
+            android:id="@+id/action_routineExecutionSimplifiedFragment_to_routineDetailFragment"
             app:destination="@id/routineDetailFragment" />
     </fragment>
     <!--    que onda aca este layout, como deberia cambiar?-->
