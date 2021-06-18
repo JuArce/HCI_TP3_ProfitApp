@@ -172,16 +172,34 @@
                     app:layout_constraintStart_toEndOf="@+id/exercise_repetitions"
                     app:layout_constraintTop_toBottomOf="@+id/exercise_detail" />
 
-                <VideoView
-                    android:id="@+id/exercise_video"
-                    android:layout_width="0dp"
-                    android:layout_height="300dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="64dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/times" />
+                    app:layout_constraintTop_toBottomOf="@+id/exercise_time">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/exercise_image"
+                            android:layout_width="300dp"
+                            android:layout_height="300dp"
+                            android:layout_marginTop="16dp"
+                            android:contentDescription="@string/profileImage"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_baseline_account_circle_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/counter"
@@ -193,7 +211,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/exercise_video" />
+                    app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

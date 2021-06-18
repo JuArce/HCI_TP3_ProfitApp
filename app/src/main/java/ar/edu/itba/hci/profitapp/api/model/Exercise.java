@@ -24,6 +24,8 @@ public class Exercise {
     @Expose
     private Object metadata;
 
+    private String media = "";
+
     public Exercise() {
     }
 
@@ -85,4 +87,11 @@ public class Exercise {
         this.metadata = metadata;
     }
 
+    public String getMedia() {
+        return media;
+    }
+
+    public void setMedia(String media) {
+        this.media = media;
+    }
 }

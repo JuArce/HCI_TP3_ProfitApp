@@ -1,6 +1,5 @@
 package ar.edu.itba.hci.profitapp.ui;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -8,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,17 +16,16 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.squareup.picasso.Picasso;
+
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import ar.edu.itba.hci.profitapp.App;
 import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.api.model.Cycle;
-import ar.edu.itba.hci.profitapp.api.model.CycleExercise;
-import ar.edu.itba.hci.profitapp.api.model.Exercise;
 import ar.edu.itba.hci.profitapp.databinding.FragmentRoutineExecutionDetailedBinding;
 import ar.edu.itba.hci.profitapp.repository.Status;
 
@@ -121,24 +120,51 @@ public class RoutineExecutionDetailedFragment extends Fragment {
                                     counter.decrementAndGet();
                                     cycle.setCycleExercises(res.getData().getContent());
 
-                                    if (counter.get() == 0) {
-                                        if (!changedOrientation) {
-                                            loadAndStart();
-                                        } else {
-                                            changedOrientation = false;
-                                            binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
-                                            binding.setCycle(routineCycles.get(cycleIndex));
-                                            binding.remCycleRep.setText(Integer.toString(currentCycleRepetition));
-                                            if(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
-                                                binding.pauseButton.setVisibility(View.VISIBLE);
-                                                binding.counter.setVisibility(View.VISIBLE);
-                                                startTimer();
-                                            } else {
-                                                binding.pauseButton.setVisibility(View.INVISIBLE);
-                                                binding.counter.setVisibility(View.INVISIBLE);
-                                            }
 
-                                        }
+                                    if (counter.get() == 0) {
+                                        AtomicInteger exerciseCounter = new AtomicInteger();
+
+                                        routineCycles.forEach(c -> {
+                                            exerciseCounter.addAndGet(c.getCycleExercises().size());
+                                            c.getCycleExercises().forEach(ex -> {
+
+                                                app.getExerciseRepository().getExerciseImages(ex.getExercise().getId()).observe(getViewLifecycleOwner(), imRes -> {
+                                                    if (imRes.getStatus() == Status.SUCCESS) {
+                                                        if (imRes.getData() != null && imRes.getData().getContent() != null) {
+                                                            if (imRes.getData().getContent().size() > 0) {
+                                                                ex.getExercise().setMedia(imRes.getData().getContent().get(0).getUrl());
+                                                                exerciseCounter.decrementAndGet();
+                                                                if (exerciseCounter.get() == 0) {
+                                                                    if (!changedOrientation) {
+
+                                                                        loadAndStart();
+                                                                    } else {
+                                                                        changedOrientation = false;
+                                                                        binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
+                                                                        binding.setCycle(routineCycles.get(cycleIndex));
+                                                                        loadImage(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getExercise().getMedia());
+                                                                        binding.remCycleRep.setText(Integer.toString(currentCycleRepetition));
+                                                                        if (routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
+                                                                            binding.pauseButton.setVisibility(View.VISIBLE);
+                                                                            binding.counter.setVisibility(View.VISIBLE);
+                                                                            startTimer();
+                                                                        } else {
+                                                                            binding.pauseButton.setVisibility(View.INVISIBLE);
+                                                                            binding.counter.setVisibility(View.INVISIBLE);
+                                                                        }
+
+                                                                    }
+                                                                    Log.d("TAG", "Exercise counter es 0");
+                                                                }
+                                                            }
+                                                        }
+                                                    } else {
+
+                                                    }
+                                                });
+                                            });
+
+                                        });
                                     }
                                 }
                             } else {
@@ -159,7 +185,8 @@ public class RoutineExecutionDetailedFragment extends Fragment {
             if (++exerciseIndex < routineCycles.get(cycleIndex).getCycleExercises().size()) {
                 Log.d("TAG", routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getExercise().getName());
                 binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
-                if(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
+                loadImage(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getExercise().getMedia());
+                if (routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
                     binding.pauseButton.setVisibility(View.VISIBLE);
                     binding.counter.setVisibility(View.VISIBLE);
                     timeMilliSeconds = routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() * 1000;
@@ -177,6 +204,7 @@ public class RoutineExecutionDetailedFragment extends Fragment {
                     currentCycleRepetition--;
                     binding.remCycleRep.setText(Integer.toString(currentCycleRepetition));
                     binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
+                    loadImage(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getExercise().getMedia());
                 } else {
                     if (cycleIndex < routineCycles.size() - 1) { //Cambiar de ciclo
                         Log.d("TAG", "tengo que cambiar de ciclo");
@@ -186,7 +214,8 @@ public class RoutineExecutionDetailedFragment extends Fragment {
                         binding.remCycleRep.setText(Integer.toString(currentCycleRepetition));
                         Log.d("TAG", routineCycles.get(cycleIndex).getName());
                         binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
-                        if(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
+                        loadImage(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getExercise().getMedia());
+                        if (routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
                             binding.pauseButton.setVisibility(View.VISIBLE);
                             binding.counter.setVisibility(View.VISIBLE);
                             timeMilliSeconds = routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() * 1000;
@@ -253,8 +282,9 @@ public class RoutineExecutionDetailedFragment extends Fragment {
         currentCycleRepetition = routineCycles.get(cycleIndex).getRepetitions() - 1;
         binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
         binding.setCycle(routineCycles.get(cycleIndex));
+        loadImage(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getExercise().getMedia());
         binding.remCycleRep.setText(Integer.toString(currentCycleRepetition));
-        if(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
+        if (routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
             binding.pauseButton.setVisibility(View.VISIBLE);
             binding.counter.setVisibility(View.VISIBLE);
             timeMilliSeconds = routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() * 1000;
@@ -266,7 +296,7 @@ public class RoutineExecutionDetailedFragment extends Fragment {
     }
 
     public void startStop() {
-        if(timerRunning) {
+        if (timerRunning) {
             stopTimer();
         } else {
             startTimer();
@@ -274,7 +304,7 @@ public class RoutineExecutionDetailedFragment extends Fragment {
     }
 
     public void startTimer() {
-        if(countDownTimer != null) {
+        if (countDownTimer != null) {
             countDownTimer.cancel();
         }
         countDownTimer = new CountDownTimer(timeMilliSeconds, 1000) {
@@ -304,6 +334,11 @@ public class RoutineExecutionDetailedFragment extends Fragment {
         String time = Integer.toString(seconds);
 
         binding.counter.setText(time + " s");
+    }
+
+    public void loadImage(String url) {
+        ImageView imageView = (ImageView) binding.exerciseImage;
+        Picasso.get().load(url).into(imageView);
     }
 }
 
