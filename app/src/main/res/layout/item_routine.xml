@@ -110,7 +110,7 @@
                     android:id="@+id/difficulty_icon"
                     android:layout_width="0dp"
                     android:layout_height="18dp"
-                    android:layout_weight="3"
+                    android:layout_weight="1.5"
                     app:srcCompat="@drawable/ic_shield_outline"
                     app:tint="@color/light_grey" />
 
@@ -127,7 +127,7 @@
                     android:id="@+id/category_icon"
                     android:layout_width="0dp"
                     android:layout_height="18dp"
-                    android:layout_weight="3"
+                    android:layout_weight="1.5"
                     android:background="#00B60000"
                     app:srcCompat="@drawable/ic_baseline_format_list_bulleted_24" />
 
