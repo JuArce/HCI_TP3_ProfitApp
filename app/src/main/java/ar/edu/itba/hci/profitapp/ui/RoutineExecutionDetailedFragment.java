@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import org.jetbrains.annotations.NotNull;
@@ -41,6 +42,9 @@ public class RoutineExecutionDetailedFragment extends Fragment {
     private int currentCycleRepetition = 0;
     private boolean changedOrientation = false;
 
+    private NavController navController;
+
+
     private CountDownTimer countDownTimer;
     private long timeMilliSeconds;
     private boolean timerRunning;
@@ -53,6 +57,7 @@ public class RoutineExecutionDetailedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentRoutineExecutionDetailedBinding.inflate(getLayoutInflater());
+        navController = NavHostFragment.findNavController(this);
 
         return binding.getRoot();
     }
@@ -198,8 +203,7 @@ public class RoutineExecutionDetailedFragment extends Fragment {
                         builder.setCancelable(false);
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-//                                RoutineExecutionDetailedFragmentDirections.actionRoutineExecutionDetailedFragmentToRoutineDetailFragment();
-//                                NavHostFragment.findNavController(this).navigate(R.id.action_routineExecutionDetailedFragment_to_routineDetailFragment);
+                                navController.navigate(R.id.action_routineExecutionDetailedFragment_to_routineDetailFragment);
                             }
                         });
                         AlertDialog alert = builder.create();
