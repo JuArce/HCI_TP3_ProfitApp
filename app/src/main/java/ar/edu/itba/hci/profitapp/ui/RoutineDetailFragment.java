@@ -190,7 +190,7 @@ public class RoutineDetailFragment extends Fragment {
             }
         });
 
-        fragmentRoutineDetailBinding.startRoutineExecutionButton.setOnClickListener(v -> {
+        fragmentRoutineDetailBinding.playRoutineFab.setOnClickListener(v -> {
             NavHostFragment.findNavController(this).navigate(R.id.action_routineDetailFragment_to_routineExecutionDetailedFragment);
         });
     }

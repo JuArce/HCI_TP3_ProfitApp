@@ -166,7 +166,7 @@
 <!--            />-->
 
         <ImageButton
-            android:id="@+id/rewindButton"
+            android:id="@+id/stop_button"
             android:layout_width="46dp"
             android:layout_height="47dp"
             android:layout_marginStart="32dp"
@@ -176,7 +176,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView2"
             app:tint="@color/teal"
-            card_view:srcCompat="@drawable/ic_baseline_history_24" />
+            card_view:srcCompat="@drawable/ic_baseline_stop_24" />
 
         <ImageButton
             android:id="@+id/nextButton"
