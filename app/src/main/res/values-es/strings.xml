@@ -37,5 +37,6 @@
     <string name="routine_mode">Visualización de Rutina</string>
     <string name="seconds">segundos</string>
     <string name="repetitions">repeticiones</string>
+    <string name="remaining_cycle_reps">Repeticiones Restantes: </string>
 
 </resources>

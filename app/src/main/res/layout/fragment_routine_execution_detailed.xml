@@ -24,16 +24,15 @@
 
         <TextView
             android:id="@+id/routine_name"
-            android:layout_width="0dp"
-            android:layout_height="27dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:text="@{cycle.name}"
             android:textAlignment="center"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/teal_700"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,18 +50,28 @@
         <!--            android:indeterminate="true"-->
         <!--            android:indeterminateTint="@color/teal_light"/>-->
 
+        <TextView
+            android:id="@+id/remaining_cycles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/remaining_cycle_reps"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/routine_name" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/routine_name"
+            app:layout_constraintTop_toBottomOf="@+id/remaining_cycles"
             card_view:cardCornerRadius="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -151,6 +160,16 @@
         <!--            android:indeterminateTint="@color/teal_light"-->
         <!--            />-->
 
+        <TextView
+            android:id="@+id/counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
         <ImageButton
             android:id="@+id/pauseButton"
             android:layout_width="46dp"
@@ -196,14 +215,13 @@
             card_view:srcCompat="@drawable/ic_baseline_skip_next_24" />
 
         <TextView
-            android:id="@+id/counter"
+            android:id="@+id/rem_cycle_rep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toEndOf="@+id/remaining_cycles"
+            app:layout_constraintTop_toBottomOf="@+id/routine_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

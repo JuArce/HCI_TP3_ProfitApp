@@ -140,26 +140,41 @@ public class RoutineExecutionDetailedFragment extends Fragment {
                 Log.d("TAG", routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getExercise().getName());
                 binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
                 if(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
+                    binding.pauseButton.setVisibility(View.VISIBLE);
+                    binding.counter.setVisibility(View.VISIBLE);
                     timeMilliSeconds = routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() * 1000;
                     startTimer();
+                } else {
+                    binding.pauseButton.setVisibility(View.INVISIBLE);
+                    binding.counter.setVisibility(View.INVISIBLE);
+
                 }
-            } else {
+            } else { //Si ya no hay ejercicios de ese ciclo
                 Log.d("TAG", "se acabaron los ejercicios");
                 exerciseIndex = 0;
-                if (currentCycleRepetition > 0) {
+                if (currentCycleRepetition > 0) { //Mismo ciclo porque le quedan repeticiones
                     Log.d("TAG", "le quedan repeticiones al ciclo");
-
                     currentCycleRepetition--;
+                    binding.remCycleRep.setText(Integer.toString(currentCycleRepetition));
+                    binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
                 } else {
-                    if (cycleIndex < routineCycles.size() - 1) {
+                    if (cycleIndex < routineCycles.size() - 1) { //Cambiar de ciclo
                         Log.d("TAG", "tengo que cambiar de ciclo");
 
                         binding.setCycle(routineCycles.get(++cycleIndex));
+                        currentCycleRepetition = routineCycles.get(cycleIndex).getRepetitions() - 1;
+                        binding.remCycleRep.setText(Integer.toString(currentCycleRepetition));
                         Log.d("TAG", routineCycles.get(cycleIndex).getName());
                         binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
                         if(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
+                            binding.pauseButton.setVisibility(View.VISIBLE);
+                            binding.counter.setVisibility(View.VISIBLE);
                             timeMilliSeconds = routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() * 1000;
                             startTimer();
+                        } else {
+                            binding.pauseButton.setVisibility(View.INVISIBLE);
+                            binding.counter.setVisibility(View.INVISIBLE);
+
                         }
                     } else {
                         //TODO popup para salir
@@ -200,9 +215,15 @@ public class RoutineExecutionDetailedFragment extends Fragment {
         currentCycleRepetition = routineCycles.get(cycleIndex).getRepetitions() - 1;
         binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
         binding.setCycle(routineCycles.get(cycleIndex));
+        binding.remCycleRep.setText(Integer.toString(currentCycleRepetition));
         if(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
+            binding.pauseButton.setVisibility(View.VISIBLE);
+            binding.counter.setVisibility(View.VISIBLE);
             timeMilliSeconds = routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() * 1000;
             startTimer();
+        } else {
+            binding.pauseButton.setVisibility(View.INVISIBLE);
+            binding.counter.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -244,7 +265,7 @@ public class RoutineExecutionDetailedFragment extends Fragment {
         int seconds = (int) timeMilliSeconds / 1000;
         String time = Integer.toString(seconds);
 
-        binding.counter.setText(time);
+        binding.counter.setText(time + " s");
     }
 }
 
