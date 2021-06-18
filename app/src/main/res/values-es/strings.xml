@@ -38,5 +38,6 @@
     <string name="seconds">segundos</string>
     <string name="repetitions">repeticiones</string>
     <string name="remaining_cycle_reps">Repeticiones Restantes: </string>
+    <string name="next_exercises">Proximos Ejercicios</string>
 
 </resources>
