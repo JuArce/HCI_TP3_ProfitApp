@@ -24,41 +24,57 @@
 
         <TextView
             android:id="@+id/routine_name"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
             android:text="@{cycle.name}"
             android:textAlignment="center"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/teal_700"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/cardView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-<!--        <ProgressBar-->
-<!--            android:id="@+id/routineProgressBar"-->
-<!--            style="?android:attr/progressBarStyleHorizontal"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="32dp"-->
-<!--            android:layout_marginEnd="32dp"-->
-<!--            android:layout_marginBottom="16dp"-->
-<!--            app:layout_constraintBottom_toTopOf="@+id/cardView2"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            android:indeterminate="true"-->
-<!--            android:indeterminateTint="@color/teal_light"/>-->
+        <!--        <ProgressBar-->
+        <!--            android:id="@+id/routineProgressBar"-->
+        <!--            style="?android:attr/progressBarStyleHorizontal"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="32dp"-->
+        <!--            android:layout_marginEnd="32dp"-->
+        <!--            android:layout_marginBottom="16dp"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/cardView2"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            android:indeterminate="true"-->
+        <!--            android:indeterminateTint="@color/teal_light"/>-->
+
+        <TextView
+            android:id="@+id/remaining_cycles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/remaining_cycle_reps"
+            app:layout_constraintStart_toEndOf="@+id/routine_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/rem_cycle_rep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toEndOf="@+id/remaining_cycles"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="546dp"
             android:layout_height="282dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="96dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="128dp"
             app:cardPreventCornerOverlap="true"
@@ -66,7 +82,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/routine_name"
+            app:layout_constraintVertical_bias="0.0"
             card_view:cardCornerRadius="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -138,6 +155,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="34sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/exercise_video"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/exercise_video"
+                    app:layout_constraintTop_toBottomOf="@+id/exercise_duration" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
@@ -147,39 +175,25 @@
             android:layout_width="46dp"
             android:layout_height="47dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/nextButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/stop_button"
             app:layout_constraintTop_toBottomOf="@+id/cardView2"
             app:tint="@color/teal"
-            card_view:srcCompat="@drawable/ic_baseline_pause_24" />
-
-<!--        <ProgressBar-->
-<!--            android:id="@+id/exercise_progress"-->
-<!--            style="?android:attr/progressBarStyle"-->
-<!--            android:layout_width="66dp"-->
-<!--            android:layout_height="62dp"-->
-<!--            android:layout_marginTop="24dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/cardView2"-->
-<!--            android:indeterminate="true"-->
-<!--            android:indeterminateTint="@color/teal_light"-->
-<!--            />-->
+            card_view:srcCompat="@drawable/ic_baseline_play_arrow_24" />
 
         <ImageButton
             android:id="@+id/stop_button"
             android:layout_width="46dp"
             android:layout_height="47dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/cardView2"
+            app:layout_constraintEnd_toStartOf="@+id/pauseButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView2"
             app:tint="@color/teal"
             card_view:srcCompat="@drawable/ic_baseline_stop_24" />
@@ -189,13 +203,12 @@
             android:layout_width="46dp"
             android:layout_height="47dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/cardView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/pauseButton"
             app:layout_constraintTop_toBottomOf="@+id/cardView2"
-            app:layout_constraintVertical_bias="0.466"
             app:tint="@color/teal"
             card_view:srcCompat="@drawable/ic_baseline_skip_next_24" />
 

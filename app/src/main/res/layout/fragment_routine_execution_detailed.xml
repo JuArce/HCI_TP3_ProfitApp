@@ -60,6 +60,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/routine_name" />
 
+        <TextView
+            android:id="@+id/rem_cycle_rep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toEndOf="@+id/remaining_cycles"
+            app:layout_constraintTop_toBottomOf="@+id/routine_name" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="match_parent"
@@ -164,7 +173,7 @@
             android:id="@+id/counter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:textSize="34sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +183,7 @@
             android:id="@+id/pauseButton"
             android:layout_width="46dp"
             android:layout_height="47dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toStartOf="@+id/nextButton"
@@ -189,7 +198,7 @@
             android:layout_width="46dp"
             android:layout_height="47dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toStartOf="@+id/pauseButton"
@@ -203,7 +212,7 @@
             android:id="@+id/nextButton"
             android:layout_width="46dp"
             android:layout_height="47dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
@@ -213,15 +222,6 @@
             app:layout_constraintTop_toBottomOf="@+id/counter"
             app:tint="@color/teal"
             card_view:srcCompat="@drawable/ic_baseline_skip_next_24" />
-
-        <TextView
-            android:id="@+id/rem_cycle_rep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toEndOf="@+id/remaining_cycles"
-            app:layout_constraintTop_toBottomOf="@+id/routine_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

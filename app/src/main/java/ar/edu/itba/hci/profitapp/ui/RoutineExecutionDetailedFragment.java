@@ -69,8 +69,17 @@ public class RoutineExecutionDetailedFragment extends Fragment {
             cycleIndex = savedInstanceState.getInt("cycleIndex");
             exerciseIndex = savedInstanceState.getInt("exerciseIndex");
             currentCycleRepetition = savedInstanceState.getInt("currentCycleRepetition");
+            timeMilliSeconds = savedInstanceState.getLong("timeMilliSeconds");
+            timerRunning = savedInstanceState.getBoolean("timerRunning");
             changedOrientation = true;
         }
+
+
+    /*
+    * private CountDownTimer countDownTimer;
+    private long timeMilliSeconds;
+    private boolean timerRunning;*/
+
 
 //        routineViewModel.getRoutine(routineId).observe(getViewLifecycleOwner(), r -> {
 //            if (r.getStatus() == Status.SUCCESS) {
@@ -112,12 +121,18 @@ public class RoutineExecutionDetailedFragment extends Fragment {
                                             loadAndStart();
                                         } else {
                                             changedOrientation = false;
-                                            try {
-                                                binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
-                                                binding.setCycle(routineCycles.get(cycleIndex));
-                                            } catch(Exception e) {
-                                                Log.d("ERROR", Integer.toString(exerciseIndex));
+                                            binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
+                                            binding.setCycle(routineCycles.get(cycleIndex));
+                                            binding.remCycleRep.setText(Integer.toString(currentCycleRepetition));
+                                            if(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
+                                                binding.pauseButton.setVisibility(View.VISIBLE);
+                                                binding.counter.setVisibility(View.VISIBLE);
+                                                startTimer();
+                                            } else {
+                                                binding.pauseButton.setVisibility(View.INVISIBLE);
+                                                binding.counter.setVisibility(View.INVISIBLE);
                                             }
+
                                         }
                                     }
                                 }
@@ -209,6 +224,9 @@ public class RoutineExecutionDetailedFragment extends Fragment {
         outState.putInt("cycleIndex", cycleIndex);
         outState.putInt("exerciseIndex", exerciseIndex);
         outState.putInt("currentCycleRepetition", currentCycleRepetition);
+        outState.putLong("timeMilliSeconds", timeMilliSeconds);
+        outState.putBoolean("timerRunning", timerRunning);
+
     }
 
     public void loadAndStart() {
