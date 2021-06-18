@@ -191,7 +191,16 @@ public class RoutineDetailFragment extends Fragment {
         });
 
         fragmentRoutineDetailBinding.playRoutineFab.setOnClickListener(v -> {
-            NavHostFragment.findNavController(this).navigate(R.id.action_routineDetailFragment_to_routineExecutionDetailedFragment);
+            switch (app.getPreferences().getRoutineDisplayMode()) {
+                case 0:
+                    Log.d("TAG", "Ejecutar vista simple");
+                    NavHostFragment.findNavController(this).navigate(R.id.action_routineDetailFragment_to_routineExecutionSimplifiedFragment);
+                    break;
+                case 1:
+                    Log.d("TAG", "Ejecutar vista detallada");
+                    NavHostFragment.findNavController(this).navigate(R.id.action_routineDetailFragment_to_routineExecutionDetailedFragment);
+                    break;
+            }
         });
     }
 }

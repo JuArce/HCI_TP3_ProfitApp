@@ -3,6 +3,8 @@ package ar.edu.itba.hci.profitapp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.RadioButton;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -54,14 +56,23 @@ public class ProfileActivity extends AppCompatActivity {
 
         app = ((App) getApplication());
 
+        switch(app.getPreferences().getRoutineDisplayMode()) {
+            case 0:
+                profileBinding.simplifiedViewButton.setChecked(true);
+                break;
+            case 1:
+                profileBinding.detailedViewButton.setChecked(true);
+                break;
+        }
+
         ViewModelProvider.Factory viewModelFactory = new RepositoryViewModelFactory<>(UserRepository.class, app.getUserRepository());
         userViewModel = new ViewModelProvider(this, viewModelFactory).get(UserViewModel.class);
 
         userViewModel.getCurrentUser().observe(this, r -> {
             if (r.getStatus() == Status.SUCCESS) {
-                if(r.getData() != null && r.getData() != null) {
+                if (r.getData() != null && r.getData() != null) {
                     profileBinding.setUser(r.getData());
-                    if(!r.getData().getAvatarUrl().equals("")) {
+                    if (!r.getData().getAvatarUrl().equals("")) {
                         Glide.with(profileBinding.getRoot()).load(r.getData().getAvatarUrl()).into(profileBinding.profilePicture);
                     }
                 }
@@ -117,7 +128,7 @@ public class ProfileActivity extends AppCompatActivity {
                     dataSet.setCircleRadius(5);
                     dataSet.setValueTextSize(13);
                     achievementsChart.setData(data);
-                    achievementsChart.animateXY(2000,2000); //o solo achievementsChart.animateX(2000);
+                    achievementsChart.animateXY(2000, 2000); //o solo achievementsChart.animateX(2000);
                     achievementsChart.invalidate();
                     achievementsChart.getDescription().setEnabled(false);
                     achievementsChart.getLegend().setEnabled(false);
@@ -125,7 +136,7 @@ public class ProfileActivity extends AppCompatActivity {
                     achievementsChart.getLegend().setEnabled(false);
                     YAxis yAxis = achievementsChart.getAxisLeft();
                     achievementsChart.getAxisRight().setEnabled(false);
-                    yAxis.enableGridDashedLine(10f,10f,0f);
+                    yAxis.enableGridDashedLine(10f, 10f, 0f);
                     yAxis.setAxisMaximum((float) (Collections.max(weightList) + 1));
                     yAxis.setAxisMinimum((float) (Collections.min(weightList) - 1));
                     XAxis xAxis = achievementsChart.getXAxis();
@@ -136,22 +147,26 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-//        profileBinding.addWeightButton.setOnClickListener((v)->{
-//            final EditText input = new EditText(this);
-//            input.setPadding(5, 0,5, 0);
-//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//            builder.setView(input);
-//            builder.setCancelable(true);
-//            builder.setTitle(getResources().getString(R.string.add_weight_title));
-//            builder.setMessage(getResources().getString(R.string.add_weight_msg));
-//            builder.setPositiveButton(getResources().getString(R.string.done), (dialog, which) -> {
-//                input.getText();
-//                achievementsViewModel.addAchievement(Double.parseDouble(input.toString())).observe(this, r -> {});
-//            });
-//            builder.setNegativeButton(getResources().getString(R.string.cancel), null);
-//            AlertDialog dialog = builder.create();
-//            dialog.show();
-//        });
+    }
 
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch (view.getId()) {
+            case R.id.simplified_view_button:
+                if (checked) {
+                    Log.d("TAG", "Rutina simple");
+                    app.getPreferences().setRoutineDisplayMode(0);
+                }
+                break;
+            case R.id.detailed_view_button:
+                if (checked) {
+                    Log.d("TAG", "Rutina completa");
+                    app.getPreferences().setRoutineDisplayMode(1);
+                }
+                break;
+        }
     }
 }
