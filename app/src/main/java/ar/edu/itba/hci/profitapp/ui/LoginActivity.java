@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import ar.edu.itba.hci.profitapp.App;
+import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.databinding.ActivityLoginBinding;
 import ar.edu.itba.hci.profitapp.repository.Resource;
 import ar.edu.itba.hci.profitapp.repository.Status;
@@ -22,7 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     private App app;
     private ActivityLoginBinding activityLoginBinding;
     private boolean didLoginFromLink = false;
-    private int routineId = - 1;
+    private int routineId = -1;
+    private boolean validCredentials = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +34,16 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent linkIntent = getIntent();
 
-        if(linkIntent != null && linkIntent.getData() != null){
+        if (linkIntent != null && linkIntent.getData() != null) {
             didLoginFromLink = true;
             Uri linkData = linkIntent.getData();
             routineId = Integer.parseInt(linkData.getLastPathSegment()); //se inicia por un link
         }
 
-        if(app.getPreferences().getAuthToken() != null) {
-            if(didLoginFromLink){
+        if (app.getPreferences().getAuthToken() != null) {
+            if (didLoginFromLink) {
                 startDetailActivity();
-            }
-            else {
+            } else {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
@@ -53,37 +54,53 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(activityLoginBinding.getRoot());
 
-//        VideoView videoview = (VideoView) findViewById(R.id.videoView);
-//        Uri uri = Uri.parse("https://assets.mixkit.co/videos/preview/mixkit-man-training-by-the-sea-14065-large.mp4");
-//        videoview.setVideoURI(uri);
-//        videoview.start();
-
         activityLoginBinding.usernameInput.setOnClickListener(v -> {
             activityLoginBinding.usernameContainer.setError(null);
+            activityLoginBinding.passwordContainer.setError(null);
+            activityLoginBinding.errorText.setText("");
+            validCredentials = true;
+        });
+
+        activityLoginBinding.passwordInput.setOnClickListener(v -> {
+            activityLoginBinding.usernameContainer.setError(null);
+            activityLoginBinding.passwordContainer.setError(null);
+            activityLoginBinding.errorText.setText("");
+            validCredentials = true;
         });
 
         activityLoginBinding.loginButton.setOnClickListener(v -> {
+            if (activityLoginBinding.usernameContainer.getEditText().getText().toString().length() < 3) {
+                activityLoginBinding.usernameContainer.setError(getResources().getString(R.string.invalid_user));
+                validCredentials = false;
+            }
+            if (activityLoginBinding.passwordContainer.getEditText().getText().toString().length() < 8) {
+                activityLoginBinding.passwordContainer.setError(getResources().getString(R.string.invalid_password));
+                validCredentials = false;
+            }
             //TODO validar user y password antes de llamar a la api. Mostrar mensajes de error en caso que esté mal el input
-            Credentials credentials = new Credentials(activityLoginBinding.usernameContainer.getEditText().getText().toString(), activityLoginBinding.passwordContainer.getEditText().getText().toString());
-            app.getUserRepository().login(credentials).observe(this, r -> {
-                if (r.getStatus() == Status.SUCCESS) {
-                    app.getPreferences().setAuthToken(r.getData().getToken());
+            if (validCredentials) {
+                Credentials credentials = new Credentials(activityLoginBinding.usernameContainer.getEditText().getText().toString(), activityLoginBinding.passwordContainer.getEditText().getText().toString());
+                app.getUserRepository().login(credentials).observe(this, r -> {
+                    if (r.getStatus() == Status.SUCCESS) {
+                        app.getPreferences().setAuthToken(r.getData().getToken());
 
-                    if(didLoginFromLink){
-                        startDetailActivity();
+                        if (didLoginFromLink) {
+                            startDetailActivity();
+                        } else {
+                            Intent intent = new Intent(this, MainActivity.class);
+                            startActivity(intent);
+                        }
+
                     } else {
-                        Intent intent = new Intent(this, MainActivity.class);
-                        startActivity(intent);
+                        defaultResourceHandler(r);
                     }
+                });
+            }
 
-                } else {
-                    defaultResourceHandler(r);
-                }
-            });
         });
     }
 
-    private void startDetailActivity(){
+    private void startDetailActivity() {
         Intent detailIntent = new Intent(this, RoutineActivity.class);
         detailIntent.putExtra(EXTRA_MESSAGE, routineId);
         startActivity(detailIntent);
@@ -98,8 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                 Error error = resource.getError();
                 String message = "Error";
                 Log.d(TAG, message);
-                activityLoginBinding.usernameContainer.setError(resource.getError().getDescription());
-
+                activityLoginBinding.errorText.setText(resource.getError().getDescription());
                 break;
         }
     }
