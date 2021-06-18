@@ -37,7 +37,8 @@
     <string name="seconds">seconds</string>
     <string name="repetitions">repetitions</string>
     <string name="remaining_cycle_reps">Remaining Repetitions: </string>
-    <string name="next_exercises">Next Exercises</string>
+    <string name="next_exercises">Next Exercises: </string>
+    <string name="remaining_exercises">Remaining Exercises: </string>
 
 
 </resources>

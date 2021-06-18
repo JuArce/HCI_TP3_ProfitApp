@@ -11,7 +11,15 @@
             type="ar.edu.itba.hci.profitapp.api.model.Cycle" />
 
         <variable
-            name="cycleExercise"
+            name="cycleExercise1"
+            type="ar.edu.itba.hci.profitapp.api.model.CycleExercise" />
+
+        <variable
+            name="cycleExercise2"
+            type="ar.edu.itba.hci.profitapp.api.model.CycleExercise" />
+
+        <variable
+            name="cycleExercise3"
             type="ar.edu.itba.hci.profitapp.api.model.CycleExercise" />
     </data>
 
@@ -19,18 +27,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!--        <TextView-->
+        <!--            android:id="@+id/CycleName"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="32dp"-->
+        <!--            android:layout_marginTop="32dp"-->
+        <!--            android:text="@{cycle.name}"-->
+        <!--            android:textSize="20sp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintVertical_bias="0.0" />-->
+
+
+        <!--       EJERCICIO ACTUAL -->
         <TextView
-            android:id="@+id/CycleName"
+            android:id="@+id/remaining_exercises"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
-            android:text="@{cycle.name}"
+            android:text="@string/remaining_exercises"
+            android:textColor="@color/teal_700"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/remaining_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:textColor="@color/dark_grey"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/remaining_exercises"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/currentExerciseCard"
@@ -41,11 +74,9 @@
             android:layout_marginEnd="32dp"
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/CycleName"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/remaining_exercises"
             card_view:cardCornerRadius="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -58,71 +89,103 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@{cycleExercise.exercise.name}"
+                    android:layout_marginTop="32dp"
+                    android:text="@{cycleExercise1.exercise.name}"
+                    android:textColor="@color/dark_grey"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/CurrentExerciseRepetitions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="@{cycleExercise.repetitions}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/CurrentExerciseName" />
-
-                <TextView
-                    android:id="@+id/repetitions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/repetitions"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/CurrentExerciseRepetitions"
-                    app:layout_constraintTop_toBottomOf="@+id/CurrentExerciseName"
-                    app:layout_constraintVertical_bias="0.575" />
 
                 <TextView
                     android:id="@+id/CurrentExerciseDuration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="@{cycleExercise.duration}"
+                    android:text="@{cycleExercise1.duration.toString()}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/repetitions"
+                    app:layout_constraintEnd_toStartOf="@+id/seconds"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/CurrentExerciseName"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintVertical_bias="0.5" />
 
                 <TextView
                     android:id="@+id/seconds"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:text="@string/seconds"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/CurrentExerciseDuration"
+                    app:layout_constraintEnd_toStartOf="@+id/separator"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/CurrentExerciseDuration"
                     app:layout_constraintTop_toBottomOf="@+id/CurrentExerciseName"
-                    app:layout_constraintVertical_bias="0.6" />
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <TextView
+                    android:id="@+id/separator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="·"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/CurrentExerciseRepetitions"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/seconds"
+                    app:layout_constraintTop_toBottomOf="@+id/CurrentExerciseName"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <TextView
+                    android:id="@+id/CurrentExerciseRepetitions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="32dp"
+                    android:text="@{cycleExercise1.repetitions.toString()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/repetitions"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/separator"
+                    app:layout_constraintTop_toBottomOf="@+id/CurrentExerciseName"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/repetitions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/repetitions"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/CurrentExerciseRepetitions"
+                    app:layout_constraintTop_toBottomOf="@+id/CurrentExerciseName"
+                    app:layout_constraintVertical_bias="0.5" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:id="@+id/next_exercises"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/next_exercises"
+            android:textColor="@color/teal_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/currentExerciseCard" />
+
+        <!--        SIGUIENTE EJERCICIO-->
         <androidx.cardview.widget.CardView
             android:id="@+id/secondExerciseCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -143,7 +206,8 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="@{cycleExercise.exercise.name}"
+                    android:text="@{cycleExercise2.exercise.name}"
+                    android:textColor="@color/light_grey"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -155,6 +219,7 @@
 
         </androidx.cardview.widget.CardView>
 
+        <!--        SIGUIENTE SIGUIENTE EJERCICIO-->
         <androidx.cardview.widget.CardView
             android:id="@+id/thirdExerciseCard"
             android:layout_width="0dp"
@@ -181,7 +246,8 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="@{cycleExercise.exercise.name}"
+                    android:text="@{cycleExercise3.exercise.name}"
+                    android:textColor="@color/light_grey"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -197,10 +263,12 @@
             android:id="@+id/stopButton"
             android:layout_width="46dp"
             android:layout_height="47dp"
-            android:layout_marginTop="32dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
-            app:layout_constraintStart_toStartOf="@+id/thirdExerciseCard"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/nextButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/thirdExerciseCard"
             app:tint="@color/teal"
             card_view:srcCompat="@drawable/ic_baseline_stop_24" />
@@ -209,25 +277,15 @@
             android:id="@+id/nextButton"
             android:layout_width="46dp"
             android:layout_height="47dp"
-            android:layout_marginTop="32dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
-            app:layout_constraintEnd_toEndOf="@+id/thirdExerciseCard"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/stopButton"
             app:layout_constraintTop_toBottomOf="@+id/thirdExerciseCard"
             app:tint="@color/teal"
             card_view:srcCompat="@drawable/ic_baseline_skip_next_24" />
-
-        <TextView
-            android:id="@+id/next_exercises"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="13dp"
-            android:text="@string/next_exercises"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/currentExerciseCard" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
