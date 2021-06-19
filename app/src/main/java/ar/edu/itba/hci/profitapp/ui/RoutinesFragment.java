@@ -55,7 +55,7 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
     private final static int PAGE_SIZE = 10;
 
     private int routinePage = 0;
-    private String orderBy = "date";
+    private String orderBy = "categoryId";
     private String direction = "asc";
     private boolean isLastRoutinePage = false;
 
@@ -93,6 +93,15 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
 
 
         app = ((App) getActivity().getApplication());
+
+        if(savedInstanceState != null) {
+            direction = savedInstanceState.getString("direction");
+        }
+        if(direction.equals("asc")) {
+            fragmentRoutinesBinding.directionSelector.setImageResource(R.drawable.ic_sort_asc);
+        } else {
+            fragmentRoutinesBinding.directionSelector.setImageResource(R.drawable.ic_sort_desc);
+        }
 
         ViewModelProvider.Factory viewModelFactory = new RepositoryViewModelFactory<>(RoutineRepository.class, app.getRoutineRepository());
         routineViewModel = new ViewModelProvider(this, viewModelFactory).get(RoutineViewModel.class);
@@ -133,6 +142,17 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
 //        });
 
         getRoutines();
+
+        fragmentRoutinesBinding.directionSelector.setOnClickListener(v -> {
+            if(direction.equals("asc")) {
+                direction = "desc";
+                fragmentRoutinesBinding.directionSelector.setImageResource(R.drawable.ic_sort_desc);
+            } else {
+                direction = "asc";
+                fragmentRoutinesBinding.directionSelector.setImageResource(R.drawable.ic_sort_asc);
+            }
+            getRoutines();
+        });
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -207,19 +227,26 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
-        if (item.getItemId() == R.id.order_by) {
-            Log.d("TAG", "En el switch");
-            Snackbar.make(item.getActionView(), getResources().getString(R.string.fav_added), Snackbar.LENGTH_LONG).show();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    //Not working :(
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
+//        if (item.getItemId() == R.id.order_by) {
+//            Log.d("TAG", "En el switch");
+//            Snackbar.make(item.getActionView(), getResources().getString(R.string.fav_added), Snackbar.LENGTH_LONG).show();
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//
+//    }
+//
+//    @Override
+//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+//        inflater.inflate(R.menu.toolbar_routines_fragment, menu);
+//    }
 
-    }
-
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.toolbar_routines_fragment, menu);
+    public void onSaveInstanceState(@NonNull @NotNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("direction", direction);
     }
 }

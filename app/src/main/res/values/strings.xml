@@ -44,5 +44,6 @@
     <string name="invalid_user">Username must be at least 3 characters long.</string>
     <string name="invalid_password">Password must be at least 8 characters long.</string>
     <string name="cannot_execute">This routine is not complete for execution.</string>
+    <string name="ordering_by">Ordering by:</string>
 
 </resources>

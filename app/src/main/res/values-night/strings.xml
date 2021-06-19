@@ -12,4 +12,5 @@
     <string name="repetitions">repetitions</string>
     <string name="remaining_cycle_reps">Remaining Repetitions: </string>
     <string name="remaining_exercises">Remaining Exercises: </string>
+    <string name="ordering_by">Ordering by:</string>
 </resources>

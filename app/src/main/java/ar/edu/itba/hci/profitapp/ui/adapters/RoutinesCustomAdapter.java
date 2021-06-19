@@ -30,7 +30,7 @@ public class RoutinesCustomAdapter extends RecyclerView.Adapter<RoutinesCustomAd
     }
 
     public void addRoutines(List<Routine> toAdd) {
-//        routineList.clear();
+        routineList.clear();
         routineList.addAll(toAdd);
     }
 
