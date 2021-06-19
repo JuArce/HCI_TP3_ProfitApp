@@ -150,6 +150,7 @@ public class RoutineExecutionDetailedFragment extends Fragment {
             }
         });
 
+        //TODO refactor y modularizacion - No se hace por falta de tiempo
         binding.nextButton.setOnClickListener(v -> {
             Log.d("TAG", "cambiar");
             Log.d("TAG", Integer.toString(routineCycles.get(cycleIndex).getCycleExercises().size()));
@@ -177,6 +178,16 @@ public class RoutineExecutionDetailedFragment extends Fragment {
                     binding.remCycleRep.setText(Integer.toString(currentCycleRepetition));
                     binding.setCycleExercise(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex));
                     loadImage(routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getExercise().getMedia());
+                    if (routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() > 0) {
+                        binding.pauseButton.setVisibility(View.VISIBLE);
+                        binding.counter.setVisibility(View.VISIBLE);
+                        timeMilliSeconds = routineCycles.get(cycleIndex).getCycleExercises().get(exerciseIndex).getDuration() * 1000;
+                        startTimer();
+                    } else {
+                        binding.pauseButton.setVisibility(View.INVISIBLE);
+                        binding.counter.setVisibility(View.INVISIBLE);
+
+                    }
                 } else {
                     if (cycleIndex < routineCycles.size() - 1) { //Cambiar de ciclo
                         Log.d("TAG", "tengo que cambiar de ciclo");
