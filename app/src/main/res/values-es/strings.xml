@@ -20,7 +20,7 @@
     <string name="difficulty">Dificultad</string>
     <string name="rating">Puntuación</string>
     <string name="start">Comenzar</string>
-    <string name="order_button_title">Order by</string>
+    <string name="order_button_title">Ordenar por</string>
     <string name="fav_added">Rutina añadida a favoritos</string>
     <string name="fav_removed">Rutina removida de favoritos</string>
     <string name="rated">¡Rutina calificada correctamente!</string>
