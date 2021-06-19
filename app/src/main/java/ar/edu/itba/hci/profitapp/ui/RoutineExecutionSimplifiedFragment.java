@@ -1,13 +1,11 @@
 package ar.edu.itba.hci.profitapp.ui;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +23,6 @@ import ar.edu.itba.hci.profitapp.App;
 import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.api.model.Cycle;
 import ar.edu.itba.hci.profitapp.api.model.CycleExercise;
-import ar.edu.itba.hci.profitapp.databinding.FragmentRoutineExecutionDetailedBinding;
 import ar.edu.itba.hci.profitapp.databinding.FragmentRoutineExecutionSimpleBinding;
 import ar.edu.itba.hci.profitapp.repository.Status;
 

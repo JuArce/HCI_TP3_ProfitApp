@@ -25,7 +25,7 @@ public class RoutineCycleViewModel extends RepositoryViewModel<RoutineRepository
         super(repository);
     }
 
-    //TODO usamos default de pedir cosas a la api
+    //usamos default de pedir cosas a la api
     public LiveData<Resource<PagedList<Cycle>>> getRoutineCycles(int routineId) {
         routineCycles.addSource(repository.getRoutineCycles(routineId), resource -> {
             if (resource.getStatus() == Status.SUCCESS) {

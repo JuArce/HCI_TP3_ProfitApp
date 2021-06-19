@@ -95,7 +95,7 @@ public class RoutineDetailFragment extends Fragment {
         ViewModelProvider.Factory routineCycleViewModelFactory = new RepositoryViewModelFactory<>(RoutineRepository.class, app.getRoutineRepository());
         routineCycleViewModel = new ViewModelProvider(this, routineCycleViewModelFactory).get(RoutineCycleViewModel.class);
 
-//        routineCyclesRecyclerView.setAdapter(routineCyclesAdapter); //TODO
+//        routineCyclesRecyclerView.setAdapter(routineCyclesAdapter);
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             routineCyclesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -107,7 +107,7 @@ public class RoutineDetailFragment extends Fragment {
         routineViewModel.getRoutine(routineId).observe(getViewLifecycleOwner(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 if (r.getData() != null && r.getData() != null) {
-                    app.getRoutineRepository().getFavorites(0, 10).observe(getViewLifecycleOwner(), favRes -> { //TODO definir viewModel vs rep
+                    app.getRoutineRepository().getFavorites(0, 10).observe(getViewLifecycleOwner(), favRes -> {
                         if (favRes.getStatus() == Status.SUCCESS) {
                             if (favRes.getData() != null && favRes.getData().getContent() != null) {
                                 if (favRes.getData().getContent().stream().map(Routine::getId).collect(Collectors.toList()).contains(r.getData().getId())) {
@@ -162,7 +162,6 @@ public class RoutineDetailFragment extends Fragment {
             }
         });
 
-        //TODO no hace el llamado a la api
         fragmentRoutineDetailBinding.ratingButton.setOnClickListener(v -> {
             RatingBar ratingBar = (RatingBar) fragmentRoutineDetailBinding.ratingBar;
             float rating = ratingBar.getRating(); //este es el rating local .
@@ -171,7 +170,6 @@ public class RoutineDetailFragment extends Fragment {
             Snackbar.make(v, getResources().getString(R.string.rated), Snackbar.LENGTH_LONG).show();
         });
 
-        //TODO probar
         fragmentRoutineDetailBinding.shareButton.setOnClickListener(v -> {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);

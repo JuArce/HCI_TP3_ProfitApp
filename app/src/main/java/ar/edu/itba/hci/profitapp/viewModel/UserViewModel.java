@@ -16,8 +16,6 @@ public class UserViewModel extends RepositoryViewModel<UserRepository> {
         super(repository);
     }
 
-    //TODO logout
-
     public LiveData<Resource<User>> getCurrentUser() {
         currentUser = repository.getCurrentUser();
         return currentUser;

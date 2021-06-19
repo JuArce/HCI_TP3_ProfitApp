@@ -3,7 +3,6 @@ package ar.edu.itba.hci.profitapp.viewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
-import ar.edu.itba.hci.profitapp.api.model.Cycle;
 import ar.edu.itba.hci.profitapp.api.model.CycleExercise;
 import ar.edu.itba.hci.profitapp.api.model.PagedList;
 import ar.edu.itba.hci.profitapp.repository.ExerciseRepository;
@@ -25,7 +24,7 @@ public class ExerciseViewModel extends RepositoryViewModel<ExerciseRepository> {
         super(repository);
     }
 
-    //TODO usamos default de pedir cosas a la api
+    //usamos default de pedir cosas a la api
     public LiveData<Resource<PagedList<CycleExercise>>> getCycleExercises(int cycleId) {
         cycleExercises.addSource(repository.getCycleExercises(cycleId), resource -> {
             if (resource.getStatus() == Status.SUCCESS) {

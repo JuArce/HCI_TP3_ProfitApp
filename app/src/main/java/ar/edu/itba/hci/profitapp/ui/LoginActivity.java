@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 activityLoginBinding.passwordContainer.setError(getResources().getString(R.string.invalid_password));
                 validCredentials = false;
             }
-            //TODO validar user y password antes de llamar a la api. Mostrar mensajes de error en caso que esté mal el input
+
             if (validCredentials) {
                 Credentials credentials = new Credentials(activityLoginBinding.usernameContainer.getEditText().getText().toString(), activityLoginBinding.passwordContainer.getEditText().getText().toString());
                 app.getUserRepository().login(credentials).observe(this, r -> {

@@ -2,6 +2,9 @@ package ar.edu.itba.hci.profitapp.ui;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,10 +13,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -25,14 +24,10 @@ import ar.edu.itba.hci.profitapp.App;
 import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.api.model.Routine;
 import ar.edu.itba.hci.profitapp.databinding.FragmentFavoritesBinding;
-import ar.edu.itba.hci.profitapp.databinding.FragmentHomeBinding;
-import ar.edu.itba.hci.profitapp.databinding.FragmentRoutinesBinding;
 import ar.edu.itba.hci.profitapp.repository.RoutineRepository;
 import ar.edu.itba.hci.profitapp.repository.Status;
 import ar.edu.itba.hci.profitapp.ui.adapters.FavoritesCustomAdapter;
-import ar.edu.itba.hci.profitapp.ui.adapters.RoutinesCustomAdapter;
 import ar.edu.itba.hci.profitapp.viewModel.FavoritesViewModel;
-import ar.edu.itba.hci.profitapp.viewModel.RoutineViewModel;
 import ar.edu.itba.hci.profitapp.viewModel.repositoryVM.RepositoryViewModelFactory;
 
 public class FavoritesFragment extends Fragment {

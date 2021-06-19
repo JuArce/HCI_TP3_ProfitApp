@@ -1,28 +1,22 @@
 package ar.edu.itba.hci.profitapp.ui;
 
-import android.app.ActionBar;
 import android.content.res.Configuration;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -35,7 +29,6 @@ import java.util.stream.Collectors;
 import ar.edu.itba.hci.profitapp.App;
 import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.api.model.Routine;
-import ar.edu.itba.hci.profitapp.databinding.FragmentHomeBinding;
 import ar.edu.itba.hci.profitapp.databinding.FragmentRoutinesBinding;
 import ar.edu.itba.hci.profitapp.repository.RoutineRepository;
 import ar.edu.itba.hci.profitapp.repository.Status;
@@ -109,7 +102,6 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
         ViewModelProvider.Factory favoriteViewModelFactory = new RepositoryViewModelFactory<>(RoutineRepository.class, app.getRoutineRepository());
         favoritesViewModel = new ViewModelProvider(this, favoriteViewModelFactory).get(FavoritesViewModel.class);
 
-        //TODO hay un error que no termina llamando a la api. Corregir
         View.OnClickListener favoriteClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {

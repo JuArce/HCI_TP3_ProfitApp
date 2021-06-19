@@ -78,34 +78,6 @@ public class RoutineExecutionDetailedFragment extends Fragment {
             changedOrientation = true;
         }
 
-
-    /*
-    * private CountDownTimer countDownTimer;
-    private long timeMilliSeconds;
-    private boolean timerRunning;*/
-
-
-//        routineViewModel.getRoutine(routineId).observe(getViewLifecycleOwner(), r -> {
-//            if (r.getStatus() == Status.SUCCESS) {
-//                if (r.getData() != null && r.getData() != null) {
-//                    app.getRoutineRepository().getFavorites(0, 10).observe(getViewLifecycleOwner(), favRes -> { //TODO definir viewModel vs rep
-//                        if (favRes.getStatus() == Status.SUCCESS) {
-//                            if (favRes.getData() != null && favRes.getData().getContent() != null) {
-//                                if (favRes.getData().getContent().stream().map(Routine::getId).collect(Collectors.toList()).contains(r.getData().getId())) {
-//                                    r.getData().setFavorite(true);
-//                                }
-//                            }
-//                        } else {
-//
-//                        }
-//                        fragmentRoutineDetailBinding.setRoutine(r.getData());
-//                    });
-//                } else {
-////                defaultResourceHandler(r);
-//                }
-//            }
-//        });
-
         app.getRoutineRepository().getRoutineCycles(routineId).observe(getViewLifecycleOwner(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 if (r.getData() != null && r.getData().getContent() != null) {
@@ -226,7 +198,6 @@ public class RoutineExecutionDetailedFragment extends Fragment {
 
                         }
                     } else {
-                        //TODO popup para salir
                         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
                         builder.setMessage("Congratulations! You finished your routine"); //despues pasarlo a R.string.lo_que_sea
                         builder.setCancelable(false);

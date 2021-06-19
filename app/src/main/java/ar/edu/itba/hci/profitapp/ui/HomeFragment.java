@@ -1,8 +1,10 @@
 package ar.edu.itba.hci.profitapp.ui;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,13 +14,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
@@ -53,10 +48,6 @@ public class HomeFragment extends Fragment {
         fragmentHomeBinding = FragmentHomeBinding.inflate(getLayoutInflater());
 
         recyclerView = fragmentHomeBinding.routinesRecyclerView;
-
-//        BottomNavigationView b = getActivity().findViewById(R.id.main_bottom_nav);
-//        Menu m = b.getMenu();
-//        m.findItem(R.id.homeFragment).setIcon(R.drawable.ic_baseline_fitness_center_24);
 
         return fragmentHomeBinding.getRoot();
 
@@ -122,19 +113,7 @@ public class HomeFragment extends Fragment {
 //                //defaultResourceHandler(r);
             }
         });
-        /*
-        routineViewModel.getRoutines().observe(getViewLifecycleOwner(), r -> {
-            if (r.getStatus() == Status.SUCCESS) {
-                if(r.getData() != null && r.getData().getContent() != null) {
-                    routinesAdapter.addRoutines(r.getData().getContent());
-                    routinesAdapter.notifyDataSetChanged();
-                }
-            } else {
-//                defaultResourceHandler(r);
-            }
-        });
 
-         */
 
     }
 }

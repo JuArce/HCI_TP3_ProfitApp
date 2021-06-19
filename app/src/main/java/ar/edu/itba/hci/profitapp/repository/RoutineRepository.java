@@ -38,7 +38,6 @@ public class RoutineRepository {
             @NotNull
             @Override
             protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
-                //TODO refactor
                 return apiService.getRoutines(page, size, orderBy, direction);
             }
         }.asLiveData();
@@ -128,7 +127,6 @@ public class RoutineRepository {
             @NotNull
             @Override
             protected LiveData<ApiResponse<PagedList<Routine>>> createCall() {
-                //TODO refactor
                 return apiService.getCurrentUserRoutines();
             }
         }.asLiveData();

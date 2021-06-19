@@ -14,7 +14,6 @@ import java.util.List;
 
 import ar.edu.itba.hci.profitapp.R;
 import ar.edu.itba.hci.profitapp.api.model.CycleExercise;
-import ar.edu.itba.hci.profitapp.api.model.Exercise;
 import ar.edu.itba.hci.profitapp.databinding.ItemExerciseBinding;
 
 public class ExercisesCustomAdapter extends RecyclerView.Adapter<ExercisesCustomAdapter.ViewHolder> {
