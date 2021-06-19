@@ -51,6 +51,8 @@ public class RoutineDetailFragment extends Fragment {
     private RoutineCyclesCustomAdapter routineCyclesAdapter;
     private List<ExercisesCustomAdapter> exercisesCustomAdapters;
 
+    private boolean canExecute = true;
+
 
     private RoutineViewModel routineViewModel;
     private RoutineCycleViewModel routineCycleViewModel;
@@ -140,6 +142,10 @@ public class RoutineDetailFragment extends Fragment {
                                     counter.decrementAndGet();
                                     cycle.setCycleExercises(res.getData().getContent());
 
+                                    if (canExecute && res.getData().getContent().size() == 0) {
+                                        canExecute = false;
+                                    }
+
                                     if (counter.get() == 0) {
                                         routineCyclesAdapter = new RoutineCyclesCustomAdapter(cycles);
                                         routineCyclesRecyclerView.setAdapter(routineCyclesAdapter);
@@ -191,15 +197,19 @@ public class RoutineDetailFragment extends Fragment {
         });
 
         fragmentRoutineDetailBinding.playRoutineFab.setOnClickListener(v -> {
-            switch (app.getPreferences().getRoutineDisplayMode()) {
-                case 0:
-                    Log.d("TAG", "Ejecutar vista simple");
-                    NavHostFragment.findNavController(this).navigate(R.id.action_routineDetailFragment_to_routineExecutionSimplifiedFragment);
-                    break;
-                case 1:
-                    Log.d("TAG", "Ejecutar vista detallada");
-                    NavHostFragment.findNavController(this).navigate(R.id.action_routineDetailFragment_to_routineExecutionDetailedFragment);
-                    break;
+            if (canExecute) {
+                switch (app.getPreferences().getRoutineDisplayMode()) {
+                    case 0:
+                        Log.d("TAG", "Ejecutar vista simple");
+                        NavHostFragment.findNavController(this).navigate(R.id.action_routineDetailFragment_to_routineExecutionSimplifiedFragment);
+                        break;
+                    case 1:
+                        Log.d("TAG", "Ejecutar vista detallada");
+                        NavHostFragment.findNavController(this).navigate(R.id.action_routineDetailFragment_to_routineExecutionDetailedFragment);
+                        break;
+                }
+            } else {
+                Snackbar.make(v, getResources().getString(R.string.cannot_execute), Snackbar.LENGTH_LONG).show(); //cambiar por un String nuestro
             }
         });
     }

@@ -44,6 +44,6 @@
     <string name="close_routine_msg">¿Está seguro que desea detener la ejecución?</string>
     <string name="invalid_user">El nombre de usuario debe contener al menos 3 caracteres.</string>
     <string name="invalid_password">La contraseña debe contener al menos 8 caracteres.</string>
-
+    <string name="cannot_execute">Esta rutina no está completa para ser ejecutada.</string>
 
 </resources>
