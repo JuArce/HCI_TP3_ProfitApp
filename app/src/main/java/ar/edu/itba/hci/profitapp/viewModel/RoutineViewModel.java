@@ -14,7 +14,7 @@ import ar.edu.itba.hci.profitapp.viewModel.repositoryVM.RepositoryViewModel;
 
 public class RoutineViewModel extends RepositoryViewModel<RoutineRepository> {
 
-    private final static int PAGE_SIZE = 10;
+    private final static int PAGE_SIZE = 50;
 
     private int routinePage = 0;
     private String orderBy = "date";

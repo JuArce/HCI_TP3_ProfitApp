@@ -45,7 +45,7 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
     private RoutineViewModel routineViewModel;
     private FavoritesViewModel favoritesViewModel;
 
-    private final static int PAGE_SIZE = 10;
+    private final static int PAGE_SIZE = 50;
 
     private int routinePage = 0;
     private String orderBy = "categoryId";

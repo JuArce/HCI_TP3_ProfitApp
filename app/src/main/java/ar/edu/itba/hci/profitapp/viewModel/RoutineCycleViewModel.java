@@ -12,7 +12,7 @@ import ar.edu.itba.hci.profitapp.viewModel.repositoryVM.RepositoryViewModel;
 
 public class RoutineCycleViewModel extends RepositoryViewModel<RoutineRepository> {
 
-    private final static int PAGE_SIZE = 10;
+    private final static int PAGE_SIZE = 50;
     private final static int CYCLE_PAGE = 0;
 
     private String orderBy = "id";
